@@ -1,9 +1,9 @@
 import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import styles from './BurgerConstructor.module.css';
-import { data } from '../../utils/data';
+import PropTypes from 'prop-types';
 
-function BurgerConstructor() {
+function BurgerConstructor({ data }) {
   return (
     <section className={`${styles.construct} mt-10`}>
       <div className="ml-4 mt-4">
@@ -51,5 +51,9 @@ function BurgerConstructor() {
     </section>
   );
 }
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.array
+}; 
 
 export default BurgerConstructor;

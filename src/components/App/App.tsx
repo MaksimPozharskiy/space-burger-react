@@ -11,7 +11,7 @@ function App() {
       <AppHeader />
       <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
         <BurgerIngredients data={data}/>
-        <BurgerConstructor />
+        <BurgerConstructor data={data}/>
       </div>
     </>
   );
