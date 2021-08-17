@@ -21,42 +21,45 @@ function BurgerIngredients({ data }) {
           Начинки
         </Tab>
       </div>
-      <h2 className="text text_type_main-medium mt-10 mb-6">Булки</h2>
-      <ul className={styles['list-ingredients']}>
-        {data.map((ingredient) => {
-          return ingredient.type === 'bun' ? 
-            <BurgerIngredient
-              key={ingredient._id}
-              image={ingredient.image}
-              name={ingredient.name}
-              price={ingredient.price}
-            /> : '';
-        })}
-      </ul>
-      <h2 className="text text_type_main-medium mt-10 mb-6">Соусы</h2>
-      <ul className={styles['list-ingredients']}>
-        {data.map((ingredient) => {
-          return ingredient.type === 'sauce' ? 
-            <BurgerIngredient
-              key={ingredient._id}
-              image={ingredient.image}
-              name={ingredient.name}
-              price={ingredient.price}
-            /> : '';
-        })}
-      </ul>
-      <h2 className="text text_type_main-medium mt-10 mb-6">Начинки</h2>
-      <ul className={styles['list-ingredients']}>
-        {data.map((ingredient) => {
-          return ingredient.type === 'main' ? 
-            <BurgerIngredient
-              key={ingredient._id}
-              image={ingredient.image}
-              name={ingredient.name}
-              price={ingredient.price}
-            /> : '';
-        })}
-      </ul>
+      <div className={styles.ingredients}>
+        <h2 className="text text_type_main-medium mt-10 mb-6">Булки</h2>
+        <ul className={styles['list-ingredients']}>
+          {data.map((ingredient) => {
+            return ingredient.type === 'bun' ? 
+              <BurgerIngredient
+                key={ingredient._id}
+                image={ingredient.image}
+                name={ingredient.name}
+                price={ingredient.price}
+              /> : '';
+          })}
+        </ul>
+        <h2 className="text text_type_main-medium mt-10 mb-6">Соусы</h2>
+        <ul className={styles['list-ingredients']}>
+          {data.map((ingredient) => {
+            return ingredient.type === 'sauce' ? 
+              <BurgerIngredient
+                key={ingredient._id}
+                image={ingredient.image}
+                name={ingredient.name}
+                price={ingredient.price}
+              /> : '';
+          })}
+        </ul>
+        <h2 className="text text_type_main-medium mt-10 mb-6">Начинки</h2>
+        <ul className={styles['list-ingredients']}>
+          {data.map((ingredient) => {
+            return ingredient.type === 'main' ? 
+              <BurgerIngredient
+                key={ingredient._id}
+                image={ingredient.image}
+                name={ingredient.name}
+                price={ingredient.price}
+              /> : '';
+          })}
+        </ul>
+      </div>
+
     </section>
   );
 }
