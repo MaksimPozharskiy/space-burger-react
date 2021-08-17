@@ -1,0 +1,13 @@
+.tabs {
+  display: flex;
+}
+
+.list-ingredients {
+  display: grid;
+  grid-template-columns: repeat(2, 272px);
+  grid-template-rows: repeat(auto-fit, 208px);
+  grid-column-gap: 24px;
+  grid-row-gap: 32px;
+  margin: 0 0 0 16px;
+  padding: 0;
+}
