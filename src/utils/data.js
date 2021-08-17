@@ -42,20 +42,6 @@ export const data = [
         "__v":0
     },
     {
-        "_id":"60666c42cc7b410027a1a9b7",
-        "name":"Соус Spicy-X",
-        "type":"sauce",
-        "proteins":30,
-        "fat":20,
-        "carbohydrates":40,
-        "calories":30,
-        "price":90,
-        "image":"https://code.s3.yandex.net/react/code/sauce-02.png",
-        "image_mobile":"https://code.s3.yandex.net/react/code/sauce-02-mobile.png",
-        "image_large":"https://code.s3.yandex.net/react/code/sauce-02-large.png",
-        "__v":0
-    },
-    {
         "_id":"60666c42cc7b410027a1a9b4",
         "name":"Мясо бессмертных моллюсков Protostomia",
         "type":"main",
