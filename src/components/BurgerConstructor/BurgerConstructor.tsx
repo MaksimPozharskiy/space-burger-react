@@ -19,9 +19,9 @@ function BurgerConstructor({ data }) {
       <ul className={styles['list-ingredients']}>
         {data.map(element => {
           return element.type === 'bun' ? '' :
-            <div className={styles['list-item-wrap']}>
+            <div className={styles['list-item-wrap']} key={element._id}>
               <DragIcon type="primary" />
-              <li key={element._id}>
+              <li >
                 <ConstructorElement
                   text={element.name}
                   price={element.price}
