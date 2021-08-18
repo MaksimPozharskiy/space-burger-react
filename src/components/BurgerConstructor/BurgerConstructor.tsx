@@ -17,17 +17,19 @@ function BurgerConstructor({ data }) {
       </div>
       
       <ul className={styles['list-ingredients']}>
-        {data.map(element =>
-        <div className={styles['list-item-wrap']}>
-          <DragIcon type="primary" />
-          <li key={element._id}>
-            <ConstructorElement
-              text={element.name}
-              price={element.price}
-              thumbnail={element.image}
-            />
-          </li>
-        </div>
+        {data.map(element => {
+          return element.type === 'bun' ? '' :
+            <div className={styles['list-item-wrap']}>
+              <DragIcon type="primary" />
+              <li key={element._id}>
+                <ConstructorElement
+                  text={element.name}
+                  price={element.price}
+                  thumbnail={element.image}
+                />
+              </li>
+            </div>
+          }
         )}
       </ul>
       <div className="ml-4">
