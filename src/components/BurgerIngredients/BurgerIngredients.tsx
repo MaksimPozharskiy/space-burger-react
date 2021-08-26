@@ -4,7 +4,7 @@ import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerIngredients({ data }) {
+function BurgerIngredients({ ingredients }) {
   const [current, setCurrent] = React.useState('buns')
 
   return (
@@ -24,7 +24,7 @@ function BurgerIngredients({ data }) {
       <div className={styles.ingredients}>
         <h2 className="text text_type_main-medium mt-10 mb-6">Булки</h2>
         <ul className={styles['list-ingredients']}>
-          {data.map((ingredient) => {
+          {ingredients.map((ingredient) => {
             return ingredient.type === 'bun' ? 
               <BurgerIngredient
                 key={ingredient._id}
@@ -36,7 +36,7 @@ function BurgerIngredients({ data }) {
         </ul>
         <h2 className="text text_type_main-medium mt-10 mb-6">Соусы</h2>
         <ul className={styles['list-ingredients']}>
-          {data.map((ingredient) => {
+          {ingredients.map((ingredient) => {
             return ingredient.type === 'sauce' ? 
               <BurgerIngredient
                 key={ingredient._id}
@@ -48,7 +48,7 @@ function BurgerIngredients({ data }) {
         </ul>
         <h2 className="text text_type_main-medium mt-10 mb-6">Начинки</h2>
         <ul className={styles['list-ingredients']}>
-          {data.map((ingredient) => {
+          {ingredients.map((ingredient) => {
             return ingredient.type === 'main' ? 
               <BurgerIngredient
                 key={ingredient._id}
@@ -64,7 +64,7 @@ function BurgerIngredients({ data }) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(
+  ingredients: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,

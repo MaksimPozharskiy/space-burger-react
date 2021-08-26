@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor({ ingredients }) {
   return (
     <section className={`${styles.construct} mt-10`}>
       <div className="ml-4 mt-4">
@@ -12,12 +12,12 @@ function BurgerConstructor({ data }) {
           isLocked={true}
           text="Краторная булка N-200i (верх)"
           price={20}
-          thumbnail={data[0].image}
+          thumbnail={ingredients[0].image}
         />
       </div>
       
       <ul className={styles['list-ingredients']}>
-        {data.map(element => {
+        {ingredients.map(element => {
           return element.type === 'bun' ? '' :
             <div className={styles['list-item-wrap']} key={element._id}>
               <DragIcon type="primary" />
@@ -38,7 +38,7 @@ function BurgerConstructor({ data }) {
             isLocked={true}
             text="Краторная булка N-200i (низ)"
             price={20}
-            thumbnail={data[0].image}
+            thumbnail={ingredients[0].image}
           />
       </div>
       <div className={`${styles['order-wrap']} mt-10`}>
@@ -56,7 +56,7 @@ function BurgerConstructor({ data }) {
 
 
 BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(
+  ingredients: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
