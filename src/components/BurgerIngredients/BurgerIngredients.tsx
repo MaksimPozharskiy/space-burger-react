@@ -4,7 +4,7 @@ import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerIngredients({ ingredients }) {
+function BurgerIngredients({ ingredients, openModal }) {
   const [current, setCurrent] = React.useState('buns')
 
   return (
