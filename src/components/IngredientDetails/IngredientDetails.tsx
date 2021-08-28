@@ -37,8 +37,9 @@ function IngredientDetails({ closeModalIngredient, isModalIngredientOpened, deta
 }
 
 IngredientDetails.propTypes = {
-  closeModalOrder: PropTypes.func,
-  isModalOpened: PropTypes.bool
+  closeModalIngredient: PropTypes.func,
+  isModalIngredientOpened: PropTypes.bool,
+  detailsIngredient: PropTypes.object
 }
 
 export default IngredientDetails;

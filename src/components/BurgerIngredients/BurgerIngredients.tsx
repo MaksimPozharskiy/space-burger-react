@@ -85,7 +85,9 @@ BurgerIngredients.propTypes = {
       image_large: PropTypes.string,
       __v: PropTypes.number,
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  closeModalIngredient: PropTypes.func,
+  openModalIngredient: PropTypes.func,
 }
 
 export default BurgerIngredients;

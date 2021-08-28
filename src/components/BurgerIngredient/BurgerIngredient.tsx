@@ -25,7 +25,9 @@ function BurgerIngredient({ image, name, price, openModalIngredient, ingredient 
 BurgerIngredient.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired, 
-  price: PropTypes.number.isRequired
+  price: PropTypes.number.isRequired,
+  openModalIngredient:PropTypes.func.isRequired,
+  ingredient: PropTypes.object.isRequired,
 }
 
 export default BurgerIngredient;
