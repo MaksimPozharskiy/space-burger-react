@@ -21,7 +21,7 @@ function BurgerConstructor({ ingredients, openModal }) {
           return element.type === 'bun' ? '' :
             <div className={styles['list-item-wrap']} key={element._id}>
               <DragIcon type="primary" />
-              <li >
+              <li className={styles.ingredient}>
                 <ConstructorElement
                   text={element.name}
                   price={element.price}
