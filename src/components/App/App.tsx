@@ -5,6 +5,7 @@ import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import { mainApiUrl, keyCodeEsc } from '../../utils/constants';
 import Modal from '../Modal/Modal';
+import OrderDetails from '../OrderDetails/OrderDetails';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([])
@@ -60,12 +61,9 @@ function App() {
           : <div>Loading...</div>
         }
       </div>
-      <Modal 
-        title='Детали ингредиента'
+      <OrderDetails 
         closeModal={closeModal}
-        isModalOpened={isModalOpened}>
-        Hello
-      </Modal>
+        isModalOpened={isModalOpened} />
     </>
   );
 }

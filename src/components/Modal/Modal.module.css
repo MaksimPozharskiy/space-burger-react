@@ -15,9 +15,8 @@
   display: block;
 }
 
-.popup svg {
-  position: absolute;
-  top: 60px;
-  right: 40px;
-  transform: translate(-50%, -50%);
+.titleWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
