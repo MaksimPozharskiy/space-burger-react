@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerConstructor({ ingredients, openModal }) {
+function BurgerConstructor({ ingredients, openModalOrder }) {
   return (
     <section className={`${styles.construct} mt-10`}>
       <div className="ml-4 mt-4">
@@ -46,7 +46,7 @@ function BurgerConstructor({ ingredients, openModal }) {
           <p className="text text_type_digits-medium">610</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large"  onClick={openModal}>
+        <Button type="primary" size="large"  onClick={openModalOrder}>
           Оформить заказ
         </Button>
       </div>

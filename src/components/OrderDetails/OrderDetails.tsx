@@ -1,15 +1,14 @@
 import React from 'react';
 import styles from './OrderDetails.module.css';
 import PropTypes from 'prop-types';
-import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../Modal/Modal';
 
-function OrderDetails({ closeModal, isModalOpened }) {
+function OrderDetails({ closeModalOrder, isModalOrderOpened }) {
 
   return (
     <Modal
-      closeModal={closeModal}
-      isModalOpened={isModalOpened}>
+      closeModalOrder={closeModalOrder}
+      isModalOrderOpened={isModalOrderOpened}>
         <div className={styles.container}>
           <p className="text text_type_digits-large mt-9">034536</p>
           <p className="text text_type_main-medium mt-8 mb-15">идентификатор заказа</p>
@@ -23,7 +22,7 @@ function OrderDetails({ closeModal, isModalOpened }) {
 }
 
 OrderDetails.propTypes = {
-  closeModal: PropTypes.func,
+  closeModalOrder: PropTypes.func,
   isModalOpened: PropTypes.bool
 }
 

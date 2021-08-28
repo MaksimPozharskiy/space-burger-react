@@ -4,7 +4,7 @@ import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerIngredients({ ingredients, openModal }) {
+function BurgerIngredients({ ingredients, closeModalIngredient, openModalIngredient }) {
   const [current, setCurrent] = React.useState('buns')
 
   return (
@@ -31,6 +31,8 @@ function BurgerIngredients({ ingredients, openModal }) {
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
+                openModalIngredient={openModalIngredient}
+                ingredient={ingredient}
               /> : '';
           })}
         </ul>
@@ -43,6 +45,8 @@ function BurgerIngredients({ ingredients, openModal }) {
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
+                openModalIngredient={openModalIngredient}
+                ingredient={ingredient}
               /> : '';
           })}
         </ul>
@@ -55,6 +59,8 @@ function BurgerIngredients({ ingredients, openModal }) {
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
+                openModalIngredient={openModalIngredient}
+                ingredient={ingredient}
               /> : '';
           })}
         </ul>

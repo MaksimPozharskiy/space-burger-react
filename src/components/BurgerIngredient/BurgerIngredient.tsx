@@ -3,10 +3,14 @@ import React from 'react';
 import styles from './BurgerIngredient.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerIngredient({ image, name, price }) {
+function BurgerIngredient({ image, name, price, openModalIngredient, ingredient }) {
+
+  const handleOpenModal = () => {
+    openModalIngredient(ingredient);
+  }
 
   return (
-    <li className={styles.ingredient}>
+    <li className={styles.ingredient} onClick={handleOpenModal}>
       <img src={image} alt={name} />
       <div className={styles['price-wrap']}>
         <p className="text text_type_digits-default mt-2 mb-2 mr-2">{price}</p>

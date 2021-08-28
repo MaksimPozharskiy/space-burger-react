@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './ModalOverlay.module.css';
 
-function ModalOverlay({ isModalOpened, closeModal }) {
+function ModalOverlay({ isModalOpened, closeModalOrder }) {
   return (
-    <div onClick={closeModal} className={`${styles.overlay} ${isModalOpened ? styles.overlayOpened : ''}`}></div>
+    <div onClick={closeModalOrder} className={`${styles.overlay} ${isModalOpened ? styles.overlayOpened : ''}`}></div>
   )
 }
 

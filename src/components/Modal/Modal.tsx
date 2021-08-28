@@ -6,20 +6,20 @@ import ReactDOM from 'react-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 const modalRoot = document.getElementById("modal");
 
-function Modal({ title, children, closeModal, isModalOpened }) {
+function Modal({ title, children, closeModalOrder, isModalOrderOpened }) {
 
 
   return modalRoot ? ReactDOM.createPortal(
     (
       <>
-        <div className={`${styles.popup} ${isModalOpened ? styles.popupOpened : ''}`}>
+        <div className={`${styles.popup} ${isModalOrderOpened ? styles.popupOpened : ''}`}>
           <div className={`${styles.titleWrap} mt-10 ml-10 mr-10`}>
             <h2 className="text text_type_main-large">{title}</h2>
-            <CloseIcon type="primary" onClick={closeModal}/>
+            <CloseIcon type="primary" onClick={closeModalOrder}/>
           </div>
           {children}
         </div>
-        <ModalOverlay isModalOpened={isModalOpened} closeModal={closeModal}/>
+        <ModalOverlay isModalOpened={isModalOrderOpened} closeModalOrder={closeModalOrder}/>
       </>
     ), modalRoot)
     : null;

@@ -4,13 +4,15 @@ import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import { mainApiUrl, keyCodeEsc } from '../../utils/constants';
-import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(false)
-  const [isModalOpened, setIsModalOpened] = React.useState(false);
+  const [isModalOrderOpened, setIsModalOrderOpened] = React.useState(false);
+  const [isModalIngredientOpened, setIsModalIngredientOpened] = React.useState(false);
+  const [detailsIngredient, setDetailsIngredient] = React.useState();
 
   
   React.useEffect(() => {
@@ -35,17 +37,27 @@ function App() {
     }
   }
 
-  function closeModal() {
-    setIsModalOpened(false);
+  function closeModalOrder() {
+    setIsModalOrderOpened(false);
   };
 
-  function openModal() {
-    setIsModalOpened(true);
+  function openModalOrder() {
+    setIsModalOrderOpened(true);
+  };
+
+  function openModalIngredient(detailsIngredient) {
+    setDetailsIngredient(detailsIngredient);
+    setIsModalIngredientOpened(true);
+  };
+
+  function closeModalIngredient() {
+    setIsModalIngredientOpened(false);
   };
 
   function closeModalEsc(e) {
     if (e.keyCode === keyCodeEsc) {
-      setIsModalOpened(false);
+      setIsModalOrderOpened(false);
+      setIsModalIngredientOpened(false);
     }
   };
 
@@ -55,15 +67,20 @@ function App() {
       <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
         { isLoading ? 
           <>
-            <BurgerIngredients openModal={openModal} ingredients={ingredients}/> 
-            <BurgerConstructor openModal={openModal} ingredients={ingredients}/>
+            <BurgerIngredients openModalIngredient={openModalIngredient} closeModalIngredient={closeModalIngredient} ingredients={ingredients}/> 
+            <BurgerConstructor openModalOrder={openModalOrder} ingredients={ingredients}/>
           </>
           : <div>Loading...</div>
         }
       </div>
       <OrderDetails 
-        closeModal={closeModal}
-        isModalOpened={isModalOpened} />
+        closeModalOrder={closeModalOrder}
+        isModalOrderOpened={isModalOrderOpened} />
+      <IngredientDetails 
+        closeModalIngredient={closeModalIngredient}
+        isModalIngredientOpened={isModalIngredientOpened}
+        detailsIngredient={detailsIngredient}
+        />
     </>
   );
 }
