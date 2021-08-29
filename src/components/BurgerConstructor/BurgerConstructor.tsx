@@ -71,7 +71,8 @@ BurgerConstructor.propTypes = {
       image_large: PropTypes.string,
       __v: PropTypes.number,
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  openModalOrder: PropTypes.func
 }
 
 export default BurgerConstructor;
