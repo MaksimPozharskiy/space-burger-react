@@ -3,7 +3,7 @@ import styles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import { mainApiUrl, keyCodeEsc } from '../../utils/constants';
+import { mainApiUrl } from '../../utils/constants';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 
@@ -14,15 +14,8 @@ function App() {
   const [isModalIngredientOpened, setIsModalIngredientOpened] = React.useState(false);
   const [detailsIngredient, setDetailsIngredient] = React.useState();
 
-  
   React.useEffect(() => {
     getIngredientData();
-    
-    document.addEventListener('keydown', closeModalEsc);
-
-    return (()=> {
-      document.removeEventListener('keydown', closeModalEsc);
-    })
   }, [])
   
   const getIngredientData = async () => {
@@ -54,12 +47,7 @@ function App() {
     setIsModalIngredientOpened(false);
   };
 
-  function closeModalEsc(e) {
-    if (e.keyCode === keyCodeEsc) {
-      setIsModalOrderOpened(false);
-      setIsModalIngredientOpened(false);
-    }
-  };
+
 
   return (
     <>
