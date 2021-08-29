@@ -4,7 +4,7 @@ import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerIngredients({ ingredients, closeModalIngredient, openModalIngredient }) {
+function BurgerIngredients({ ingredients, openModalIngredient }) {
   const [current, setCurrent] = React.useState('buns')
 
   return (
@@ -86,7 +86,6 @@ BurgerIngredients.propTypes = {
       __v: PropTypes.number,
     }).isRequired
   ).isRequired,
-  closeModalIngredient: PropTypes.func.isRequired,
   openModalIngredient: PropTypes.func.isRequired,
 }
 

@@ -54,7 +54,7 @@ function App() {
       <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
         { isLoading ? 
           <>
-            <BurgerIngredients openModalIngredient={openModalIngredient} closeModalIngredient={closeModalIngredient} ingredients={ingredients}/> 
+            <BurgerIngredients openModalIngredient={openModalIngredient} ingredients={ingredients}/> 
             <BurgerConstructor openModalOrder={openModalOrder} ingredients={ingredients}/>
           </>
           : <div>Loading...</div>
