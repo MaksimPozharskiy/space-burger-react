@@ -41,7 +41,7 @@ function Modal({ title, children, closeModalOrder, isModalOrderOpened }) {
 
 Modal.propTypes = {
   title: PropTypes.string,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.element.isRequired,
   closeModalOrder: PropTypes.func.isRequired,
   isModalOrderOpened: PropTypes.bool.isRequired
 }

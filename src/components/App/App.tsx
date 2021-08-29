@@ -6,6 +6,7 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import { mainApiUrl } from '../../utils/constants';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import Modal from '../Modal/Modal';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([])
@@ -47,8 +48,6 @@ function App() {
     setIsModalIngredientOpened(false);
   };
 
-
-
   return (
     <>
       <AppHeader />
@@ -61,14 +60,19 @@ function App() {
           : <div>Loading...</div>
         }
       </div>
-      <OrderDetails 
+      {detailsIngredient && 
+      <Modal
+        closeModalOrder={closeModalIngredient}
+        isModalOrderOpened={isModalIngredientOpened}
+        title="Детали ингредиента">
+        <IngredientDetails 
+          detailsIngredient={detailsIngredient} />
+      </Modal>}
+      <Modal
         closeModalOrder={closeModalOrder}
-        isModalOrderOpened={isModalOrderOpened} />
-      {detailsIngredient && <IngredientDetails 
-        closeModalIngredient={closeModalIngredient}
-        isModalIngredientOpened={isModalIngredientOpened}
-        detailsIngredient={detailsIngredient}
-        />}
+        isModalOrderOpened={isModalOrderOpened}>
+        <OrderDetails />
+      </Modal>
     </>
   );
 }
