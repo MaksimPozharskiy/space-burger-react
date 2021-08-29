@@ -22,8 +22,8 @@ function OrderDetails({ closeModalOrder, isModalOrderOpened }) {
 }
 
 OrderDetails.propTypes = {
-  closeModalOrder: PropTypes.func,
-  isModalOpened: PropTypes.bool
+  closeModalOrder: PropTypes.func.isRequired,
+  isModalOrderOpened: PropTypes.bool.isRequired
 }
 
 export default OrderDetails;

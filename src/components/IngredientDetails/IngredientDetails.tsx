@@ -10,7 +10,7 @@ function IngredientDetails({ closeModalIngredient, isModalIngredientOpened, deta
       closeModalOrder={closeModalIngredient}
       isModalOrderOpened={isModalIngredientOpened}
       title="Детали ингредиента">
-      {detailsIngredient && <div className={`${styles.container} mb-15`}>
+      <div className={`${styles.container} mb-15`}>
         <img src={detailsIngredient.image_large} alt={detailsIngredient.name}/>
         <p className="text text_type_main-medium mt-6 mb-10">{detailsIngredient.name}</p>
           <ul className={styles.details}>
@@ -31,14 +31,14 @@ function IngredientDetails({ closeModalIngredient, isModalIngredientOpened, deta
               <p className="text text_type_digits-default text_color_inactive">{detailsIngredient.carbohydrates}</p>
             </li>
           </ul>
-      </div>}
+      </div>
     </Modal>
     )
 }
 
 IngredientDetails.propTypes = {
-  closeModalIngredient: PropTypes.func,
-  isModalIngredientOpened: PropTypes.bool,
+  closeModalIngredient: PropTypes.func.isRequired,
+  isModalIngredientOpened: PropTypes.bool.isRequired,
   detailsIngredient: PropTypes.object
 }
 

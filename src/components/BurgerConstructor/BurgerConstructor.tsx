@@ -72,7 +72,7 @@ BurgerConstructor.propTypes = {
       __v: PropTypes.number,
     }).isRequired
   ).isRequired,
-  openModalOrder: PropTypes.func
+  openModalOrder: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor;

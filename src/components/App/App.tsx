@@ -76,11 +76,11 @@ function App() {
       <OrderDetails 
         closeModalOrder={closeModalOrder}
         isModalOrderOpened={isModalOrderOpened} />
-      <IngredientDetails 
+      {detailsIngredient && <IngredientDetails 
         closeModalIngredient={closeModalIngredient}
         isModalIngredientOpened={isModalIngredientOpened}
         detailsIngredient={detailsIngredient}
-        />
+        />}
     </>
   );
 }
