@@ -39,6 +39,7 @@
 }
 
 .list-item-wrap {
+  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -47,4 +48,13 @@
   display: flex;
   align-items: center;
   column-gap: 10px;
+}
+
+.ingredient {
+  width: 100%; 
+}
+
+.ingredient div {
+  max-width: 478px;
+  width: 100%;
 }

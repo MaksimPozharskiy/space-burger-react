@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.details {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  column-gap: 50px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -4,7 +4,7 @@ import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerIngredients({ data }) {
+function BurgerIngredients({ ingredients, openModalIngredient }) {
   const [current, setCurrent] = React.useState('buns')
 
   return (
@@ -24,37 +24,43 @@ function BurgerIngredients({ data }) {
       <div className={styles.ingredients}>
         <h2 className="text text_type_main-medium mt-10 mb-6">Булки</h2>
         <ul className={styles['list-ingredients']}>
-          {data.map((ingredient) => {
+          {ingredients.map((ingredient) => {
             return ingredient.type === 'bun' ? 
               <BurgerIngredient
                 key={ingredient._id}
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
+                openModalIngredient={openModalIngredient}
+                ingredient={ingredient}
               /> : '';
           })}
         </ul>
         <h2 className="text text_type_main-medium mt-10 mb-6">Соусы</h2>
         <ul className={styles['list-ingredients']}>
-          {data.map((ingredient) => {
+          {ingredients.map((ingredient) => {
             return ingredient.type === 'sauce' ? 
               <BurgerIngredient
                 key={ingredient._id}
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
+                openModalIngredient={openModalIngredient}
+                ingredient={ingredient}
               /> : '';
           })}
         </ul>
         <h2 className="text text_type_main-medium mt-10 mb-6">Начинки</h2>
         <ul className={styles['list-ingredients']}>
-          {data.map((ingredient) => {
+          {ingredients.map((ingredient) => {
             return ingredient.type === 'main' ? 
               <BurgerIngredient
                 key={ingredient._id}
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
+                openModalIngredient={openModalIngredient}
+                ingredient={ingredient}
               /> : '';
           })}
         </ul>
@@ -64,22 +70,23 @@ function BurgerIngredients({ data }) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(
+  ingredients: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
-      proteins: PropTypes.number,
-      fat: PropTypes.number,
-      carbohydrates: PropTypes.number,
-      calories: PropTypes.number,
+      proteins: PropTypes.number.isRequired,
+      fat: PropTypes.number.isRequired,
+      carbohydrates: PropTypes.number.isRequired,
+      calories: PropTypes.number.isRequired,
       price: PropTypes.number.isRequired,
       image: PropTypes.string.isRequired,
-      image_mobile: PropTypes.string,
+      image_mobile: PropTypes.string.isRequired,
       image_large: PropTypes.string,
       __v: PropTypes.number,
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  openModalIngredient: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredients;
