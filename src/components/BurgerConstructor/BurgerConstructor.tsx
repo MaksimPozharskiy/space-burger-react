@@ -2,22 +2,48 @@ import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktiku
 import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
+import { IngredientsContext } from '../../contexts/ingredientsContext';
 
-function BurgerConstructor({ ingredients, openModalOrder }) {
+function BurgerConstructor({ openModalOrder }) {
+
+  const ingredients = React.useContext(IngredientsContext);
+
+  let dataIngredients;
+  if(ingredients.length > 0) {
+    dataIngredients = ingredients
+  }
+  // get buns from ingredients
+  const arrayBuns = dataIngredients.filter(item => item.type === 'bun');
+  
+  // get total price
+  const [totalPrice, dispatchPrice] = React.useReducer(reducer, {totalPrice: 0}, undefined )
+  function reducer(state, action) {
+    switch (action.type) {
+      case "testCount":
+        return { totalPrice: dataIngredients.reduce((acc, curr) => acc + curr.price, 0 )}
+      default:
+        throw new Error(`Wrong type of action: ${action.type}`);
+    }
+  }
+
+  React.useEffect(() => {
+    dispatchPrice({type: 'testCount'})
+  }, [])
+
   return (
     <section className={`${styles.construct} mt-10`}>
       <div className="ml-4 mt-4">
         <ConstructorElement
           type="top"
           isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={20}
-          thumbnail={ingredients[0].image}
+          text={`${arrayBuns[0].name} (верх)`}
+          price={arrayBuns[0].price}
+          thumbnail={arrayBuns[0].image}
         />
       </div>
       
       <ul className={styles['list-ingredients']}>
-        {ingredients.map(element => {
+        {dataIngredients.map(element => {
           return element.type === 'bun' ? '' :
             <div className={styles['list-item-wrap']} key={element._id}>
               <DragIcon type="primary" />
@@ -36,14 +62,14 @@ function BurgerConstructor({ ingredients, openModalOrder }) {
         <ConstructorElement
             type="bottom"
             isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={20}
-            thumbnail={ingredients[0].image}
+            text={`${arrayBuns[0].name} (низ)`}
+            price={arrayBuns[0].price}
+            thumbnail={arrayBuns[0].image}
           />
       </div>
       <div className={`${styles['order-wrap']} mt-10`}>
         <div className={styles['price-wrap']}>
-          <p className="text text_type_digits-medium">610</p>
+          <p className="text text_type_digits-medium">{totalPrice.totalPrice}</p>
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large"  onClick={openModalOrder}>
@@ -54,24 +80,7 @@ function BurgerConstructor({ ingredients, openModalOrder }) {
   );
 }
 
-
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      proteins: PropTypes.number,
-      fat: PropTypes.number,
-      carbohydrates: PropTypes.number,
-      calories: PropTypes.number,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      image_mobile: PropTypes.string,
-      image_large: PropTypes.string,
-      __v: PropTypes.number,
-    }).isRequired
-  ).isRequired,
   openModalOrder: PropTypes.func.isRequired
 }
 
