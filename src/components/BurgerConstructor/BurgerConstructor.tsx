@@ -3,8 +3,9 @@ import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
 import { IngredientsContext } from '../../contexts/ingredientsContext';
+import { mainApiUrl } from '../../utils/constants';
 
-function BurgerConstructor({ openModalOrder }) {
+function BurgerConstructor({ openModalOrder, setOrderNumber }) {
 
   const ingredients = React.useContext(IngredientsContext);
 
@@ -29,6 +30,25 @@ function BurgerConstructor({ openModalOrder }) {
   React.useEffect(() => {
     dispatchPrice({type: 'testCount'})
   }, [])
+
+    const handleCreateOrder = async () => {
+      try {
+        const res = await fetch(`${mainApiUrl}/orders`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ingredients: dataIngredients }),
+        })
+        const data = await res.json();
+        setOrderNumber(data.order.number)
+        console.log(data)
+      }
+      catch(err) {
+        console.log(err)
+      }
+    }
 
   return (
     <section className={`${styles.construct} mt-10`}>
@@ -72,7 +92,10 @@ function BurgerConstructor({ openModalOrder }) {
           <p className="text text_type_digits-medium">{totalPrice.totalPrice}</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large"  onClick={openModalOrder}>
+        <Button type="primary" size="large"  onClick={() => {
+            handleCreateOrder()
+            openModalOrder()
+          }}>
           Оформить заказ
         </Button>
       </div>
@@ -81,7 +104,8 @@ function BurgerConstructor({ openModalOrder }) {
 }
 
 BurgerConstructor.propTypes = {
-  openModalOrder: PropTypes.func.isRequired
+  openModalOrder: PropTypes.func.isRequired,
+  setOrderNumber: PropTypes.func.isRequired,
 }
 
 export default BurgerConstructor;

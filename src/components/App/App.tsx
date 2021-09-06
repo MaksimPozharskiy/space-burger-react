@@ -15,6 +15,7 @@ function App() {
   const [isModalOrderOpened, setIsModalOrderOpened] = React.useState(false);
   const [isModalIngredientOpened, setIsModalIngredientOpened] = React.useState(false);
   const [detailsIngredient, setDetailsIngredient] = React.useState();
+  const [orderNumber, setOrderNumber] = React.useState(0);
   
   React.useEffect(() => {
     getIngredientData();
@@ -22,7 +23,7 @@ function App() {
   
   const getIngredientData = async () => {
     try {
-      const res = await fetch(mainApiUrl);
+      const res = await fetch(`${mainApiUrl}/ingredients`);
       const data = await res.json();
       setIngredients(data.data);
       setIsLoading(true)
@@ -57,7 +58,7 @@ function App() {
           { isLoading ? 
             <>
               <BurgerIngredients openModalIngredient={openModalIngredient} /> 
-              <BurgerConstructor openModalOrder={openModalOrder} />
+              <BurgerConstructor openModalOrder={openModalOrder} setOrderNumber={setOrderNumber} />
             </>
             : <div>Loading...</div>
           }
@@ -73,7 +74,7 @@ function App() {
         <Modal
           closeModalOrder={closeModalOrder}
           isModalOrderOpened={isModalOrderOpened}>
-          <OrderDetails />
+          <OrderDetails orderNumber={orderNumber} />
         </Modal>
       </IngredientsContext.Provider>
     </>
