@@ -5,7 +5,7 @@ import styles from './BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
 import { IngredientsContext } from '../../contexts/ingredientsContext';
 
-function BurgerIngredients({ openModalIngredient }) {
+function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
   const [current, setCurrent] = React.useState('buns')
   
   const ingredients = React.useContext(IngredientsContext);
@@ -39,6 +39,7 @@ function BurgerIngredients({ openModalIngredient }) {
                 name={ingredient.name}
                 price={ingredient.price}
                 openModalIngredient={openModalIngredient}
+                addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
               /> : '';
           })}
@@ -53,6 +54,7 @@ function BurgerIngredients({ openModalIngredient }) {
                 name={ingredient.name}
                 price={ingredient.price}
                 openModalIngredient={openModalIngredient}
+                addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
               /> : '';
           })}
@@ -67,6 +69,7 @@ function BurgerIngredients({ openModalIngredient }) {
                 name={ingredient.name}
                 price={ingredient.price}
                 openModalIngredient={openModalIngredient}
+                addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
               /> : '';
           })}
@@ -78,6 +81,7 @@ function BurgerIngredients({ openModalIngredient }) {
 
 BurgerIngredients.propTypes = {
   openModalIngredient: PropTypes.func.isRequired,
+  addItemInOrder: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredients;

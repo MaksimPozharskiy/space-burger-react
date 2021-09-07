@@ -3,10 +3,11 @@ import React from 'react';
 import styles from './BurgerIngredient.module.css';
 import PropTypes from 'prop-types';
 
-function BurgerIngredient({ image, name, price, openModalIngredient, ingredient }) {
+function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOrder, ingredient }) {
 
   const handleOpenModal = () => {
     openModalIngredient(ingredient);
+    addItemInOrder(ingredient);
   }
 
   return (
@@ -26,7 +27,8 @@ BurgerIngredient.propTypes = {
   image: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired, 
   price: PropTypes.number.isRequired,
-  openModalIngredient:PropTypes.func.isRequired,
+  openModalIngredient: PropTypes.func.isRequired,
+  addItemInOrder: PropTypes.func,
   ingredient: PropTypes.object.isRequired,
 }
 

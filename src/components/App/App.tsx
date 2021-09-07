@@ -16,6 +16,8 @@ function App() {
   const [isModalIngredientOpened, setIsModalIngredientOpened] = React.useState(false);
   const [detailsIngredient, setDetailsIngredient] = React.useState();
   const [orderNumber, setOrderNumber] = React.useState(0);
+  const [ingredientsOfOrder, setIngredientsOfOrder] = React.useState<object[]>([]);
+  const [bunsOfOrder, setBunsOfOrder] = React.useState({})
   
   React.useEffect(() => {
     getIngredientData();
@@ -24,9 +26,13 @@ function App() {
   const getIngredientData = async () => {
     try {
       const res = await fetch(`${mainApiUrl}/ingredients`);
-      const data = await res.json();
-      setIngredients(data.data);
-      setIsLoading(true)
+      if (res.status === 200) {
+        const data = await res.json();
+        setIngredients(data.data);
+        setIsLoading(true)
+      } else {
+        throw new Error('Произошла ошибка ');
+      }
     }
     catch(err) {
       console.log(err)
@@ -50,6 +56,16 @@ function App() {
     setIsModalIngredientOpened(false);
   };
 
+  function addItemInOrder(item) {
+    if (item.type === 'bun') {
+      setBunsOfOrder(item)
+    } else if(ingredientsOfOrder.some(ingredient => ingredient['_id'] === item['_id'])) {
+      return
+    } else {
+      setIngredientsOfOrder([...ingredientsOfOrder, item])
+    }
+  }
+
   return (
     <>
       <IngredientsContext.Provider value={ingredients}>
@@ -57,8 +73,12 @@ function App() {
         <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
           { isLoading ? 
             <>
-              <BurgerIngredients openModalIngredient={openModalIngredient} /> 
-              <BurgerConstructor openModalOrder={openModalOrder} setOrderNumber={setOrderNumber} />
+              <BurgerIngredients openModalIngredient={openModalIngredient} addItemInOrder={addItemInOrder} /> 
+              <BurgerConstructor 
+                openModalOrder={openModalOrder} 
+                setOrderNumber={setOrderNumber} 
+                ingredientsOfOrder={ingredientsOfOrder}
+                bunsOfOrder={bunsOfOrder} />
             </>
             : <div>Loading...</div>
           }
