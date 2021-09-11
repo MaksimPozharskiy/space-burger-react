@@ -2,22 +2,72 @@ import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktiku
 import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
+import { mainApiUrl } from '../../utils/constants';
 
-function BurgerConstructor({ ingredients, openModalOrder }) {
+function BurgerConstructor({ 
+    openModalOrder,
+    setOrderNumber,
+    ingredientsOfOrder,
+    bunsOfOrder
+  }) {
+  
+  // get total price
+  const [totalPrice, dispatchPrice] = React.useReducer(reducer, {totalPrice: 0}, undefined )
+  function reducer(state, action) {
+    switch (action.type) {
+      case "сount":
+        return { totalPrice: ingredientsOfOrder.reduce((acc, curr) => acc + curr.price, 0 )}
+      default:
+        throw new Error(`Wrong type of action: ${action.type}`);
+    }
+  }
+
+  const getBunsPrice = () => {
+    if (Object.keys(bunsOfOrder).length === 0) return 0;
+    return bunsOfOrder.price * 2;
+  }
+
+  React.useEffect(() => {
+    dispatchPrice({type: 'сount'})
+  }, [ingredientsOfOrder])
+
+    const handleCreateOrder = async () => {
+      try {
+        const res = await fetch(`${mainApiUrl}/orders`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ ingredients: ingredientsOfOrder }),
+        })
+        const data = await res.json();
+        if (res.status === 200) {
+          setOrderNumber(data.order.number)
+          console.log(data)
+        } else {
+          throw new Error('Произошла ошибка ');
+        }
+      }
+      catch(err) {
+        console.log(err)
+      }
+    }
+
   return (
     <section className={`${styles.construct} mt-10`}>
       <div className="ml-4 mt-4">
-        <ConstructorElement
+        {Object.keys(bunsOfOrder).length !== 0 && <ConstructorElement
           type="top"
           isLocked={true}
-          text="Краторная булка N-200i (верх)"
-          price={20}
-          thumbnail={ingredients[0].image}
-        />
+          text={`${bunsOfOrder.name} (верх)`}
+          price={bunsOfOrder.price}
+          thumbnail={bunsOfOrder.image}
+        />}
       </div>
       
       <ul className={styles['list-ingredients']}>
-        {ingredients.map(element => {
+        {ingredientsOfOrder.map(element => {
           return element.type === 'bun' ? '' :
             <div className={styles['list-item-wrap']} key={element._id}>
               <DragIcon type="primary" />
@@ -33,20 +83,25 @@ function BurgerConstructor({ ingredients, openModalOrder }) {
         )}
       </ul>
       <div className="ml-4">
-        <ConstructorElement
+        {Object.keys(bunsOfOrder).length !== 0 && <ConstructorElement
             type="bottom"
             isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={20}
-            thumbnail={ingredients[0].image}
-          />
+            text={`${bunsOfOrder.name} (низ)`}
+            price={bunsOfOrder.price}
+            thumbnail={bunsOfOrder.image}
+          />}
       </div>
       <div className={`${styles['order-wrap']} mt-10`}>
         <div className={styles['price-wrap']}>
-          <p className="text text_type_digits-medium">610</p>
+          <p className="text text_type_digits-medium">{totalPrice.totalPrice + getBunsPrice()}</p>
           <CurrencyIcon type="primary" />
         </div>
-        <Button type="primary" size="large"  onClick={openModalOrder}>
+        <Button type="primary" size="large"  onClick={() => {
+          if (bunsOfOrder.length !== 0 && ingredientsOfOrder.length > 0) {
+            handleCreateOrder()
+            openModalOrder()
+          }
+        }}>
           Оформить заказ
         </Button>
       </div>
@@ -54,25 +109,11 @@ function BurgerConstructor({ ingredients, openModalOrder }) {
   );
 }
 
-
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.arrayOf(
-    PropTypes.shape({
-      _id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      proteins: PropTypes.number,
-      fat: PropTypes.number,
-      carbohydrates: PropTypes.number,
-      calories: PropTypes.number,
-      price: PropTypes.number.isRequired,
-      image: PropTypes.string.isRequired,
-      image_mobile: PropTypes.string,
-      image_large: PropTypes.string,
-      __v: PropTypes.number,
-    }).isRequired
-  ).isRequired,
-  openModalOrder: PropTypes.func.isRequired
+  openModalOrder: PropTypes.func.isRequired,
+  setOrderNumber: PropTypes.func.isRequired,
+  ingredientsOfOrder: PropTypes.array,
+  bunsOfOrder: PropTypes.object,
 }
 
 export default BurgerConstructor;
