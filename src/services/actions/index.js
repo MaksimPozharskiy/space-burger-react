@@ -118,6 +118,47 @@ export function getOrder(ingredients) {
   };
 }
 
+
+// Other 
+export const SHOW_MODAL = "SHOW_MODAL";
+export const HIDE_MODAL = "HIDE_MODAL";
+export const SHOW_MODAL_ORDER = "SHOW_MODAL_ORDER";
+export const HIDE_MODAL_ORDER = "HIDE_MODAL_ORDER";
+
+export function closeModals() {
+  return (dispatch) => {
+    // dispatch(hideError());
+    dispatch(deleteSelectedIngredient());
+    dispatch(closeOrder());
+    // dispatch(hideMenu());
+    // dispatch(hidePersonalMenu());
+  };
+}
+
+export function showModal() {
+  return {
+    type: SHOW_MODAL,
+  };
+}
+
+export function hideModal() {
+  return {
+    type: HIDE_MODAL,
+  };
+}
+
+export function showModalOrder() {
+  return {
+    type: SHOW_MODAL_ORDER,
+  };
+}
+
+export function hideModalOrder() {
+  return {
+    type: HIDE_MODAL_ORDER,
+  };
+}
+
 export function closeOrder() {
   return {
     type: DELETE_ORDER,

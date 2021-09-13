@@ -2,6 +2,8 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import React from 'react';
 import styles from './BurgerIngredient.module.css';
 import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSelectedIngredient, closeModals, showModal } from '../../services/actions';
 
 function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOrder, ingredient }) {
 
@@ -10,8 +12,15 @@ function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOr
     addItemInOrder(ingredient);
   }
 
+  const dispatch = useDispatch();
+  
+  function handleAddIngredient() {
+    dispatch(getSelectedIngredient(ingredient));
+    dispatch(showModal())
+  }
+
   return (
-    <li className={styles.ingredient} onClick={handleOpenModal}>
+    <li className={styles.ingredient} onClick={handleAddIngredient}>
       <img src={image} alt={name} />
       <div className={styles['price-wrap']}>
         <p className="text text_type_digits-default mt-2 mb-2 mr-2">{price}</p>

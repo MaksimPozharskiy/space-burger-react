@@ -7,21 +7,25 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import { IngredientsContext } from '../../contexts/ingredientsContext';
-import { useDispatch } from 'react-redux';
-import { getIngredients } from '../../services/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngredients, hideModal, hideModalOrder, showModalOrder } from '../../services/actions';
 
 function App() {
-  const [ingredients, setIngredients] = React.useState([])
   const [isLoading, setIsLoading] = React.useState(false)
-  const [isModalOrderOpened, setIsModalOrderOpened] = React.useState(false);
-  const [isModalIngredientOpened, setIsModalIngredientOpened] = React.useState(false);
   const [detailsIngredient, setDetailsIngredient] = React.useState();
   const [orderNumber, setOrderNumber] = React.useState(0);
   const [ingredientsOfOrder, setIngredientsOfOrder] = React.useState<object[]>([]);
   const [bunsOfOrder, setBunsOfOrder] = React.useState({})
-  
+  const { isModalOpened, isModalOpenedOrder, currentIngredient } = useSelector(
+    (store: any) => ({
+      isModalOpened: store.modal.isModalOpened,
+      isModalOpenedOrder: store.modal.isModalOpenedOrder,
+      currentIngredient: store.burgerIngredient.currentIngredient,
+    })
+  );
+
   const dispatch = useDispatch();
+    console.log(isModalOpened)
 
   React.useEffect(() => {
     dispatch(getIngredients())
@@ -29,20 +33,19 @@ function App() {
   }, [])
 
   function closeModalOrder() {
-    setIsModalOrderOpened(false);
+    dispatch(hideModalOrder())
   };
 
   function openModalOrder() {
-    setIsModalOrderOpened(true);
+    dispatch(showModalOrder())
   };
 
   function openModalIngredient(detailsIngredient) {
     setDetailsIngredient(detailsIngredient);
-    setIsModalIngredientOpened(true);
   };
 
   function closeModalIngredient() {
-    setIsModalIngredientOpened(false);
+    dispatch(hideModal())
   };
 
   function addItemInOrder(item) {
@@ -57,35 +60,32 @@ function App() {
 
   return (
     <>
-      <IngredientsContext.Provider value={ingredients}>
-        <AppHeader />
-        <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
-          { isLoading ? 
-            <>
-              <BurgerIngredients openModalIngredient={openModalIngredient} addItemInOrder={addItemInOrder} /> 
-              <BurgerConstructor 
-                openModalOrder={openModalOrder} 
-                setOrderNumber={setOrderNumber} 
-                ingredientsOfOrder={ingredientsOfOrder}
-                bunsOfOrder={bunsOfOrder} />
-            </>
-            : <div>Loading...</div>
-          }
-        </div>
-        {detailsIngredient && 
-        <Modal
-          closeModalOrder={closeModalIngredient}
-          isModalOrderOpened={isModalIngredientOpened}
-          title="Детали ингредиента">
-          <IngredientDetails 
-            detailsIngredient={detailsIngredient} />
-        </Modal>}
-        <Modal
-          closeModalOrder={closeModalOrder}
-          isModalOrderOpened={isModalOrderOpened}>
-          <OrderDetails orderNumber={orderNumber} />
-        </Modal>
-      </IngredientsContext.Provider>
+      <AppHeader />
+      <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
+        { isLoading ? 
+          <>
+            <BurgerIngredients openModalIngredient={openModalIngredient} addItemInOrder={addItemInOrder} /> 
+            <BurgerConstructor 
+              openModalOrder={openModalOrder} 
+              setOrderNumber={setOrderNumber} 
+              ingredientsOfOrder={ingredientsOfOrder}
+              bunsOfOrder={bunsOfOrder} />
+          </>
+          : <div>Loading...</div>
+        }
+      </div>
+      {currentIngredient && <Modal
+        closeModal={closeModalIngredient}
+        isModalOpened={isModalOpened}
+        title="Детали ингредиента">
+        <IngredientDetails 
+          detailsIngredient={detailsIngredient} />
+      </Modal>}
+      <Modal
+        closeModal={closeModalOrder}
+        isModalOpened={isModalOpenedOrder}>
+        <OrderDetails orderNumber={orderNumber} />
+      </Modal>
     </>
   );
 }

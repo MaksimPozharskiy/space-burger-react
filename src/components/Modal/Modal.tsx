@@ -7,13 +7,14 @@ import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { keyCodeEsc } from '../../utils/constants';
 const modalRoot = document.getElementById("modal");
 
-function Modal({ title, children, closeModalOrder, isModalOrderOpened }) {
+function Modal({ title, children, closeModal, isModalOpened }) {
+
 
   const closeModalEsc = React.useCallback((e) => {
     if (e.keyCode === keyCodeEsc) {
-      closeModalOrder();
+      closeModal();
     }
-  }, [closeModalOrder]);
+  }, [closeModal]);
 
   React.useEffect(() => {
     document.addEventListener('keydown', closeModalEsc);
@@ -26,14 +27,14 @@ function Modal({ title, children, closeModalOrder, isModalOrderOpened }) {
   return modalRoot ? ReactDOM.createPortal(
     (
       <>
-        <div className={`${styles.popup} ${isModalOrderOpened ? styles.popupOpened : ''}`}>
+        <div className={`${styles.popup} ${isModalOpened ? styles.popupOpened : ''}`}>
           <div className={`${styles.titleWrap} mt-10 ml-10 mr-10`}>
             <h2 className="text text_type_main-large">{title}</h2>
-            <CloseIcon type="primary" onClick={closeModalOrder}/>
+            <CloseIcon type="primary" onClick={closeModal}/>
           </div>
           {children}
         </div>
-        <ModalOverlay isModalOpened={isModalOrderOpened} closeModalOrder={closeModalOrder}/>
+        <ModalOverlay isModalOpened={isModalOpened} closeModalOrder={closeModal}/>
       </>
     ), modalRoot)
     : null;
@@ -42,8 +43,8 @@ function Modal({ title, children, closeModalOrder, isModalOrderOpened }) {
 Modal.propTypes = {
   title: PropTypes.string,
   children: PropTypes.element.isRequired,
-  closeModalOrder: PropTypes.func.isRequired,
-  isModalOrderOpened: PropTypes.bool.isRequired
+  closeModal: PropTypes.func.isRequired,
+  isModalOpened: PropTypes.bool.isRequired
 }
 
 export default Modal;

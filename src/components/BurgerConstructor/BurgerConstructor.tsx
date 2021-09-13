@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
 import { mainApiUrl } from '../../utils/constants';
+import { useDispatch, useSelector } from 'react-redux';
 
 function BurgerConstructor({ 
     openModalOrder,
@@ -10,7 +11,13 @@ function BurgerConstructor({
     ingredientsOfOrder,
     bunsOfOrder
   }) {
-  
+  const dispatch = useDispatch();
+  const {constructorIngredients, IsBun } = useSelector(
+    (store: any) => ({
+      constructorIngredients: store.constructor.constructorIngredients,
+      IsBun: store.constructor.isBuns,
+    })
+  );
   // get total price
   const [totalPrice, dispatchPrice] = React.useReducer(reducer, {totalPrice: 0}, undefined )
   function reducer(state, action) {
