@@ -3,11 +3,13 @@ import styles from './App.module.css';
 import AppHeader from '../AppHeader/AppHeader';
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import { mainApiUrl } from '../../utils/constants';
+
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import { IngredientsContext } from '../../contexts/ingredientsContext';
+import { useDispatch } from 'react-redux';
+import { getIngredients } from '../../services/actions';
 
 function App() {
   const [ingredients, setIngredients] = React.useState([])
@@ -19,25 +21,12 @@ function App() {
   const [ingredientsOfOrder, setIngredientsOfOrder] = React.useState<object[]>([]);
   const [bunsOfOrder, setBunsOfOrder] = React.useState({})
   
+  const dispatch = useDispatch();
+
   React.useEffect(() => {
-    getIngredientData();
+    dispatch(getIngredients())
+    setIsLoading(true)
   }, [])
-  
-  const getIngredientData = async () => {
-    try {
-      const res = await fetch(`${mainApiUrl}/ingredients`);
-      if (res.status === 200) {
-        const data = await res.json();
-        setIngredients(data.data);
-        setIsLoading(true)
-      } else {
-        throw new Error('Произошла ошибка ');
-      }
-    }
-    catch(err) {
-      console.log(err)
-    }
-  }
 
   function closeModalOrder() {
     setIsModalOrderOpened(false);
