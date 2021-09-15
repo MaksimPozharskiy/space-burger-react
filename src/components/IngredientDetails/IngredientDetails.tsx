@@ -1,14 +1,10 @@
-import React from 'react';
 import styles from './IngredientDetails.module.css';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-function IngredientDetails({ detailsIngredient }) {
-  const dispatch = useDispatch();
+function IngredientDetails() {
   const { currentIngredient } = useSelector((store: any) => ({
     currentIngredient: store.burgerIngredient.currentIngredient,
   }));
-  
 
   return (
     <div className={`${styles.container} mb-15`}>
@@ -35,9 +31,4 @@ function IngredientDetails({ detailsIngredient }) {
     </div>
   )
 }
-
-IngredientDetails.propTypes = {
-  detailsIngredient: PropTypes.object
-}
-
 export default IngredientDetails;

@@ -1,17 +1,16 @@
-import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
 import { mainApiUrl } from '../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDrop } from "react-dnd";
+import { useDrop} from "react-dnd";
 import { addConstructorIngredient } from '../../services/actions';
+import ConstructorItem from '../ConstructorItem/ConstructorItem';
 
 function BurgerConstructor({ 
     openModalOrder,
     setOrderNumber,
-    ingredientsOfOrder,
-    bunsOfOrder
   }) {
   const dispatch = useDispatch();
   const {constructorIngredients, IsBun } = useSelector(
@@ -32,7 +31,7 @@ function BurgerConstructor({
     }
   }
 
-  const [{ isHover }, dropTarget] = useDrop({
+  const [, dropTarget] = useDrop({
     accept: "dragIngredient",
     drop(ingredient) {
       dispatch(addConstructorIngredient(ingredient));
@@ -87,18 +86,9 @@ function BurgerConstructor({
       </div>
       
       <ul className={styles['list-ingredients']}>
-        {constructorIngredients && constructorIngredients.map(element => {
+        {constructorIngredients && constructorIngredients.map((element, index) => {
           return element.type === 'bun' ? '' :
-            <div className={styles['list-item-wrap']} key={element.ingredientId}>
-              <DragIcon type="primary" />
-              <li className={styles.ingredient}>
-                <ConstructorElement
-                  text={element.name}
-                  price={element.price}
-                  thumbnail={element.image}
-                />
-              </li>
-            </div>
+            <ConstructorItem ingredient={element} key={element.ingredientId} index={index}/>
           }
         )}
       </ul>

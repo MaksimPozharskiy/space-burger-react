@@ -2,10 +2,9 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo } from 'react';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
-import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
+function BurgerIngredients() {
   const [current, setCurrent] = React.useState('buns')
   const buns: any = document.getElementById("buns");
   const sauces: any = document.getElementById("sauces");
@@ -82,8 +81,6 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
-                openModalIngredient={openModalIngredient}
-                addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
                 count={ingredient.count}
               /> : '';
@@ -98,8 +95,6 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
-                openModalIngredient={openModalIngredient}
-                addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
                 count={ingredient.count}
               /> : '';
@@ -114,8 +109,6 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
                 image={ingredient.image}
                 name={ingredient.name}
                 price={ingredient.price}
-                openModalIngredient={openModalIngredient}
-                addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
                 count={ingredient.count}
               /> : '';
@@ -124,11 +117,6 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
       </div>
     </section>
   );
-}
-
-BurgerIngredients.propTypes = {
-  openModalIngredient: PropTypes.func.isRequired,
-  addItemInOrder: PropTypes.func.isRequired,
 }
 
 export default BurgerIngredients;

@@ -14,10 +14,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false)
-  const [detailsIngredient, setDetailsIngredient] = React.useState();
   const [orderNumber, setOrderNumber] = React.useState(0);
-  const [ingredientsOfOrder, setIngredientsOfOrder] = React.useState<object[]>([]);
-  const [bunsOfOrder, setBunsOfOrder] = React.useState({})
   const { isModalOpened, isModalOpenedOrder, currentIngredient } = useSelector(
     (store: any) => ({
       isModalOpened: store.modal.isModalOpened,
@@ -31,7 +28,7 @@ function App() {
   React.useEffect(() => {
     dispatch(getIngredients())
     setIsLoading(true)
-  }, [])
+  }, [dispatch])
 
   function closeModalOrder() {
     dispatch(hideModalOrder())
@@ -41,23 +38,9 @@ function App() {
     dispatch(showModalOrder())
   };
 
-  function openModalIngredient(detailsIngredient) {
-    setDetailsIngredient(detailsIngredient);
-  };
-
   function closeModalIngredient() {
     dispatch(hideModal())
   };
-
-  function addItemInOrder(item) {
-    if (item.type === 'bun') {
-      setBunsOfOrder(item)
-    } else if(ingredientsOfOrder.some(ingredient => ingredient['_id'] === item['_id'])) {
-      return
-    } else {
-      setIngredientsOfOrder([...ingredientsOfOrder, item])
-    }
-  }
 
   return (
     <>
@@ -66,12 +49,10 @@ function App() {
         <DndProvider backend={HTML5Backend}>
           { isLoading ? 
             <>
-              <BurgerIngredients openModalIngredient={openModalIngredient} addItemInOrder={addItemInOrder} /> 
+              <BurgerIngredients /> 
               <BurgerConstructor 
                 openModalOrder={openModalOrder} 
-                setOrderNumber={setOrderNumber} 
-                ingredientsOfOrder={ingredientsOfOrder}
-                bunsOfOrder={bunsOfOrder} />
+                setOrderNumber={setOrderNumber} />
             </>
             : <div>Loading...</div>
           }
@@ -81,8 +62,7 @@ function App() {
         closeModal={closeModalIngredient}
         isModalOpened={isModalOpened}
         title="Детали ингредиента">
-        <IngredientDetails 
-          detailsIngredient={detailsIngredient} />
+        <IngredientDetails />
       </Modal>}
       <Modal
         closeModal={closeModalOrder}
