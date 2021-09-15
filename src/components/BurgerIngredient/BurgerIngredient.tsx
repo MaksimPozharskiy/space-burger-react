@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { getSelectedIngredient, showModal } from '../../services/actions';
 import { useDrag } from "react-dnd";
 
-function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOrder, ingredient }) {
+function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOrder, ingredient, count }) {
 
   const handleOpenModal = () => {
     openModalIngredient(ingredient);
@@ -36,7 +36,7 @@ function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOr
         <CurrencyIcon type="primary" />
       </div>
       <p className={`${styles.name} text text_type_main-default`}>{name}</p>
-      <Counter count={1} size="default" />
+      <Counter count={count} size="default" />
     </li>
   ): null;
 }
@@ -48,6 +48,7 @@ BurgerIngredient.propTypes = {
   openModalIngredient: PropTypes.func.isRequired,
   addItemInOrder: PropTypes.func,
   ingredient: PropTypes.object.isRequired,
+  count: PropTypes.number
 }
 
 export default BurgerIngredient;

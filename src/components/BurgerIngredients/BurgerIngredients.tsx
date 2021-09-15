@@ -1,5 +1,5 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
+import React, { useMemo } from 'react';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
 import PropTypes from 'prop-types';
@@ -23,6 +23,16 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
     setCurrent(e)
     document.getElementById(type)?.scrollIntoView();
   }
+
+  const countOfIngredients = useMemo(() => {
+    return ingredients.map((ingredient) => {
+      ingredient.count = constructorIngredients.filter(
+        (item) => item._id === ingredient._id
+      ).length;
+      if (IsBun && IsBun._id === ingredient._id) ingredient.count += 2;
+      return ingredient;
+    });
+  }, [ingredients, constructorIngredients, IsBun]);
 
   const onScrollIngredients = () => {
     const bunsPos = Math.abs(
@@ -65,7 +75,7 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
       <div id="ingredients" className={styles.ingredients} onScroll={onScrollIngredients}>
         <h2 id="buns" className="text text_type_main-medium mt-10 mb-6">Булки</h2>
         {ingredients && <ul className={styles['list-ingredients']}>
-          {ingredients.map((ingredient) => {
+          {countOfIngredients.map((ingredient) => {
             return ingredient.type === 'bun' ? 
               <BurgerIngredient
                 key={ingredient._id}
@@ -75,12 +85,13 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
                 openModalIngredient={openModalIngredient}
                 addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
+                count={ingredient.count}
               /> : '';
           })}
         </ul>}
         <h2 id="sauces" className="text text_type_main-medium mt-10 mb-6">Соусы</h2>
         <ul className={styles['list-ingredients']}>
-          {ingredients.map((ingredient) => {
+          {countOfIngredients.map((ingredient) => {
             return ingredient.type === 'sauce' ? 
               <BurgerIngredient
                 key={ingredient._id}
@@ -90,12 +101,13 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
                 openModalIngredient={openModalIngredient}
                 addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
+                count={ingredient.count}
               /> : '';
           })}
         </ul>
         <h2 id="toppings" className="text text_type_main-medium mt-10 mb-6">Начинки</h2>
         <ul className={styles['list-ingredients']}>
-          {ingredients.map((ingredient) => {
+          {countOfIngredients.map((ingredient) => {
             return ingredient.type === 'main' ? 
               <BurgerIngredient
                 key={ingredient._id}
@@ -105,6 +117,7 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
                 openModalIngredient={openModalIngredient}
                 addItemInOrder={addItemInOrder}
                 ingredient={ingredient}
+                count={ingredient.count}
               /> : '';
           })}
         </ul>
