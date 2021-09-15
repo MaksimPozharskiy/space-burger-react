@@ -2,8 +2,9 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import React from 'react';
 import styles from './BurgerIngredient.module.css';
 import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { getSelectedIngredient, closeModals, showModal } from '../../services/actions';
+import { useDispatch } from 'react-redux';
+import { getSelectedIngredient, showModal } from '../../services/actions';
+import { useDrag } from "react-dnd";
 
 function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOrder, ingredient }) {
 
@@ -19,8 +20,16 @@ function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOr
     dispatch(showModal())
   }
 
-  return (
-    <li className={styles.ingredient} onClick={handleAddIngredient}>
+  const [{ isDrag }, dragRef] = useDrag({
+    type: "dragIngredient",
+    item: ingredient,
+    collect: (monitor) => ({
+      isDrag: monitor.isDragging(),
+    }),
+  });
+
+  return !isDrag ? (
+    <li className={styles.ingredient} onClick={handleAddIngredient} ref={dragRef}>
       <img src={image} alt={name} />
       <div className={styles['price-wrap']}>
         <p className="text text_type_digits-default mt-2 mb-2 mr-2">{price}</p>
@@ -29,7 +38,7 @@ function BurgerIngredient({ image, name, price, openModalIngredient, addItemInOr
       <p className={`${styles.name} text text_type_main-default`}>{name}</p>
       <Counter count={1} size="default" />
     </li>
-  );
+  ): null;
 }
 
 BurgerIngredient.propTypes = {

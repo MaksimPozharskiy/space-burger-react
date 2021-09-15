@@ -14,11 +14,11 @@ function BurgerIngredients({ openModalIngredient, addItemInOrder }) {
   const { ingredients, constructorIngredients, IsBun } = useSelector(
     (store: any) => ({
       ingredients: store.burgerIngredients.ingredients,
-      constructorIngredients: store.constructor.constructorIngredients,
-      IsBun: store.constructor.isBuns,
+      constructorIngredients: store.constructorOfOrder.constructorIngredients,
+      IsBun: store.constructorOfOrder.isBuns,
     })
   );
-  
+
   const handleClickTypes = (e, type) => {
     setCurrent(e)
     document.getElementById(type)?.scrollIntoView();

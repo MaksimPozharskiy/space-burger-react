@@ -9,6 +9,8 @@ import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients, hideModal, hideModalOrder, showModalOrder } from '../../services/actions';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -25,7 +27,6 @@ function App() {
   );
 
   const dispatch = useDispatch();
-    console.log(isModalOpened)
 
   React.useEffect(() => {
     dispatch(getIngredients())
@@ -62,17 +63,19 @@ function App() {
     <>
       <AppHeader />
       <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
-        { isLoading ? 
-          <>
-            <BurgerIngredients openModalIngredient={openModalIngredient} addItemInOrder={addItemInOrder} /> 
-            <BurgerConstructor 
-              openModalOrder={openModalOrder} 
-              setOrderNumber={setOrderNumber} 
-              ingredientsOfOrder={ingredientsOfOrder}
-              bunsOfOrder={bunsOfOrder} />
-          </>
-          : <div>Loading...</div>
-        }
+        <DndProvider backend={HTML5Backend}>
+          { isLoading ? 
+            <>
+              <BurgerIngredients openModalIngredient={openModalIngredient} addItemInOrder={addItemInOrder} /> 
+              <BurgerConstructor 
+                openModalOrder={openModalOrder} 
+                setOrderNumber={setOrderNumber} 
+                ingredientsOfOrder={ingredientsOfOrder}
+                bunsOfOrder={bunsOfOrder} />
+            </>
+            : <div>Loading...</div>
+          }
+        </DndProvider>
       </div>
       {currentIngredient && <Modal
         closeModal={closeModalIngredient}

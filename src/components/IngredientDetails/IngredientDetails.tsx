@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './IngredientDetails.module.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { getSelectedIngredient, showModal } from '../../services/actions';
 
 function IngredientDetails({ detailsIngredient }) {
   const dispatch = useDispatch();

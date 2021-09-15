@@ -223,7 +223,7 @@ const modalReducer = (state = initialStateModal, action) => {
 
 const rootReducer = combineReducers({
   burgerIngredients: getIngredientsListReducer,
-  constructor: getConstructorIngredientsReducer,
+  constructorOfOrder: getConstructorIngredientsReducer,
   burgerIngredient: getIngredientInfoReducer,
   order: getOrderReducer,
   modal: modalReducer
