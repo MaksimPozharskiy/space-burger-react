@@ -51,6 +51,7 @@ function BurgerConstructor({
   }, [constructorIngredients])
 
     const handleCreateOrder = async () => {
+      if (IsBun === null) return;
       try {
         const res = await fetch(`${mainApiUrl}/orders`, {
           method: "POST",
@@ -107,11 +108,11 @@ function BurgerConstructor({
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large"  onClick={() => {
-          if (IsBun.length !== 0 && constructorIngredients.length > 0) {
+          if (IsBun !== null && constructorIngredients.length > 0) {
             handleCreateOrder()
             openModalOrder()
           }
-        }}>
+        }}> 
           Оформить заказ
         </Button>
       </div>
