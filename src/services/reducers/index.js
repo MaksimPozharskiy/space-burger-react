@@ -17,6 +17,10 @@ import {
   HIDE_MODAL,
   SHOW_MODAL_ORDER,
   HIDE_MODAL_ORDER,
+  SHOW_ERROR,
+  HIDE_ERROR,
+  SHOW_MODAL_ERROR,
+  HIDE_MODAL_ERROR
 } from '../actions/index';
 
 const initialStateIngredients = {
@@ -43,7 +47,35 @@ const initialStateOrder = {
 const initialStateModal = {
   isModalOpened: false,
   isModalOpenedOrder: false,
+  isModalOpenedError: false
 };
+
+const initialStateError = {
+  error: {},
+};
+
+export const errorsReducer = (state = initialStateError, action) => {
+  switch (action.type) {
+    case SHOW_ERROR: {
+      return {
+        ...state,
+        error: action.payload,
+      };
+    }
+    case HIDE_ERROR: {
+      return {
+        ...state,
+        error: {},
+      };
+    }
+    default: {
+      return {
+        ...state,
+      };
+    }
+  }
+};
+
 const getIngredientsListReducer = (state = initialStateIngredients, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
@@ -190,6 +222,7 @@ const modalReducer = (state = initialStateModal, action) => {
         ...state,
         isModalOpened: true,
         isModalOpenedOrder: false,
+        isModalOpenedError: false,
       };
     }
     case HIDE_MODAL: {
@@ -197,6 +230,7 @@ const modalReducer = (state = initialStateModal, action) => {
         ...state,
         isModalOpened: false,
         isModalOpenedOrder: false,
+        isModalOpenedError: false,
       };
     }
     case SHOW_MODAL_ORDER: {
@@ -204,6 +238,7 @@ const modalReducer = (state = initialStateModal, action) => {
         ...state,
         isModalOpenedOrder: true,
         isModalOpened: false,
+        isModalOpenedError: false,
       };
     }
     case HIDE_MODAL_ORDER: {
@@ -211,6 +246,23 @@ const modalReducer = (state = initialStateModal, action) => {
         ...state,
         isModalOpenedOrder: false,
         isModalOpened: false,
+        isModalOpenedError: false,
+      };
+    }
+    case SHOW_MODAL_ERROR: {
+      return {
+        ...state,
+        isModalOpenedOrder: false,
+        isModalOpened: false,
+        isModalOpenedError: true,
+      };
+    }
+    case HIDE_MODAL_ERROR: {
+      return {
+        ...state,
+        isModalOpenedOrder: false,
+        isModalOpened: false,
+        isModalOpenedError: false,
       };
     }
     default: {
@@ -226,7 +278,8 @@ const rootReducer = combineReducers({
   constructorOfOrder: getConstructorIngredientsReducer,
   burgerIngredient: getIngredientInfoReducer,
   order: getOrderReducer,
-  modal: modalReducer
+  modal: modalReducer,
+  errors: errorsReducer
 });
 
 export default rootReducer;

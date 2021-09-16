@@ -127,11 +127,8 @@ export const HIDE_MODAL_ORDER = "HIDE_MODAL_ORDER";
 
 export function closeModals() {
   return (dispatch) => {
-    // dispatch(hideError());
     dispatch(deleteSelectedIngredient());
     dispatch(closeOrder());
-    // dispatch(hideMenu());
-    // dispatch(hidePersonalMenu());
   };
 }
 
@@ -162,5 +159,36 @@ export function hideModalOrder() {
 export function closeOrder() {
   return {
     type: DELETE_ORDER,
+  };
+}
+
+// Errors 
+export const SHOW_ERROR = "SHOW_ERROR";
+export const HIDE_ERROR = "HIDE_ERROR";
+export const SHOW_MODAL_ERROR = "SHOW_MODAL_ERROR";
+export const HIDE_MODAL_ERROR = "HIDE_MODAL_ERROR";
+
+export function showError(error) {
+  return {
+    type: SHOW_ERROR,
+    payload: error,
+  };
+}
+
+export function hideError() {
+  return {
+    type: HIDE_ERROR,
+  };
+}
+
+export function showModalError() {
+  return {
+    type: SHOW_MODAL_ERROR,
+  };
+}
+
+export function hideModalError() {
+  return {
+    type: HIDE_MODAL_ERROR,
   };
 }

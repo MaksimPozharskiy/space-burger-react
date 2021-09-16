@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { mainApiUrl } from '../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop} from "react-dnd";
-import { addConstructorIngredient } from '../../services/actions';
+import { addConstructorIngredient, showError, showModalError } from '../../services/actions';
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 
 function BurgerConstructor({ 
@@ -17,6 +17,7 @@ function BurgerConstructor({
     (store: any) => ({
       constructorIngredients: store.constructorOfOrder.constructorIngredients,
       IsBun: store.constructorOfOrder.isBuns,
+      error: store.errors.error
     })
   );
 
@@ -45,6 +46,11 @@ function BurgerConstructor({
     if (IsBun === null) return 0;
     return IsBun.price * 2;
   }
+
+  function openModalError(error) {
+    dispatch(showError(error))
+    dispatch(showModalError())
+  };
 
   React.useEffect(() => {
     dispatchPrice({type: 'сount'})
@@ -111,7 +117,7 @@ function BurgerConstructor({
           if (IsBun !== null && constructorIngredients.length > 0) {
             handleCreateOrder()
             openModalOrder()
-          }
+          } else {openModalError({error: 'Для создания бургера необходимы 2 булки и минимум 1 наполнитель'})}
         }}> 
           Оформить заказ
         </Button>
