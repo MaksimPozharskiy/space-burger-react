@@ -1,37 +1,63 @@
-import { Button, ConstructorElement, CurrencyIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import PropTypes from 'prop-types';
 import { mainApiUrl } from '../../utils/constants';
+import { useDispatch, useSelector } from 'react-redux';
+import { useDrop} from "react-dnd";
+import { addConstructorIngredient, showError, showModalError } from '../../services/actions';
+import ConstructorItem from '../ConstructorItem/ConstructorItem';
 
 function BurgerConstructor({ 
     openModalOrder,
     setOrderNumber,
-    ingredientsOfOrder,
-    bunsOfOrder
   }) {
-  
+  const dispatch = useDispatch();
+  const {constructorIngredients, IsBun } = useSelector(
+    (store: any) => ({
+      constructorIngredients: store.constructorOfOrder.constructorIngredients,
+      IsBun: store.constructorOfOrder.isBuns,
+      error: store.errors.error
+    })
+  );
+
   // get total price
   const [totalPrice, dispatchPrice] = React.useReducer(reducer, {totalPrice: 0}, undefined )
   function reducer(state, action) {
     switch (action.type) {
       case "сount":
-        return { totalPrice: ingredientsOfOrder.reduce((acc, curr) => acc + curr.price, 0 )}
+        return { totalPrice: constructorIngredients.reduce((acc, curr) => acc + curr.price, 0 )}
       default:
         throw new Error(`Wrong type of action: ${action.type}`);
     }
   }
 
+  const [, dropTarget] = useDrop({
+    accept: "dragIngredient",
+    drop(ingredient) {
+      dispatch(addConstructorIngredient(ingredient));
+    },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+  });
+
   const getBunsPrice = () => {
-    if (Object.keys(bunsOfOrder).length === 0) return 0;
-    return bunsOfOrder.price * 2;
+    if (IsBun === null) return 0;
+    return IsBun.price * 2;
   }
+
+  function openModalError(error) {
+    dispatch(showError(error))
+    dispatch(showModalError())
+  };
 
   React.useEffect(() => {
     dispatchPrice({type: 'сount'})
-  }, [ingredientsOfOrder])
+  }, [constructorIngredients])
 
     const handleCreateOrder = async () => {
+      if (IsBun === null) return;
       try {
         const res = await fetch(`${mainApiUrl}/orders`, {
           method: "POST",
@@ -39,7 +65,7 @@ function BurgerConstructor({
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ingredients: ingredientsOfOrder }),
+          body: JSON.stringify({ ingredients: constructorIngredients }),
         })
         const data = await res.json();
         if (res.status === 200) {
@@ -55,40 +81,31 @@ function BurgerConstructor({
     }
 
   return (
-    <section className={`${styles.construct} mt-10`}>
+    <section className={`${styles.construct} mt-10`}  id="dropTarget" ref={dropTarget}>
       <div className="ml-4 mt-4">
-        {Object.keys(bunsOfOrder).length !== 0 && <ConstructorElement
+        { IsBun && <ConstructorElement
           type="top"
           isLocked={true}
-          text={`${bunsOfOrder.name} (верх)`}
-          price={bunsOfOrder.price}
-          thumbnail={bunsOfOrder.image}
+          text={`${IsBun.name} (верх)`}
+          price={IsBun.price}
+          thumbnail={IsBun.image}
         />}
       </div>
       
       <ul className={styles['list-ingredients']}>
-        {ingredientsOfOrder.map(element => {
+        {constructorIngredients && constructorIngredients.map((element, index) => {
           return element.type === 'bun' ? '' :
-            <div className={styles['list-item-wrap']} key={element._id}>
-              <DragIcon type="primary" />
-              <li className={styles.ingredient}>
-                <ConstructorElement
-                  text={element.name}
-                  price={element.price}
-                  thumbnail={element.image}
-                />
-              </li>
-            </div>
+            <ConstructorItem ingredient={element} key={element.ingredientId} index={index}/>
           }
         )}
       </ul>
       <div className="ml-4">
-        {Object.keys(bunsOfOrder).length !== 0 && <ConstructorElement
+        {IsBun &&  <ConstructorElement
             type="bottom"
             isLocked={true}
-            text={`${bunsOfOrder.name} (низ)`}
-            price={bunsOfOrder.price}
-            thumbnail={bunsOfOrder.image}
+            text={`${IsBun.name} (низ)`}
+            price={IsBun.price}
+            thumbnail={IsBun.image}
           />}
       </div>
       <div className={`${styles['order-wrap']} mt-10`}>
@@ -97,11 +114,11 @@ function BurgerConstructor({
           <CurrencyIcon type="primary" />
         </div>
         <Button type="primary" size="large"  onClick={() => {
-          if (bunsOfOrder.length !== 0 && ingredientsOfOrder.length > 0) {
+          if (IsBun !== null && constructorIngredients.length > 0) {
             handleCreateOrder()
             openModalOrder()
-          }
-        }}>
+          } else {openModalError({error: 'Для создания бургера необходимы 2 булки и минимум 1 наполнитель'})}
+        }}> 
           Оформить заказ
         </Button>
       </div>

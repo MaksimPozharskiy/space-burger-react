@@ -1,0 +1,14 @@
+.list-item-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.ingredient {
+  width: 100%; 
+}
+
+.ingredient div {
+  max-width: 478px;
+  width: 100%;
+}
