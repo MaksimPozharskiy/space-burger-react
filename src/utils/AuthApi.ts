@@ -40,6 +40,22 @@ class AuthApi {
       .then(this.handleResponse)
       .catch(this.handleResponseError);
   }
+
+  loginUser(email, password) {
+    return fetch(`${this._url}/auth/login`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: `${email}`,
+        password: `${password}`,
+      }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
 }
 
 export default AuthApi;

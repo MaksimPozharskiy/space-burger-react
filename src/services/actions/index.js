@@ -230,3 +230,36 @@ export function createUser({ email, password, name }) {
       });
   };
 }
+
+// Login
+export const LOGIN_USER_REQUEST = "LOGIN_USER_REQUEST";
+export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
+export const LOGIN_USER_FAILED = "LOGIN_USER_FAILED";
+
+export function loginUser({ email, password }) {
+  return (dispatch) => {
+    dispatch({
+      type: LOGIN_USER_REQUEST,
+    });
+    authApi
+      .loginUser(email, password)
+      .then((res) => {
+        if (res.accessToken && res.refreshToken) {
+          setCookie("token", res.accessToken.split("Bearer ")[1]);
+          localStorage.setItem("refreshToken", res.refreshToken);
+          localStorage.setItem("userName", res.user.name);
+        }
+        dispatch({
+          type: LOGIN_USER_SUCCESS,
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(showError(error));
+        dispatch({
+          type: LOGIN_USER_FAILED,
+        });
+      });
+  };
+}

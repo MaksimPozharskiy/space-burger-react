@@ -19,6 +19,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { RegisterPage } from '../../pages';
+import { LoginPage } from '../../pages/login';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -64,6 +65,10 @@ function App() {
         <Route exact path="/registration">
           <AppHeader />
           <RegisterPage />
+        </Route>
+        <Route exact path="/login">
+        <AppHeader />
+          <LoginPage />
         </Route>
         <Route exact path="/">
           <AppHeader />
