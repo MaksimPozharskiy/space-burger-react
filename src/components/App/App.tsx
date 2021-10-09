@@ -11,6 +11,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getIngredients, hideError, hideModal, hideModalOrder, showModalOrder } from '../../services/actions';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import {
+  Router,
+  Route,
+  Switch,
+  useHistory,
+  useLocation,
+} from "react-router-dom";
+import { RegisterPage } from '../../pages';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -24,7 +32,8 @@ function App() {
       error: store.errors.error
     })
   );
-
+  const history = useHistory();
+  let location = useLocation();
   const dispatch = useDispatch();
 
   React.useEffect(() => {
@@ -50,38 +59,49 @@ function App() {
   };
 
   return (
-    <>
-      <AppHeader />
-      <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
-        <DndProvider backend={HTML5Backend}>
-          { isLoading ? 
-            <>
-              <BurgerIngredients /> 
-              <BurgerConstructor 
-                openModalOrder={openModalOrder} 
-                setOrderNumber={setOrderNumber} />
-            </>
-            : <div>Loading...</div>
-          }
-        </DndProvider>
-      </div>
-      {currentIngredient && <Modal
-        closeModal={closeModalIngredient}
-        isModalOpened={isModalOpened}
-        title="Детали ингредиента">
-        <IngredientDetails />
-      </Modal>}
-      <Modal
-        closeModal={closeModalOrder}
-        isModalOpened={isModalOpenedOrder}>
-        <OrderDetails orderNumber={orderNumber} />
-      </Modal>
-      <Modal
-        closeModal={closeModalError}
-        isModalOpened={isModalOpenedError}>
-        <p className={styles.error}>{error.error}</p>
-      </Modal>
-    </>
+    <Router history={history}>
+      <Switch location={location}>
+        <Route exact path="/registration">
+          <AppHeader />
+          <RegisterPage />
+        </Route>
+        <Route exact path="/">
+          <AppHeader />
+          <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
+            <DndProvider backend={HTML5Backend}>
+              { isLoading ? 
+                <>
+                  <BurgerIngredients /> 
+                  <BurgerConstructor 
+                    openModalOrder={openModalOrder} 
+                    setOrderNumber={setOrderNumber} />
+                </>
+                : <div>Loading...</div>
+              }
+            </DndProvider>
+          </div>
+          {currentIngredient && <Modal
+            closeModal={closeModalIngredient}
+            isModalOpened={isModalOpened}
+            title="Детали ингредиента">
+            <IngredientDetails />
+          </Modal>}
+          <Modal
+            closeModal={closeModalOrder}
+            isModalOpened={isModalOpenedOrder}>
+            <OrderDetails orderNumber={orderNumber} />
+          </Modal>
+          <Modal
+            closeModal={closeModalError}
+            isModalOpened={isModalOpenedError}>
+            <p className={styles.error}>{error.error}</p>
+          </Modal>
+        </Route>
+        <Route>
+          <p>Не нашли</p>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

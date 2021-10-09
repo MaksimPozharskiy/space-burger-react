@@ -20,7 +20,10 @@ import {
   SHOW_ERROR,
   HIDE_ERROR,
   SHOW_MODAL_ERROR,
-  HIDE_MODAL_ERROR
+  HIDE_MODAL_ERROR,
+  CREATE_USER_REQUEST,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_FAILED,
 } from '../actions/index';
 
 const initialStateIngredients = {
@@ -52,6 +55,16 @@ const initialStateModal = {
 
 const initialStateError = {
   error: {},
+};
+
+const initialUserInfo = {
+  user: {},
+  success: false,
+  accessToken: null,
+  refreshToken: null,
+  message: null,
+  userRequest: false,
+  userRequestFail: false,
 };
 
 export const errorsReducer = (state = initialStateError, action) => {
@@ -273,13 +286,49 @@ const modalReducer = (state = initialStateModal, action) => {
   }
 };
 
+// Auth
+const userInfoReducer = (state = initialUserInfo, action) => {
+  switch (action.type) {
+    case CREATE_USER_REQUEST: {
+      return {
+        ...state,
+        userRequest: true,
+      };
+    }
+    case CREATE_USER_SUCCESS: {
+      const { success, user, accessToken, refreshToken } = action.payload;
+      return {
+        ...state,
+        success: success,
+        user: user,
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        userRequest: false,
+        userRequestFail: false,
+      };
+    }
+    case CREATE_USER_FAILED: {
+      return {
+        ...state,
+        userRequest: false,
+        userRequestFail: true,
+      };
+    }
+    default: {
+      return {
+        ...state,
+      };
+    }
+  }
+}
 const rootReducer = combineReducers({
   burgerIngredients: getIngredientsListReducer,
   constructorOfOrder: getConstructorIngredientsReducer,
   burgerIngredient: getIngredientInfoReducer,
   order: getOrderReducer,
   modal: modalReducer,
-  errors: errorsReducer
+  errors: errorsReducer,
+  authInfoUser: userInfoReducer,
 });
 
 export default rootReducer;

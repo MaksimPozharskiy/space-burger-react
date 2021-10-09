@@ -1,4 +1,7 @@
 import { mainApiUrl } from '../../utils/constants';
+import AuthApi from '../../utils/AuthApi';
+import { setCookie } from '../../utils/cookie';
+const authApi = new AuthApi(mainApiUrl);
 
 // Ingredients of Burger
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
@@ -190,5 +193,40 @@ export function showModalError() {
 export function hideModalError() {
   return {
     type: HIDE_MODAL_ERROR,
+  };
+}
+
+// Auth 
+
+// Register
+export const CREATE_USER_REQUEST = "CREATE_USER_REQUEST";
+export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
+export const CREATE_USER_FAILED = "CREATE_USER_FAILED";
+
+export function createUser({ email, password, name }) {
+  return (dispatch) => {
+    dispatch({
+      type: CREATE_USER_REQUEST,
+    });
+    authApi
+      .registerUser(email, password, name)
+      .then((res) => {
+        if (res.accessToken && res.refreshToken) {
+          setCookie("token", res.accessToken.split("Bearer ")[1]);
+          localStorage.setItem("refreshToken", res.refreshToken);
+          localStorage.setItem("userName", res.user.name);
+        }
+        dispatch({
+          type: CREATE_USER_SUCCESS,
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(showError(error));
+        dispatch({
+          type: CREATE_USER_FAILED,
+        });
+      });
   };
 }
