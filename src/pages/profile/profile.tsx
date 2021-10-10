@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Profile.module.css";
+import styles from "./profile.module.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import { useSelector, useDispatch } from "react-redux";

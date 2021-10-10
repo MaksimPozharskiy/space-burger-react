@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Profile.module.css";
+import styles from "./ProfileMenu.module.css";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../services/actions";

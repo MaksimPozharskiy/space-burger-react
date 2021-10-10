@@ -22,6 +22,8 @@ import { RegisterPage } from '../../pages';
 import { LoginPage } from '../../pages/login';
 import { ForgetPassPage } from '../../pages/forgetPass';
 import { ResetPassPage } from '../../pages/resetPass';
+import { ProfilePage } from '../../pages/profile';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -80,6 +82,9 @@ function App() {
           <AppHeader />
           <ResetPassPage />
         </Route>
+        <ProtectedRoute exact path="/profile">
+          <ProfilePage />
+        </ProtectedRoute>
         <Route exact path="/">
           <AppHeader />
           <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
