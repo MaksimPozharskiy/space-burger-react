@@ -56,6 +56,32 @@ class AuthApi {
       .then(this.handleResponse)
       .catch(this.handleResponseError);
   }
+
+  forgetPassword(email) {
+    return fetch(`${this._url}/password-reset`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: `${email}` }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
+
+  resetPassword(password, code) {
+    return fetch(`${this._url}/password-reset/reset`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ password: `${password}`, token: `${code}` }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
 }
 
 export default AuthApi;

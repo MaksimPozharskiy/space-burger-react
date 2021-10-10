@@ -263,3 +263,41 @@ export function loginUser({ email, password }) {
       });
   };
 }
+
+// Forget/Reset Pass
+export const FORGET_PASSWORD_CODE = "FORGET_PASSWORD_CODE";
+export const RESET_USER_PASSWORD = "RESET_USER_PASSWORD";
+
+export function forgetUserPassword(email) {
+  return (dispatch) => {
+    authApi
+      .forgetPassword(email)
+      .then((res) => {
+        dispatch({
+          type: FORGET_PASSWORD_CODE,
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(showError(error));
+      });
+  };
+}
+
+export function resetUserPassword(password, code) {
+  return (dispatch) => {
+    authApi
+      .resetPassword(password, code)
+      .then((res) => {
+        dispatch({
+          type: RESET_USER_PASSWORD,
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(showError(error));
+      });
+  };
+}

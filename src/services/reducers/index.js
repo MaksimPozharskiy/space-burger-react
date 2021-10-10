@@ -27,6 +27,8 @@ import {
   LOGIN_USER_REQUEST,
   LOGIN_USER_SUCCESS,
   LOGIN_USER_FAILED,
+  FORGET_PASSWORD_CODE,
+  RESET_USER_PASSWORD,
 } from '../actions/index';
 
 const initialStateIngredients = {
@@ -340,6 +342,22 @@ const userInfoReducer = (state = initialUserInfo, action) => {
         ...state,
         userRequest: false,
         userRequestFail: true,
+      };
+    }
+    case FORGET_PASSWORD_CODE: {
+      const { success, message } = action.payload;
+      return {
+        ...state,
+        success: success,
+        message: message,
+      };
+    }
+    case RESET_USER_PASSWORD: {
+      const { success, message } = action.payload;
+      return {
+        ...state,
+        success: success,
+        message: message,
       };
     }
     default: {

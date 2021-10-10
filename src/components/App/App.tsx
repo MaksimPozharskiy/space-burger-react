@@ -20,6 +20,8 @@ import {
 } from "react-router-dom";
 import { RegisterPage } from '../../pages';
 import { LoginPage } from '../../pages/login';
+import { ForgetPassPage } from '../../pages/forgetPass';
+import { ResetPassPage } from '../../pages/resetPass';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -67,8 +69,16 @@ function App() {
           <RegisterPage />
         </Route>
         <Route exact path="/login">
-        <AppHeader />
+          <AppHeader />
           <LoginPage />
+        </Route>
+        <Route exact path="/forgot-password">
+          <AppHeader />
+          <ForgetPassPage />
+        </Route>
+        <Route exact path="/reset-password">
+          <AppHeader />
+          <ResetPassPage />
         </Route>
         <Route exact path="/">
           <AppHeader />
