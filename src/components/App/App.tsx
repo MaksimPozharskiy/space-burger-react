@@ -83,6 +83,7 @@ function App() {
           <ResetPassPage />
         </Route>
         <ProtectedRoute exact path="/profile">
+          <AppHeader />
           <ProfilePage />
         </ProtectedRoute>
         <Route exact path="/">
