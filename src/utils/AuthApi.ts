@@ -1,4 +1,4 @@
-// import { getCookie } from "./func";
+import { getCookie } from "./helpers";
 
 class AuthApi {
   _url: any;
@@ -78,6 +78,66 @@ class AuthApi {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ password: `${password}`, token: `${code}` }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
+
+  logout(refreshToken) {
+    return fetch(`${this._url}/auth/logout`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: `${refreshToken}`,
+      }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
+
+  refreshToken(refreshToken) {
+    return fetch(`${this._url}/auth/token`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: `${refreshToken}`,
+      }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
+
+  getUserInfo() {
+    return fetch(`${this._url}/auth/user`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getCookie("token"),
+      },
+    })
+      .then((res) => (res.json()))
+      .catch(this.handleResponseError);
+  }
+  updateUserInfo(name, email, password) {
+    return fetch(`${this._url}/auth/user`, {
+      method: "PATCH",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getCookie("token"),
+      },
+      body: JSON.stringify({
+        name: `${name}`,
+        email: `${email}`,
+        password: `${password}`,
+      }),
     })
       .then(this.handleResponse)
       .catch(this.handleResponseError);

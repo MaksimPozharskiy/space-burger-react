@@ -29,6 +29,7 @@ import {
   LOGIN_USER_FAILED,
   FORGET_PASSWORD_CODE,
   RESET_USER_PASSWORD,
+  LOGOUT_USER_INFO,
 } from '../actions/index';
 
 const initialStateIngredients = {
@@ -358,6 +359,19 @@ const userInfoReducer = (state = initialUserInfo, action) => {
         ...state,
         success: success,
         message: message,
+      };
+    }
+    case LOGOUT_USER_INFO: {
+      const { success, message } = action.payload;
+      return {
+        ...state,
+        user: {},
+        success: success,
+        accessToken: null,
+        refreshToken: null,
+        message: message,
+        userRequest: false,
+        userRequestFail: false,
       };
     }
     default: {

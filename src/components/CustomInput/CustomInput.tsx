@@ -8,6 +8,7 @@ CustomInput.propTypes = {
   isRequired: PropTypes.bool.isRequired,
   value: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
+  isCustom: PropTypes.bool
 };
 
 function CustomInput(props) {

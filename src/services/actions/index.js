@@ -301,3 +301,119 @@ export function resetUserPassword(password, code) {
       });
   };
 }
+
+// Logout
+export const LOGOUT_USER_INFO = "LOGOUT_USER_INFO";
+
+export function logout(refreshToken) {
+  return (dispatch) => {
+    authApi
+      .logout(refreshToken)
+      .then((res) => {
+        dispatch({
+          type: LOGOUT_USER_INFO,
+          payload: res,
+        });
+        setCookie("token", null);
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("userName");
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(showError(error));
+      });
+  };
+}
+
+
+// Refresh user TOKEN
+export const REFRESH_USER_TOKEN = "REFRESH_USER_TOKEN";
+
+export function refreshToken(afterRefresh) {
+  return (dispatch) => {
+    authApi
+      .refreshToken(localStorage.getItem("refreshToken"))
+      .then((res) => {
+        if (res.accessToken && res.refreshToken) {
+          setCookie("token", res.accessToken.split("Bearer ")[1]);
+          localStorage.setItem("refreshToken", res.refreshToken);
+        }
+        dispatch({
+          type: REFRESH_USER_TOKEN,
+          payload: res,
+        });
+        if (afterRefresh) dispatch(afterRefresh);
+      })
+      .catch((error) => {
+        console.log(error);
+        dispatch(showError(error));
+      });
+  };
+}
+
+// Get info User
+export const GET_USER_INFO_REQUEST = "GET_USER_INFO_REQUEST";
+export const GET_USER_INFO_SUCCESS = "GET_USER_INFO";
+export const GET_USER_INFO_FAILED = "GET_USER_INFO_FAILED";
+
+export function getUserInfo() {
+  return (dispatch) => {
+    dispatch({
+      type: GET_USER_INFO_REQUEST,
+    });
+    authApi
+      .getUserInfo()
+      .then((res) => {
+        if (!res.success) {
+          throw res;
+        }
+        dispatch({
+          type: GET_USER_INFO_SUCCESS,
+          payload: res,
+        });
+      })
+      .catch((error) => {
+        if (error.message === "jwt expired") {
+          dispatch(refreshToken(getUserInfo()));
+          console.log(error);
+        }
+        dispatch({
+          type: GET_USER_INFO_FAILED,
+        });
+      });
+  };
+}
+
+// Udate info User
+export const UPDATE_USER_INFO_REQUEST = "UPDATE_USER_INFO_REQUEST";
+export const UPDATE_USER_INFO_SUCCESS = "UPDATE_USER_INFO_SUCCESS";
+export const UPDATE_USER_INFO_FAILED = "UPDATE_USER_INFO_FAILED";
+
+export function updateUserInfo(name, email, password) {
+  return (dispatch) => {
+    dispatch({
+      type: UPDATE_USER_INFO_REQUEST,
+    });
+    authApi
+      .updateUserInfo(name, email, password)
+      .then((res) => {
+        if (!res.success) {
+          throw res;
+        }
+        dispatch({
+          type: UPDATE_USER_INFO_SUCCESS,
+          payload: res,
+        });
+        localStorage.setItem("userName", res.user.name);
+      })
+      .catch((error) => {
+        if (error.message === "jwt expired") {
+          dispatch(refreshToken(updateUserInfo(name, email, password)));
+          console.log(error);
+          dispatch({
+            type: UPDATE_USER_INFO_FAILED,
+          });
+        }
+      });
+  };
+}
