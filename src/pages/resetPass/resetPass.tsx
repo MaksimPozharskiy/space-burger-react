@@ -1,6 +1,6 @@
 import React from "react";
 import CustomInput from "../../components/CustomInput/CustomInput";
-import styles from "./resetPass.module.css";
+import styles from "../common.module.css"
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
