@@ -5,9 +5,14 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ReactDOM from 'react-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { keyCodeEsc } from '../../utils/constants';
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 const modalRoot = document.getElementById("modal");
 
 function Modal({ title, children, closeModal, isModalOpened }) {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
 
   const closeModalEsc = React.useCallback((e) => {

@@ -24,6 +24,7 @@ import { ForgetPassPage } from '../../pages/forgetPass';
 import { ResetPassPage } from '../../pages/resetPass';
 import { ProfilePage } from '../../pages/profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { IngredientDetailsPage } from '../../pages/ingredientDetail';
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false)
@@ -81,6 +82,9 @@ function App() {
         <Route exact path="/reset-password">
           <AppHeader />
           <ResetPassPage />
+        </Route>
+        <Route exact path="/ingredients/:id">
+          <IngredientDetailsPage />
         </Route>
         <ProtectedRoute exact path="/profile">
           <AppHeader />

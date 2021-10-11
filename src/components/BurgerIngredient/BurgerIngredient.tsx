@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { getSelectedIngredient, showModal } from '../../services/actions';
 import { useDrag } from "react-dnd";
+import { Link } from "react-router-dom";
 
 function BurgerIngredient({ image, name, price, ingredient, count }) {
   const dispatch = useDispatch();
@@ -24,13 +25,13 @@ function BurgerIngredient({ image, name, price, ingredient, count }) {
 
   return !isDrag ? (
     <li className={styles.ingredient} onClick={handleAddIngredient} ref={dragRef}>
-      <img src={image} alt={name} />
-      <div className={styles['price-wrap']}>
-        <p className="text text_type_digits-default mt-2 mb-2 mr-2">{price}</p>
-        <CurrencyIcon type="primary" />
-      </div>
-      <p className={`${styles.name} text text_type_main-default`}>{name}</p>
-      <Counter count={count} size="default" />
+        <img src={image} alt={name} />
+        <div className={styles['price-wrap']}>
+          <p className="text text_type_digits-default mt-2 mb-2 mr-2">{price}</p>
+          <CurrencyIcon type="primary" />
+        </div>
+        <p className={`${styles.name} text text_type_main-default`}>{name}</p>
+        <Counter count={count} size="default" />
     </li>
   ): null;
 }
