@@ -43,3 +43,7 @@
   align-items: center;
   color: #8585AD;
 }
+
+.active {
+  color: #f2f2f2;
+}

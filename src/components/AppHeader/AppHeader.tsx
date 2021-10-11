@@ -19,7 +19,7 @@ function AppHeader() {
           <li className={`${styles['list-item']} pr-5 pl-5 pt-4 pb-4`}>
             <Link to="/" className={styles.link}>
               <BurgerIcon type="primary" />
-              <p className="text text_type_main-default p-2">Конструктор</p>
+              <p className={`text text_type_main-default p-2 ${location.pathname === "/" && styles.active}`}>Конструктор</p>
             </Link>
           </li>
           <li className={`${styles['list-item']} pr-5 pl-5 pt-4 pb-4`}>
@@ -41,7 +41,7 @@ function AppHeader() {
                     : "secondary"
                 } 
               />
-              <p className="text text_type_main-default text_color_inactive p-2">{userName ? userName : "Личный кабинет"}</p>
+              <p className={`text text_type_main-default text_color_inactive p-2 ${location.pathname === "/profile" && styles.active}`}>{userName ? userName : "Личный кабинет"}</p>
             </Link>
           </li>
         </ul>

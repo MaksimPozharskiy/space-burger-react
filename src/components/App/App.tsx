@@ -123,7 +123,7 @@ function App() {
           </Modal>
         </Route>
         <Route>
-          <p>Не нашли</p>
+          <p>Страница не существует</p>
         </Route>
       </Switch>
     </Router>

@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { getSelectedIngredient, showModal } from '../../services/actions';
 import { useDrag } from "react-dnd";
-import { Link } from "react-router-dom";
 
 function BurgerIngredient({ image, name, price, ingredient, count }) {
   const dispatch = useDispatch();
