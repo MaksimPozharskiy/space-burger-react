@@ -41,6 +41,9 @@ function App() {
   const history = useHistory();
   let location = useLocation();
   const dispatch = useDispatch();
+  const action = history.action === "PUSH" || history.action === "REPLACE";
+  let backgroundIngredient =
+    action && location.state && location.state.backgroundIngredient;
 
   React.useEffect(() => {
     dispatch(getIngredients())
@@ -66,7 +69,7 @@ function App() {
 
   return (
     <Router history={history}>
-      <Switch location={location}>
+      <Switch location={backgroundIngredient || location}>
         <Route exact path="/registration">
           <AppHeader />
           <RegisterPage />
@@ -83,9 +86,9 @@ function App() {
           <AppHeader />
           <ResetPassPage />
         </Route>
-        <Route exact path="/ingredients/:id">
+        {backgroundIngredient && <Route exact path="/ingredients/:id">
           <IngredientDetailsPage />
-        </Route>
+        </Route>}
         <ProtectedRoute exact path="/profile">
           <AppHeader />
           <ProfilePage />
