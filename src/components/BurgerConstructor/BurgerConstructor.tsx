@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDrop} from "react-dnd";
 import { addConstructorIngredient, showError, showModalError } from '../../services/actions';
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
+import { useHistory } from "react-router-dom";
 
 function BurgerConstructor({ 
     openModalOrder,
@@ -20,6 +21,8 @@ function BurgerConstructor({
       error: store.errors.error
     })
   );
+  const isToken = localStorage.getItem("refreshToken");
+  const history = useHistory();
 
   // get total price
   const [totalPrice, dispatchPrice] = React.useReducer(reducer, {totalPrice: 0}, undefined )
@@ -77,6 +80,9 @@ function BurgerConstructor({
       }
       catch(err) {
         console.log(err)
+      }
+      if ((IsBun && !isToken) || (!IsBun && !isToken)) {
+        history.push("/login");
       }
     }
 

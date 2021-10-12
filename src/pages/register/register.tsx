@@ -60,10 +60,10 @@ function RegisterPage() {
   }
 
   return (
-    <form className={styles.login_container} onSubmit={onRegister} noValidate>
-      <h2 className={styles.login_title}>Регистрация</h2>
-      <span className={styles.login_error}>{error}</span>
-      <span className={styles.login_message}>
+    <form className={styles.form_container} onSubmit={onRegister} noValidate>
+      <h2 className={styles.form_title}>Регистрация</h2>
+      <span className={styles.form_error}>{error}</span>
+      <span className={styles.form_message}>
         {success ? "Выбранная почта уже зарегистрирована" : ""}
       </span>
 
@@ -88,13 +88,13 @@ function RegisterPage() {
         value={password}
         handleChange={changePassword}
       />
-      <div className={styles.login_button}>
+      <div className={styles.form_button}>
         <Button type="primary" size="large">
           {" "}
           Зарегистрироваться{" "}
         </Button>
       </div>
-      <p className={styles.login_paragraph}>
+      <p className={styles.form_paragraph}>
         Уже зарегестрированы? <Link to="/login">Войти</Link>
       </p>
     </form>

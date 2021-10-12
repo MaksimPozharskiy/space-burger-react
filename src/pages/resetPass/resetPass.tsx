@@ -55,9 +55,9 @@ function ResetPassPage() {
   }
 
   return (
-    <form className={styles.login_container} onSubmit={onSubmit} noValidate>
-      <h2 className={styles.login_title}>Восстановление пароля</h2>
-      <span className={styles.login_error}>{error}</span>
+    <form className={styles.form_container} onSubmit={onSubmit} noValidate>
+      <h2 className={styles.form_title}>Восстановление пароля</h2>
+      <span className={styles.form_error}>{error}</span>
       <CustomInput
         type="password"
         isRequired
@@ -72,12 +72,12 @@ function ResetPassPage() {
         value={code}
         handleChange={changeCode}
       />
-      <div className={styles.login_button}>
+      <div className={styles.form_button}>
         <Button type="primary" size="large">
           Сохранить
         </Button>
       </div>
-      <p className={styles.login_paragraph}>
+      <p className={styles.form_paragraph}>
         Вспомнили пароль? <Link to="/login">Войти</Link>
       </p>
     </form>

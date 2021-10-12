@@ -52,10 +52,10 @@ function LoginPage() {
   }
 
   return (
-    <form className={styles.login_container} onSubmit={onLogin} noValidate>
-      <h2 className={styles.login_title}>Вход</h2>
-      <span className={styles.login_error}>{error}</span>
-      <span className={styles.login_message}>
+    <form className={styles.form_container} onSubmit={onLogin} noValidate>
+      <h2 className={styles.form_title}>Вход</h2>
+      <span className={styles.form_error}>{error}</span>
+      <span className={styles.form_message}>
         {success && userName ? `Вход выполнен` : ""}
       </span>
       <CustomInput
@@ -72,16 +72,16 @@ function LoginPage() {
         value={password}
         handleChange={changePassword}
       />
-      <div className={styles.login_button}>
+      <div className={styles.form_button}>
         <Button type="primary" size="large">
           Войти
         </Button>
       </div>
-      <p className={styles.login_paragraph}>
+      <p className={styles.form_paragraph}>
         Вы &mdash; новый пользователь?{" "}
         <Link to="/registration">Зарегистрироваться</Link>
       </p>
-      <p className={styles.login_paragraph}>
+      <p className={styles.form_paragraph}>
         Забыли пароль? <Link to="/forgot-password">Восстановить пароль</Link>
       </p>
     </form>

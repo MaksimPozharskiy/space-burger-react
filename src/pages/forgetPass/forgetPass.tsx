@@ -60,9 +60,9 @@ function ForgetPassPage() {
   }
 
   return (
-    <form className={styles.login_container} onSubmit={onSubmit} noValidate>
-      <h2 className={styles.login_title}>Восстановление пароля</h2>
-      <span className={styles.login_error}>{error}</span>
+    <form className={styles.form_container} onSubmit={onSubmit} noValidate>
+      <h2 className={styles.form_title}>Восстановление пароля</h2>
+      <span className={styles.form_error}>{error}</span>
       <CustomInput
         type="email"
         isRequired
@@ -70,12 +70,12 @@ function ForgetPassPage() {
         value={email}
         handleChange={changeEmail}
       />
-      <div className={styles.login_button}>
+      <div className={styles.form_button}>
         <Button type="primary" size="large">
           Восстановить
         </Button>
       </div>
-      <p className={styles.login_paragraph}>
+      <p className={styles.form_paragraph}>
         Вспомнили пароль? <Link to="/login">Войти</Link>
       </p>
     </form>
