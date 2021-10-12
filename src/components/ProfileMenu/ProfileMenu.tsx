@@ -13,6 +13,7 @@ function ProfileMenu() {
   const handleLogout = () => {
     dispatch(logout(refreshToken));
     localStorage.removeItem("refreshToken");
+    localStorage.removeItem("userName");
     history.push("/login");
   };
 

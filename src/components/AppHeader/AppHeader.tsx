@@ -2,17 +2,22 @@ import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-dev
 import React from 'react';
 import styles from './AppHeader.module.css';
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function AppHeader() {
   const [userName, setUserName] = React.useState("");
   const location = useLocation();
-  const dispatch = useDispatch()
+
+  const nameInfo = useSelector(
+    (store: any) => ({
+      nameInfo: store.authInfoUser.user.name,
+    })
+  );
 
   React.useEffect(() => {
     const currentUserName = localStorage.getItem("userName");
     currentUserName && setUserName(currentUserName);
-  }, [dispatch]);
+  }, [nameInfo]);
 
   return (
     <header className={styles.header}>
