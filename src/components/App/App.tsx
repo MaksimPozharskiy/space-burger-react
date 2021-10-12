@@ -41,9 +41,7 @@ function App() {
   const history = useHistory();
   let location = useLocation();
   const dispatch = useDispatch();
-  const action = history.action === "PUSH" || history.action === "REPLACE";
-  let backgroundIngredient =
-    action && location.state && location.state.backgroundIngredient;
+  const backgroundIngredient = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.backgroundIngredient
 
   React.useEffect(() => {
     dispatch(getIngredients())
@@ -86,13 +84,13 @@ function App() {
           <AppHeader />
           <ResetPassPage />
         </Route>
-        {backgroundIngredient && <Route exact path="/ingredients/:id">
-          <IngredientDetailsPage />
-        </Route>}
         <ProtectedRoute exact path="/profile">
           <AppHeader />
           <ProfilePage />
         </ProtectedRoute>
+        <Route exact path="/ingredients/:id">
+          <IngredientDetailsPage />
+        </Route>
         <Route exact path="/">
           <AppHeader />
           <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
@@ -129,6 +127,9 @@ function App() {
           <p>Страница не существует</p>
         </Route>
       </Switch>
+      {backgroundIngredient && <Route exact path="/ingredients/:id">
+          <IngredientDetails />
+        </Route>}
     </Router>
   );
 }
