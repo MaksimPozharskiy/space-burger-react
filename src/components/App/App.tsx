@@ -8,7 +8,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { getIngredients, hideError, hideModal, hideModalOrder, showModalOrder } from '../../services/actions';
+import { getIngredients, hideModal, hideModalError, hideModalOrder, showModalOrder } from '../../services/actions';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {
@@ -62,7 +62,7 @@ function App() {
 
 
   function closeModalError() {
-    dispatch(hideError())
+    dispatch(hideModalError())
   };
 
   return (
