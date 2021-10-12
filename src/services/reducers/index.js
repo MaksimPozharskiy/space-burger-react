@@ -30,6 +30,10 @@ import {
   FORGET_PASSWORD_CODE,
   RESET_USER_PASSWORD,
   LOGOUT_USER_INFO,
+  UPDATE_USER_INFO_REQUEST,
+  UPDATE_USER_INFO_SUCCESS,
+  UPDATE_USER_INFO_FAILED,
+  REFRESH_USER_TOKEN,
 } from '../actions/index';
 
 const initialStateIngredients = {
@@ -370,6 +374,41 @@ const userInfoReducer = (state = initialUserInfo, action) => {
         accessToken: null,
         refreshToken: null,
         message: message,
+        userRequest: false,
+        userRequestFail: false,
+      };
+    }
+
+    case UPDATE_USER_INFO_REQUEST: {
+      return {
+        ...state,
+        userRequest: true,
+      };
+    }
+    case UPDATE_USER_INFO_SUCCESS: {
+      const { success, user } = action.payload;
+      return {
+        ...state,
+        success: success,
+        user: user,
+        userRequest: false,
+        userRequestFail: false,
+      };
+    }
+    case UPDATE_USER_INFO_FAILED: {
+      return {
+        ...state,
+        userRequest: false,
+        userRequestFail: true,
+      };
+    }
+    case REFRESH_USER_TOKEN: {
+      const { success, accessToken, refreshToken } = action.payload;
+      return {
+        ...state,
+        success: success,
+        accessToken: accessToken,
+        refreshToken: refreshToken,
         userRequest: false,
         userRequestFail: false,
       };

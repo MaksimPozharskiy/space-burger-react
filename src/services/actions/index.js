@@ -373,7 +373,7 @@ export function getUserInfo() {
         });
       })
       .catch((error) => {
-        if (error.message === "jwt expired") {
+        if (error.message === "jwt expired" || error.message === "jwt malformed") {
           dispatch(refreshToken(getUserInfo()));
           console.log(error);
         }
