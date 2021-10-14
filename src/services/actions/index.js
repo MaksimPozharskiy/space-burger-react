@@ -373,6 +373,10 @@ export function getUserInfo() {
         });
       })
       .catch((error) => {
+        if (error.status === 403) {
+          dispatch(refreshToken(getUserInfo()));
+          console.log(error);
+        }
         if (error.message === "jwt expired" || error.message === "jwt malformed") {
           dispatch(refreshToken(getUserInfo()));
           console.log(error);
@@ -407,6 +411,10 @@ export function updateUserInfo(name, email, password) {
         localStorage.setItem("userName", res.user.name);
       })
       .catch((error) => {
+        if (error.status === 403) {
+          dispatch(refreshToken(getUserInfo()));
+          console.log(error);
+        }
         if (error.message === "jwt expired") {
           dispatch(refreshToken(updateUserInfo(name, email, password)));
           console.log(error);

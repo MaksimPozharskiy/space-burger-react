@@ -82,3 +82,18 @@
 .profile_button {
   margin: 0 24px 0 0;
 }
+
+.profile_button_reset {
+  font-family: 'Jet Brains Mono';
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: normal;
+  padding: 20px 40px;
+  color: var(--text-primary-color);
+  background: linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%);
+  border: none;
+  cursor: pointer;
+  outline: none;
+  border-radius: var(--common-border-radius);
+  transition: var(--common-transition);
+}

@@ -78,10 +78,8 @@ function Profile() {
               Сохранить
             </Button>
           </div>
-          <div className={styles.profile_button} onClick={handleCancel}>
-            <Button type="primary" size="large">
-              Отмена
-            </Button>
+          <div className={styles.profile_button} >
+            <button className={styles.profile_button_reset} type="reset" onClick={handleCancel}>Отмена</button>
           </div>
         </div>
       </form>
