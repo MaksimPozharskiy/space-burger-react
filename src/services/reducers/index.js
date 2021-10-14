@@ -40,6 +40,7 @@ const initialStateIngredients = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
+  isLoading: false,
 };
 
 const initialStateConstructor = {
@@ -113,6 +114,7 @@ const getIngredientsListReducer = (state = initialStateIngredients, action) => {
         ingredientsFailed: false,
         ingredients: action.payload,
         ingredientsRequest: false,
+        isLoading: true,
       };
     }
     case GET_INGREDIENTS_FAILED: {
@@ -120,6 +122,7 @@ const getIngredientsListReducer = (state = initialStateIngredients, action) => {
         ...state,
         ingredientsFailed: true,
         ingredientsRequest: false,
+        isLoading: false,
       };
     }
 

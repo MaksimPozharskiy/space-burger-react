@@ -27,15 +27,15 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { IngredientDetailsPage } from '../../pages/ingredientDetail';
 
 function App() {
-  const [isLoading, setIsLoading] = React.useState(false)
   const [orderNumber, setOrderNumber] = React.useState(0);
-  const { isModalOpened, isModalOpenedOrder, currentIngredient, error, isModalOpenedError } = useSelector(
+  const { isModalOpened, isModalOpenedOrder, currentIngredient, error, isModalOpenedError, isLoading } = useSelector(
     (store: any) => ({
       isModalOpened: store.modal.isModalOpened,
       isModalOpenedOrder: store.modal.isModalOpenedOrder,
       isModalOpenedError: store.modal.isModalOpenedError,
       currentIngredient: store.burgerIngredient.currentIngredient,
-      error: store.errors.error
+      error: store.errors.error,
+      isLoading: store.burgerIngredients.isLoading,
     })
   );
   const history = useHistory();
@@ -45,7 +45,6 @@ function App() {
 
   React.useEffect(() => {
     dispatch(getIngredients())
-    setIsLoading(true)
   }, [dispatch])
 
   function closeModalOrder() {
@@ -66,7 +65,7 @@ function App() {
   };
 
   return (
-    <Router history={history}>
+    isLoading ? <Router history={history}>
       <Switch location={backgroundIngredient || location}>
         <Route exact path="/registration">
           <AppHeader />
@@ -130,7 +129,7 @@ function App() {
       {backgroundIngredient && <Route exact path="/ingredients/:id">
           <IngredientDetails />
         </Route>}
-    </Router>
+    </Router> : <div>Loading...</div>
   );
 }
 
