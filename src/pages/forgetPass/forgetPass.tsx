@@ -38,7 +38,7 @@ function ForgetPassPage() {
     setEmail(evt.target.value);
   };
 
-  if (success && message === "Reset email") {
+  if (success && message === "Reset email sent") {
     return (
       <Redirect
         to={{
