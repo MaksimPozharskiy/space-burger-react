@@ -17,7 +17,7 @@ function BurgerIngredients() {
       IsBun: store.constructorOfOrder.isBuns,
     })
   );
-
+  
   const handleClickTypes = (e, type) => {
     setCurrent(e)
     document.getElementById(type)?.scrollIntoView();

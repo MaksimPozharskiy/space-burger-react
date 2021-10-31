@@ -5,10 +5,10 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ReactDOM from 'react-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
 import { keyCodeEsc } from '../../utils/constants';
+
 const modalRoot = document.getElementById("modal");
 
 function Modal({ title, children, closeModal, isModalOpened }) {
-
 
   const closeModalEsc = React.useCallback((e) => {
     if (e.keyCode === keyCodeEsc) {
