@@ -4,12 +4,12 @@ import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
 import { useSelector } from 'react-redux';
 
-function BurgerIngredients() {
-  const [current, setCurrent] = React.useState('buns')
-  const buns: any = document.getElementById("buns");
-  const sauces: any = document.getElementById("sauces");
-  const toppings: any = document.getElementById("toppings");
-  const headerOfIngredients: any = document.getElementById("ingredients");
+function BurgerIngredients(): JSX.Element | null {
+  const [current, setCurrent] = React.useState<string>('buns')
+  const buns: HTMLElement | null = document.getElementById("buns");
+  const sauces: HTMLElement | null = document.getElementById("sauces");
+  const toppings: HTMLElement | null = document.getElementById("toppings");
+  const headerOfIngredients: HTMLElement | null = document.getElementById("ingredients");
   const { ingredients, constructorIngredients, IsBun } = useSelector(
     (store: any) => ({
       ingredients: store.burgerIngredients.ingredients,
@@ -18,7 +18,7 @@ function BurgerIngredients() {
     })
   );
   
-  const handleClickTypes = (e, type) => {
+  const handleClickTypes = (e: string, type: string): void => {
     setCurrent(e)
     document.getElementById(type)?.scrollIntoView();
   }
@@ -33,8 +33,8 @@ function BurgerIngredients() {
     });
   }, [ingredients, constructorIngredients, IsBun]);
 
-  const onScrollIngredients = () => {
-    if (headerOfIngredients) {
+  const onScrollIngredients = (): void => {
+    if (headerOfIngredients && buns && sauces && toppings) {
       const bunsPos = Math.abs(
         buns.getBoundingClientRect().top -
         headerOfIngredients.getBoundingClientRect().top

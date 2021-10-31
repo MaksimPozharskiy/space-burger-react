@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './Modal.module.css';
-import PropTypes from 'prop-types';
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import ReactDOM from 'react-dom';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
@@ -8,8 +7,14 @@ import { keyCodeEsc } from '../../utils/constants';
 
 const modalRoot = document.getElementById("modal");
 
-function Modal({ title, children, closeModal, isModalOpened }) {
+interface IModal {
+  title?: string;
+  children: JSX.Element | null;
+  closeModal: () => void;
+  isModalOpened: boolean;
+}
 
+function Modal({ title, children, closeModal, isModalOpened }: IModal): JSX.Element | null {
   const closeModalEsc = React.useCallback((e) => {
     if (e.keyCode === keyCodeEsc) {
       closeModal();
@@ -38,13 +43,6 @@ function Modal({ title, children, closeModal, isModalOpened }) {
       </>
     ), modalRoot)
     : null;
-}
-
-Modal.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.element.isRequired,
-  closeModal: PropTypes.func.isRequired,
-  isModalOpened: PropTypes.bool.isRequired
 }
 
 export default Modal;

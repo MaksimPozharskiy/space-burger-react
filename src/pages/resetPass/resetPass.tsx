@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css"
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -6,7 +6,7 @@ import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { resetUserPassword } from "../../services/actions";
 
-function ResetPassPage() {
+function ResetPassPage(): JSX.Element | null {
   const location = useLocation();
   const history = useHistory();
   const { message, success } = useSelector((store: any) => ({
@@ -14,11 +14,11 @@ function ResetPassPage() {
     success: store.authInfoUser.success,
   }));
   const dispatch = useDispatch();
-  const [code, setCode] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [code, setCode] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
+  const [error, setError] = React.useState<string>("");
   const isToken = localStorage.getItem("refreshToken");
-  const onSubmit = (evt) => {
+  const onSubmit = (evt: FormEvent): void => {
     evt.preventDefault();
     if (!code || !password) {
       setError("Необходимые поля не заполнены");
@@ -30,10 +30,10 @@ function ResetPassPage() {
     setCode("");
   };
 
-  const changeCode = (evt) => {
+  const changeCode = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setCode(evt.target.value);
   };
-  const changePassword = (evt) => {
+  const changePassword = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(evt.target.value);
   };
 

@@ -1,7 +1,13 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-function ProtectedRoute({ children, ...props }) {
+interface IProtectedRoute {
+  children: React.ReactNode | null;
+  path: string;
+  exact: boolean;
+}
+
+function ProtectedRoute({ children, ...props }: IProtectedRoute) {
   const isToken = localStorage.getItem("refreshToken");
 
   return (

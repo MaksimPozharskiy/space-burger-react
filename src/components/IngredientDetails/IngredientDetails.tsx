@@ -1,7 +1,7 @@
 import styles from './IngredientDetails.module.css';
 import { useSelector } from 'react-redux';
 
-function IngredientDetails() {
+function IngredientDetails(): JSX.Element | null {
   const { currentIngredient } = useSelector((store: any) => ({
     currentIngredient: store.burgerIngredient.currentIngredient,
   }));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import styles from "./profile.module.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
@@ -6,31 +6,31 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserInfo, updateUserInfo } from "../../services/actions";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function Profile() {
+function Profile(): JSX.Element | null {
   const { userName, userEmail } = useSelector((store: any) => ({
     userName: store.authInfoUser.user.name,
     userEmail: store.authInfoUser.user.email,
   }));
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
   const dispatch = useDispatch();
 
-  const changeName = (evt) => {
+  const changeName = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setName(evt.target.value);
   };
-  const changeEmail = (evt) => {
+  const changeEmail = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(evt.target.value);
   };
-  const changePassword = (evt) => {
+  const changePassword = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(evt.target.value);
   };
 
-  const onSaveNewUserData = (evt) => {
+  const onSaveNewUserData = (evt: FormEvent): void => {
     evt.preventDefault();
     dispatch(updateUserInfo(name, email, password));
   };
-  const handleCancel = () => {
+  const handleCancel = (): void => {
     setName(userName);
     setEmail(userEmail); 
   };

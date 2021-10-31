@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
 
 function AppHeader() {
-  const [userName, setUserName] = React.useState("");
+  const [userName, setUserName] = React.useState<string>("");
   const location = useLocation();
 
   const nameInfo = useSelector(

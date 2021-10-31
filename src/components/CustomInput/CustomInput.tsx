@@ -1,21 +1,19 @@
 import React from "react";
 import styles from "./CustomInput.module.css";
-import PropTypes from "prop-types";
 
-CustomInput.propTypes = {
-  placeholder: PropTypes.string,
-  type: PropTypes.string.isRequired,
-  isRequired: PropTypes.bool.isRequired,
-  value: PropTypes.string,
-  handleChange: PropTypes.func.isRequired,
-  isCustom: PropTypes.bool
-};
+interface ICustomInput {
+  placeholder: string;
+  type: string;
+  isRequired: boolean;
+  value: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isCustom?: boolean;
+}
 
-function CustomInput(props) {
-  const { placeholder, type, value, handleChange, isRequired, isCustom } = props;
-  const [typeInput, setTypeInput] = React.useState(type);
-
-  const onEyeClick = () => {
+function CustomInput(props: ICustomInput): JSX.Element | null {
+  const { placeholder, type, value, handleChange, isRequired, isCustom }: ICustomInput = props;
+  const [typeInput, setTypeInput] = React.useState<string>(type);
+  const onEyeClick = (): void => {
     if (typeInput === "password") {
       setTypeInput("show-password");
     } else {
@@ -23,7 +21,7 @@ function CustomInput(props) {
     }
   };
 
-  const renderCustomInput = () => !isCustom ? (
+  const renderCustomInput = (): JSX.Element => !isCustom ? (
     <>
       <label className={styles.input_label}>{value ? "" : placeholder}</label>
       <input

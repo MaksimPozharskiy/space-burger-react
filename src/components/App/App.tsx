@@ -27,7 +27,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { IngredientDetailsPage } from '../../pages/ingredientDetail';
 
 function App() {
-  const [orderNumber, setOrderNumber] = React.useState(0);
+  const [orderNumber, setOrderNumber] = React.useState<number>(0);
   const { isModalOpened, isModalOpenedOrder, currentIngredient, error, isModalOpenedError, isLoading } = useSelector(
     (store: any) => ({
       isModalOpened: store.modal.isModalOpened,

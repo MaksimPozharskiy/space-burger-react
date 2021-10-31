@@ -9,7 +9,7 @@ import { useParams, useHistory } from "react-router-dom";
 
 const element: any = document.getElementById("modal");
 
-function IngredientDetailsPage() {
+function IngredientDetailsPage():JSX.Element | null {
   const history = useHistory();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -17,11 +17,11 @@ function IngredientDetailsPage() {
     ingredients: store.burgerIngredients.ingredients,
   }));
 
-  const currentIngredient = ingredients.filter(({ _id }) => {
+  const currentIngredient = ingredients.filter(({ _id }: {_id: string}) => {
     return _id === id;
   })[0];
 
-  function handleAddIngredient() {
+  function handleAddIngredient(): void {
     dispatch(addConstructorIngredient(currentIngredient));
     dispatch(closeModals());
     history.push("/");
