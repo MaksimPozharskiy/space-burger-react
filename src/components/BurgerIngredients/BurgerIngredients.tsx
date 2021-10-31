@@ -34,28 +34,31 @@ function BurgerIngredients() {
   }, [ingredients, constructorIngredients, IsBun]);
 
   const onScrollIngredients = () => {
-    const bunsPos = Math.abs(
-      buns.getBoundingClientRect().top -
-      headerOfIngredients.getBoundingClientRect().top
-    );
-    const saucePos = Math.abs(
-      sauces.getBoundingClientRect().top -
-      headerOfIngredients.getBoundingClientRect().top
-    );
-    const fillingPos = Math.abs(
-      toppings.getBoundingClientRect().top -
-      headerOfIngredients.getBoundingClientRect().top
-    );
-
-    if (bunsPos < saucePos && bunsPos < fillingPos) {
-      setCurrent("buns");
+    if (headerOfIngredients) {
+      const bunsPos = Math.abs(
+        buns.getBoundingClientRect().top -
+        headerOfIngredients.getBoundingClientRect().top
+      );
+      const saucePos = Math.abs(
+        sauces.getBoundingClientRect().top -
+        headerOfIngredients.getBoundingClientRect().top
+      );
+      const fillingPos = Math.abs(
+        toppings.getBoundingClientRect().top -
+        headerOfIngredients.getBoundingClientRect().top
+      );
+  
+      if (bunsPos < saucePos && bunsPos < fillingPos) {
+        setCurrent("buns");
+      }
+      if (saucePos < bunsPos && saucePos < fillingPos) {
+        setCurrent("sauces");
+      }
+      if (fillingPos < bunsPos && fillingPos < saucePos) {
+        setCurrent("toppings");
+      }
     }
-    if (saucePos < bunsPos && saucePos < fillingPos) {
-      setCurrent("sauces");
-    }
-    if (fillingPos < bunsPos && fillingPos < saucePos) {
-      setCurrent("toppings");
-    }
+    
   };
   return (
     <section>
