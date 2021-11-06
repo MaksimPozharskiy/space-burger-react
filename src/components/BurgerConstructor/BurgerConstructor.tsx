@@ -1,7 +1,6 @@
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styles from './BurgerConstructor.module.css';
-import PropTypes from 'prop-types';
 import { mainApiUrl } from '../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop} from "react-dnd";
@@ -9,10 +8,15 @@ import { addConstructorIngredient, showError, showModalError } from '../../servi
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 import { useHistory } from "react-router-dom";
 
+interface IBurgerConstructor {
+  openModalOrder: () => void;
+  setOrderNumber: Dispatch<SetStateAction<number>>;
+}
+
 function BurgerConstructor({ 
     openModalOrder,
     setOrderNumber,
-  }) {
+  }: IBurgerConstructor): JSX.Element {
   const dispatch = useDispatch();
   const {constructorIngredients, IsBun } = useSelector(
     (store: any) => ({
@@ -45,7 +49,7 @@ function BurgerConstructor({
     }),
   });
 
-  const getBunsPrice = () => {
+  const getBunsPrice = (): number => {
     if (IsBun === null) return 0;
     return IsBun.price * 2;
   }
@@ -130,13 +134,6 @@ function BurgerConstructor({
       </div>
     </section>
   );
-}
-
-BurgerConstructor.propTypes = {
-  openModalOrder: PropTypes.func.isRequired,
-  setOrderNumber: PropTypes.func.isRequired,
-  ingredientsOfOrder: PropTypes.array,
-  bunsOfOrder: PropTypes.object,
 }
 
 export default BurgerConstructor;
