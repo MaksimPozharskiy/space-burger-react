@@ -66,32 +66,27 @@ function App() {
 
   return (
     isLoading ? <Router history={history}>
+      <AppHeader />
       <Switch location={backgroundIngredient || location}>
         <Route exact path="/registration">
-          <AppHeader />
           <RegisterPage />
         </Route>
         <Route exact path="/login">
-          <AppHeader />
           <LoginPage />
         </Route>
         <Route exact path="/forgot-password">
-          <AppHeader />
           <ForgetPassPage />
         </Route>
         <Route exact path="/reset-password">
-          <AppHeader />
           <ResetPassPage />
         </Route>
         <ProtectedRoute exact path="/profile">
-          <AppHeader />
           <ProfilePage />
         </ProtectedRoute>
         <Route exact path="/ingredients/:id">
           <IngredientDetailsPage />
         </Route>
         <Route exact path="/">
-          <AppHeader />
           <div className={`${styles.wrap} pl-5 pr-5 pt-10`}>
             <DndProvider backend={HTML5Backend}>
               { isLoading ? 
