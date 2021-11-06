@@ -55,7 +55,9 @@ function AppHeader() {
       </nav>
       <div className={styles.logo}>
         {/* Logo here because in tag ul not li can be used */}
-        <Logo /> 
+        <Link to="/">
+          <Logo /> 
+        </Link>
       </div>
     </header>
   );
