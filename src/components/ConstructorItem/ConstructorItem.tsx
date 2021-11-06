@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import PropTypes from 'prop-types';
 import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd';
 import styles from './constructor-item.module.css';
 import { useDispatch } from 'react-redux';
@@ -71,10 +70,5 @@ const ConstructorItem = ({ingredient, index }: IConstructorItem) => {
       </div>
     );
 }
-
-ConstructorItem.propTypes = {
-    ingredient: PropTypes.object,
-    index: PropTypes.number,
-};
 
 export default ConstructorItem;
