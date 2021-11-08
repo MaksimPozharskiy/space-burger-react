@@ -1,13 +1,21 @@
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import styles from './BurgerIngredient.module.css';
-import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { getSelectedIngredient, showModal } from '../../services/actions';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
+import { IIngredient } from '../../interfaces/interfaces';
 
-function BurgerIngredient({ image, name, price, ingredient, count }) {
+interface IBurgerIngredient {
+  image: string;
+  name: string;
+  price: number;
+  ingredient: IIngredient;
+  count: number;
+}
+
+function BurgerIngredient({ image, name, price, ingredient, count }: IBurgerIngredient): JSX.Element | null {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -43,14 +51,6 @@ function BurgerIngredient({ image, name, price, ingredient, count }) {
       </li>
     </Link>
   ): null;
-}
-
-BurgerIngredient.propTypes = {
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired, 
-  price: PropTypes.number.isRequired,
-  ingredient: PropTypes.object.isRequired,
-  count: PropTypes.number
 }
 
 export default BurgerIngredient;

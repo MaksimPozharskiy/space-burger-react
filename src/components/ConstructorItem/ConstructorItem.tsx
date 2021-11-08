@@ -1,30 +1,48 @@
 import { useRef } from 'react';
-import PropTypes from 'prop-types';
-import { useDrag, useDrop } from 'react-dnd';
+import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd';
 import styles from './constructor-item.module.css';
 import { useDispatch } from 'react-redux';
 import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import { deleteConstructorIngredient, moveConstructorIngredient } from '../../services/actions';
+import { IIngredient } from '../../interfaces/interfaces';
 
-const ConstructorItem = ({ingredient, index }) => {
-    const id = ingredient._id;
-    const ref = useRef<any>(null);
+type TIngredientId = {
+  ingredientId: string;
+}
+
+interface IConstructorItem {
+  ingredient: IIngredient & TIngredientId;
+  index: number;
+}
+
+const ConstructorItem = ({ingredient, index }: IConstructorItem) => {
+    const id: string = ingredient._id;
+    const ref = useRef<HTMLLIElement>(null);
     const dispatch = useDispatch();
     
     const [, drop] = useDrop({
       accept: "constructor",
-      hover(item: any, monitor: any) {
-          const [dragIndex, hoverIndex] = [item.index, index];
-          if (dragIndex === hoverIndex) return;
-          const hoverBoundingRect = ref.current?.getBoundingClientRect();
-          const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-          const clientOffset = monitor.getClientOffset();
-          const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-          if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
-          if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return;
-          dispatch(moveConstructorIngredient({ dragIndex, hoverIndex }));
-          item.index = hoverIndex;
+      hover(item: {index: number}, monitor: DropTargetMonitor) {
+        if (!ref.current) {
+          return;
+        }
+
+        const [dragIndex, hoverIndex] = [item.index, index];
+        if (!dragIndex || dragIndex === hoverIndex) {
+          return;
+        }
+
+        const hoverBoundingRect = ref.current?.getBoundingClientRect();
+        const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+        const clientOffset = monitor.getClientOffset();
+        if (!clientOffset) return;
+
+        const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+        if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return;
+        if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) return;
+        dispatch(moveConstructorIngredient({ dragIndex, hoverIndex }));
+        item.index = hoverIndex;
       }
     });
 
@@ -52,10 +70,5 @@ const ConstructorItem = ({ingredient, index }) => {
       </div>
     );
 }
-
-ConstructorItem.propTypes = {
-    ingredient: PropTypes.object,
-    index: PropTypes.number,
-};
 
 export default ConstructorItem;

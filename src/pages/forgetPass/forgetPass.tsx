@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
@@ -7,18 +7,18 @@ import { Link, Redirect, useLocation } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
 import { forgetUserPassword } from "../../services/actions";
 
-function ForgetPassPage() {
+function ForgetPassPage(): JSX.Element | null {
   const location = useLocation();
   const { message, success } = useSelector((store: any) => ({
     message: store.authInfoUser.message,
     success: store.authInfoUser.success,
   }));
   const dispatch = useDispatch();
-  const [email, setEmail] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [email, setEmail] = React.useState<string>("");
+  const [error, setError] = React.useState<string>("");
   const isMailValid = email ? email.match(emailRegxep) : "null";
   const isToken = localStorage.getItem("refreshToken");
-  const onSubmit = (evt) => {
+  const onSubmit = (evt: FormEvent) => {
     evt.preventDefault();
     if (!email) {
       setError("Поля Email должно быть заполнено");
@@ -34,7 +34,7 @@ function ForgetPassPage() {
     setEmail("");
   };
 
-  const changeEmail = (evt) => {
+  const changeEmail = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(evt.target.value);
   };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
@@ -7,20 +7,20 @@ import { Link, Redirect, useLocation } from "react-router-dom";
 import { loginUser } from "../../services/actions";
 import { emailRegxep } from "../../utils/constants";
 
-function LoginPage() {
+function LoginPage(): JSX.Element | null {
   const location = useLocation();
   const { success, userName } = useSelector((store: any) => ({
     success: store.authInfoUser.success,
     userName: store.authInfoUser.name,
   }));
   const dispatch = useDispatch();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [email, setEmail] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
+  const [error, setError] = React.useState<string>("");
   const isValidityMail = email ? email.match(emailRegxep) : "null";
   const isToken = localStorage.getItem("refreshToken");
 
-  const onLogin = (evt) => {
+  const onLogin = (evt: FormEvent): void => {
     evt.preventDefault();
     if (!email || !password) {
       setError("Поля не заполненны!");
@@ -37,11 +37,11 @@ function LoginPage() {
     setPassword("");
   };
 
-  const changeEmail = (evt) => {
+  const changeEmail = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(evt.target.value);
   };
 
-  const changePassword = (evt) => {
+  const changePassword = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(evt.target.value);
   };
 

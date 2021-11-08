@@ -4,13 +4,13 @@ import { Link, useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../../services/actions";
 
-function ProfileMenu() {
+function ProfileMenu(): JSX.Element | null {
   const refreshToken = localStorage.getItem("refreshToken");
   const dispatch = useDispatch();
   const history = useHistory();
   let location = useLocation();
   
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     dispatch(logout(refreshToken));
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("userName");

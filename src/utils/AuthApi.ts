@@ -10,7 +10,7 @@ class AuthApi {
     return res.json();
   }
 
-  handleResponse(res) {
+  handleResponse(res: Response) {
     if (res.ok) {
       return res.json();
     } else {
@@ -19,12 +19,12 @@ class AuthApi {
     }
   }
 
-  handleResponseError(e) {
+  handleResponseError(e: Event) {
     console.log(e);
     return Promise.reject(e);
   }
   
-  registerUser(email, password, name) {
+  registerUser(email: string, password: string, name: string) {
     return fetch(`${this._url}/auth/register`, {
       method: "POST",
       headers: {
@@ -41,7 +41,7 @@ class AuthApi {
       .catch(this.handleResponseError);
   }
 
-  loginUser(email, password) {
+  loginUser(email: string, password: string) {
     return fetch(`${this._url}/auth/login`, {
       method: "POST",
       headers: {
@@ -57,7 +57,7 @@ class AuthApi {
       .catch(this.handleResponseError);
   }
 
-  forgetPassword(email) {
+  forgetPassword(email: string) {
     return fetch(`${this._url}/password-reset`, {
       method: "POST",
       headers: {
@@ -70,7 +70,7 @@ class AuthApi {
       .catch(this.handleResponseError);
   }
 
-  resetPassword(password, code) {
+  resetPassword(password: string, code: string) {
     return fetch(`${this._url}/password-reset/reset`, {
       method: "POST",
       headers: {
@@ -83,7 +83,7 @@ class AuthApi {
       .catch(this.handleResponseError);
   }
 
-  logout(refreshToken) {
+  logout(refreshToken: string) {
     return fetch(`${this._url}/auth/logout`, {
       method: "POST",
       headers: {
@@ -98,7 +98,7 @@ class AuthApi {
       .catch(this.handleResponseError);
   }
 
-  refreshToken(refreshToken) {
+  refreshToken(refreshToken: string) {
     return fetch(`${this._url}/auth/token`, {
       method: "POST",
       headers: {
@@ -125,7 +125,7 @@ class AuthApi {
       .then((res) => (res.json()))
       .catch(this.handleResponseError);
   }
-  updateUserInfo(name, email, password) {
+  updateUserInfo(name: string, email: string, password: string) {
     return fetch(`${this._url}/auth/user`, {
       method: "PATCH",
       headers: {

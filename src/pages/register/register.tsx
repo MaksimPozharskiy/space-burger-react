@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
@@ -7,19 +7,19 @@ import { Link, Redirect } from "react-router-dom";
 import { createUser } from "../../services/actions";
 import { emailRegxep } from "../../utils/constants";
 
-function RegisterPage() {
+function RegisterPage(): JSX.Element | null {
   const dispatch = useDispatch();
   const { success } = useSelector((store: any) => ({
     success: store.authInfoUser.success,
   }));
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [error, setError] = React.useState("");
+  const [name, setName] = React.useState<string>("");
+  const [email, setEmail] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
+  const [error, setError] = React.useState<string>("");
   const isValidityMail = email ? email.match(emailRegxep) : "null";
   const isToken = localStorage.getItem("refreshToken");
 
-  const onRegister = (evt) => {
+  const onRegister = (evt: FormEvent): void => {
     evt.preventDefault();
     if (!email || !password || !name) {
       setError("Все поля должны быть заполнены!");
@@ -37,15 +37,15 @@ function RegisterPage() {
     setPassword("");
   };
 
-  const changeName = (evt) => {
+  const changeName = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setName(evt.target.value);
   };
 
-  const changeEmail = (evt) => {
+  const changeEmail = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setEmail(evt.target.value);
   };
 
-  const changePassword = (evt) => {
+  const changePassword = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setPassword(evt.target.value);
   };
 
