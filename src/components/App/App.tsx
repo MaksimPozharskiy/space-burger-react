@@ -22,7 +22,7 @@ import { RegisterPage } from '../../pages';
 import { LoginPage } from '../../pages/login';
 import { ForgetPassPage } from '../../pages/forgetPass';
 import { ResetPassPage } from '../../pages/resetPass';
-import { ProfilePage } from '../../pages/profile';
+import { ProfileOrders, ProfilePage } from '../../pages/profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { IngredientDetailsPage } from '../../pages/ingredientDetail';
 import { Feed } from '../../pages/feed';
@@ -90,6 +90,12 @@ function App() {
         </Route>
         <ProtectedRoute exact path="/profile">
           <ProfilePage />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/profile/orders">
+          <ProfileOrders />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/profile/orders/:id">
+          <OrderItem />
         </ProtectedRoute>
         <Route exact path="/ingredients/:id">
           <IngredientDetailsPage />

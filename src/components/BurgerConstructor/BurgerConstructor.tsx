@@ -7,6 +7,7 @@ import { useDrop} from "react-dnd";
 import { addConstructorIngredient, showError, showModalError } from '../../services/actions';
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 import { useHistory } from "react-router-dom";
+import { getCookie } from '../../utils/helpers';
 
 interface IBurgerConstructor {
   openModalOrder: () => void;
@@ -71,6 +72,7 @@ function BurgerConstructor({
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            Authorization: "Bearer " + getCookie("token"),
           },
           body: JSON.stringify({ ingredients: constructorIngredients }),
         })

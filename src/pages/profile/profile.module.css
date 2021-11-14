@@ -55,6 +55,18 @@
   height: 80vh;
 }
 
+.profile_orders_list::-webkit-scrollbar-track {
+  background-color: #2F2F37;
+}
+
+.profile_orders_list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.profile_orders_list::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
 .profile_orders_container {
   width: 1240px;
   display: flex;
