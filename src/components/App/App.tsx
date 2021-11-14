@@ -25,6 +25,7 @@ import { ResetPassPage } from '../../pages/resetPass';
 import { ProfilePage } from '../../pages/profile';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { IngredientDetailsPage } from '../../pages/ingredientDetail';
+import { Feed } from '../../pages/feed';
 
 function App() {
   const [orderNumber, setOrderNumber] = React.useState<number>(0);
@@ -79,6 +80,9 @@ function App() {
         </Route>
         <Route exact path="/reset-password">
           <ResetPassPage />
+        </Route>
+        <Route exact path="/feed">
+          <Feed />
         </Route>
         <ProtectedRoute exact path="/profile">
           <ProfilePage />

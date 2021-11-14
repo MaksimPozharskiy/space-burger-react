@@ -85,6 +85,9 @@ export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
 export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
 export const GET_ORDER_FAILED = "GET_ORDER_FAILED";
 export const DELETE_ORDER = "DELETE_ORDER";
+export const REMOVE_ORDER = "REMOVE_ORDER";
+export const GET_SELECTED_ORDER = "GET_SELECTED_ORDER";
+export const REMOVE_SELECTED_ORDER = "REMOVE_SELECTED_ORDER";
 
 export function getOrder(ingredients) {
   return (dispatch) => {
@@ -113,11 +116,29 @@ export function getOrder(ingredients) {
       })
       .catch((error) => {
         console.log(error);
-        // dispatch(showError(error));
         dispatch({
           type: GET_ORDER_FAILED,
         });
       });
+  };
+}
+
+export function hideOrder() {
+  return {
+    type: REMOVE_ORDER,
+  };
+}
+
+export function getSelectedOrder(currentOrder) {
+  return {
+    type: GET_SELECTED_ORDER,
+    payload: currentOrder,
+  };
+}
+
+export function removeSelectedOrder() {
+  return {
+    type: REMOVE_SELECTED_ORDER,
   };
 }
 
@@ -425,3 +446,45 @@ export function updateUserInfo(name, email, password) {
       });
   };
 }
+
+// WebSockets
+export const WS_CONNECTION_START = 'WS_CONNECTION_START';
+export const WS_CONNECTION_SUCCESS = 'WS_CONNECTION_SUCCESS';
+export const WS_GET_ORDERS = 'WS_GET_ORDERS';
+export const WS_SEND_MESSAGE = 'WS_SEND_MESSAGE';
+export const WS_SEND_PONG = 'WS_SEND_PONG';
+export const WS_CONNECTION_ERROR = 'WS_CONNECTION_ERROR';
+export const WS_CONNECTION_CLOSED = 'WS_CONNECTION_CLOSED';
+export const WS_CONNECTION_END = 'WS_CONNECTION_END';
+
+export function wsConnectionSuccess() {
+  return {
+    type: WS_CONNECTION_SUCCESS,
+  };
+}
+
+export function wsGetOrders(orders) {
+  return {
+    type: WS_GET_ORDERS,
+    payload: orders,
+  };
+}
+
+export const wsSendMessage = (message) => {
+  return {
+    type: WS_SEND_MESSAGE,
+    payload: message,
+  };
+};
+
+export const wsConnectionError = () => {
+  return {
+    type: WS_CONNECTION_ERROR,
+  };
+};
+
+export const wsConnectionClosed = () => {
+  return {
+    type: WS_CONNECTION_CLOSED,
+  };
+};

@@ -34,6 +34,10 @@ import {
   UPDATE_USER_INFO_SUCCESS,
   UPDATE_USER_INFO_FAILED,
   REFRESH_USER_TOKEN,
+  WS_CONNECTION_SUCCESS,
+  WS_GET_ORDERS,
+  WS_CONNECTION_ERROR,
+  WS_CONNECTION_CLOSED,
 } from '../actions/index';
 
 const initialStateIngredients = {
@@ -76,6 +80,16 @@ const initialUserInfo = {
   message: null,
   userRequest: false,
   userRequestFail: false,
+};
+
+const initialStateWS = {
+  wsConnected: false,
+  wsError: false,
+  Data: {
+    orders: [],
+    total: 0,
+    totalToday: 0,
+  },
 };
 
 export const errorsReducer = (state = initialStateError, action) => {
@@ -423,6 +437,36 @@ const userInfoReducer = (state = initialUserInfo, action) => {
     }
   }
 }
+
+export const wsReducer = (state = initialStateWS, action) => {
+  switch (action.type) {
+    case WS_CONNECTION_SUCCESS:
+      return {
+        ...state,
+        wsConnected: true,
+      };
+    case WS_CONNECTION_ERROR:
+      return {
+        ...state,
+        wsConnected: false,
+        wsError: true,
+      };
+    case WS_CONNECTION_CLOSED:
+      return {
+        ...state,
+        wsConnected: false,
+        wsError: false,
+      };
+    case WS_GET_ORDERS:
+      return {
+        ...state,
+        Data: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 const rootReducer = combineReducers({
   burgerIngredients: getIngredientsListReducer,
   constructorOfOrder: getConstructorIngredientsReducer,
@@ -431,6 +475,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   errors: errorsReducer,
   authInfoUser: userInfoReducer,
+  ws: wsReducer,
 });
 
 export default rootReducer;
