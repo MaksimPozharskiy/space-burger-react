@@ -4,9 +4,9 @@ import { setCookie } from '../../utils/cookie';
 export const authApi = new AuthApi(mainApiUrl);
 
 // Ingredients of Burger
-export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
-export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
-export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
+export const GET_INGREDIENTS_REQUEST: "GET_INGREDIENTS_REQUEST" = "GET_INGREDIENTS_REQUEST";
+export const GET_INGREDIENTS_SUCCESS: "GET_INGREDIENTS_SUCCESS" = "GET_INGREDIENTS_SUCCESS";
+export const GET_INGREDIENTS_FAILED: "GET_INGREDIENTS_FAILED" = "GET_INGREDIENTS_FAILED";
 
 export function getIngredients() {
   return (dispatch) => {
@@ -38,9 +38,9 @@ export function getIngredients() {
 }
 
 // Constructor of Burger
-export const ADD_CONSTRUCTOR_INGREDIENT = "ADD_CONSTRUCTOR_INGREDIENT";
-export const DELETE_CONSTRUCTOR_INGREDIENT = "DELETE_CONSTRUCTOR_INGREDIENT";
-export const MOVE_CONSTRUCTOR_INGREDIENT = "MOVE_CONSTRUCTOR_INGREDIENT";
+export const ADD_CONSTRUCTOR_INGREDIENT: "ADD_CONSTRUCTOR_INGREDIENT" = "ADD_CONSTRUCTOR_INGREDIENT";
+export const DELETE_CONSTRUCTOR_INGREDIENT: "DELETE_CONSTRUCTOR_INGREDIENT" = "DELETE_CONSTRUCTOR_INGREDIENT";
+export const MOVE_CONSTRUCTOR_INGREDIENT: "MOVE_CONSTRUCTOR_INGREDIENT" = "MOVE_CONSTRUCTOR_INGREDIENT";
 
 export function addConstructorIngredient(ingredient) {
   return {
@@ -64,8 +64,8 @@ export function moveConstructorIngredient({ dragIndex, hoverIndex }) {
 }
 
 // Selected ingredients
-export const GET_SELECTED_INGREDIENT_INFO = "GET_SELECTED_INGREDIENT_INFO";
-export const DELETE_SELECTED_INGREDIENT_INFO = "DELETE_SELECTED_INGREDIENT_INFO";
+export const GET_SELECTED_INGREDIENT_INFO: "GET_SELECTED_INGREDIENT_INFO" = "GET_SELECTED_INGREDIENT_INFO";
+export const DELETE_SELECTED_INGREDIENT_INFO: "DELETE_SELECTED_INGREDIENT_INFO" = "DELETE_SELECTED_INGREDIENT_INFO";
 
 export function getSelectedIngredient(ingredient) {
   return {
@@ -81,13 +81,13 @@ export function deleteSelectedIngredient() {
 }
 
 // User Order
-export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
-export const GET_ORDER_SUCCESS = "GET_ORDER_SUCCESS";
-export const GET_ORDER_FAILED = "GET_ORDER_FAILED";
-export const DELETE_ORDER = "DELETE_ORDER";
-export const REMOVE_ORDER = "REMOVE_ORDER";
-export const GET_SELECTED_ORDER = "GET_SELECTED_ORDER";
-export const REMOVE_SELECTED_ORDER = "REMOVE_SELECTED_ORDER";
+export const GET_ORDER_REQUEST: "GET_ORDER_REQUEST" = "GET_ORDER_REQUEST";
+export const GET_ORDER_SUCCESS: "GET_ORDER_SUCCESS" = "GET_ORDER_SUCCESS";
+export const GET_ORDER_FAILED: "GET_ORDER_FAILED" = "GET_ORDER_FAILED";
+export const DELETE_ORDER: "DELETE_ORDER" = "DELETE_ORDER";
+export const REMOVE_ORDER: "REMOVE_ORDER" = "REMOVE_ORDER";
+export const GET_SELECTED_ORDER: "GET_SELECTED_ORDER" = "GET_SELECTED_ORDER";
+export const REMOVE_SELECTED_ORDER: "REMOVE_SELECTED_ORDER" = "REMOVE_SELECTED_ORDER";
 
 export function getOrder(ingredients) {
   return (dispatch) => {
@@ -144,10 +144,10 @@ export function removeSelectedOrder() {
 
 
 // Other 
-export const SHOW_MODAL = "SHOW_MODAL";
-export const HIDE_MODAL = "HIDE_MODAL";
-export const SHOW_MODAL_ORDER = "SHOW_MODAL_ORDER";
-export const HIDE_MODAL_ORDER = "HIDE_MODAL_ORDER";
+export const SHOW_MODAL: "SHOW_MODAL" = "SHOW_MODAL";
+export const HIDE_MODAL: "HIDE_MODAL" = "HIDE_MODAL";
+export const SHOW_MODAL_ORDER: "SHOW_MODAL_ORDER" = "SHOW_MODAL_ORDER";
+export const HIDE_MODAL_ORDER: "HIDE_MODAL_ORDER" = "HIDE_MODAL_ORDER";
 
 export function closeModals() {
   return (dispatch) => {
@@ -187,10 +187,10 @@ export function closeOrder() {
 }
 
 // Errors 
-export const SHOW_ERROR = "SHOW_ERROR";
-export const HIDE_ERROR = "HIDE_ERROR";
-export const SHOW_MODAL_ERROR = "SHOW_MODAL_ERROR";
-export const HIDE_MODAL_ERROR = "HIDE_MODAL_ERROR";
+export const SHOW_ERROR: "SHOW_ERROR" = "SHOW_ERROR";
+export const HIDE_ERROR: "HIDE_ERROR" = "HIDE_ERROR";
+export const SHOW_MODAL_ERROR: "SHOW_MODAL_ERROR" = "SHOW_MODAL_ERROR";
+export const HIDE_MODAL_ERROR: "HIDE_MODAL_ERROR" = "HIDE_MODAL_ERROR";
 
 export function showError(error) {
   return {
@@ -220,9 +220,9 @@ export function hideModalError() {
 // Auth 
 
 // Register
-export const CREATE_USER_REQUEST = "CREATE_USER_REQUEST";
-export const CREATE_USER_SUCCESS = "CREATE_USER_SUCCESS";
-export const CREATE_USER_FAILED = "CREATE_USER_FAILED";
+export const CREATE_USER_REQUEST: "CREATE_USER_REQUEST" = "CREATE_USER_REQUEST";
+export const CREATE_USER_SUCCESS: "CREATE_USER_SUCCESS" = "CREATE_USER_SUCCESS";
+export const CREATE_USER_FAILED: "CREATE_USER_FAILED" = "CREATE_USER_FAILED";
 
 export function createUser({ email, password, name }) {
   return (dispatch) => {
@@ -253,9 +253,9 @@ export function createUser({ email, password, name }) {
 }
 
 // Login
-export const LOGIN_USER_REQUEST = "LOGIN_USER_REQUEST";
-export const LOGIN_USER_SUCCESS = "LOGIN_USER_SUCCESS";
-export const LOGIN_USER_FAILED = "LOGIN_USER_FAILED";
+export const LOGIN_USER_REQUEST: "LOGIN_USER_REQUEST" = "LOGIN_USER_REQUEST";
+export const LOGIN_USER_SUCCESS: "LOGIN_USER_SUCCESS" = "LOGIN_USER_SUCCESS";
+export const LOGIN_USER_FAILED: "LOGIN_USER_FAILED" = "LOGIN_USER_FAILED";
 
 export function loginUser({ email, password }) {
   return (dispatch) => {
@@ -286,8 +286,8 @@ export function loginUser({ email, password }) {
 }
 
 // Forget/Reset Pass
-export const FORGET_PASSWORD_CODE = "FORGET_PASSWORD_CODE";
-export const RESET_USER_PASSWORD = "RESET_USER_PASSWORD";
+export const FORGET_PASSWORD_CODE: "FORGET_PASSWORD_CODE" = "FORGET_PASSWORD_CODE";
+export const RESET_USER_PASSWORD: "RESET_USER_PASSWORD" = "RESET_USER_PASSWORD";
 
 export function forgetUserPassword(email) {
   return (dispatch) => {
@@ -324,7 +324,7 @@ export function resetUserPassword(password, code) {
 }
 
 // Logout
-export const LOGOUT_USER_INFO = "LOGOUT_USER_INFO";
+export const LOGOUT_USER_INFO: "LOGOUT_USER_INFO" = "LOGOUT_USER_INFO";
 
 export function logout(refreshToken) {
   return (dispatch) => {
@@ -335,7 +335,7 @@ export function logout(refreshToken) {
           type: LOGOUT_USER_INFO,
           payload: res,
         });
-        setCookie("token", null);
+        setCookie("token", '');
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("userName");
       })
@@ -348,7 +348,7 @@ export function logout(refreshToken) {
 
 
 // Refresh user TOKEN
-export const REFRESH_USER_TOKEN = "REFRESH_USER_TOKEN";
+export const REFRESH_USER_TOKEN: "REFRESH_USER_TOKEN" = "REFRESH_USER_TOKEN";
 
 export function refreshToken(afterRefresh) {
   return (dispatch) => {
@@ -373,9 +373,9 @@ export function refreshToken(afterRefresh) {
 }
 
 // Get info User
-export const GET_USER_INFO_REQUEST = "GET_USER_INFO_REQUEST";
-export const GET_USER_INFO_SUCCESS = "GET_USER_INFO";
-export const GET_USER_INFO_FAILED = "GET_USER_INFO_FAILED";
+export const GET_USER_INFO_REQUEST: "GET_USER_INFO_REQUEST" = "GET_USER_INFO_REQUEST";
+export const GET_USER_INFO_SUCCESS: "GET_USER_INFO" = "GET_USER_INFO";
+export const GET_USER_INFO_FAILED: "GET_USER_INFO_FAILED" = "GET_USER_INFO_FAILED";
 
 export function getUserInfo() {
   return (dispatch) => {
@@ -410,9 +410,9 @@ export function getUserInfo() {
 }
 
 // Udate info User
-export const UPDATE_USER_INFO_REQUEST = "UPDATE_USER_INFO_REQUEST";
-export const UPDATE_USER_INFO_SUCCESS = "UPDATE_USER_INFO_SUCCESS";
-export const UPDATE_USER_INFO_FAILED = "UPDATE_USER_INFO_FAILED";
+export const UPDATE_USER_INFO_REQUEST: "UPDATE_USER_INFO_REQUEST" = "UPDATE_USER_INFO_REQUEST";
+export const UPDATE_USER_INFO_SUCCESS: "UPDATE_USER_INFO_SUCCESS" = "UPDATE_USER_INFO_SUCCESS";
+export const UPDATE_USER_INFO_FAILED: "UPDATE_USER_INFO_FAILED" = "UPDATE_USER_INFO_FAILED";
 
 export function updateUserInfo(name, email, password) {
   return (dispatch) => {
@@ -448,14 +448,14 @@ export function updateUserInfo(name, email, password) {
 }
 
 // WebSockets
-export const WS_CONNECTION_START = 'WS_CONNECTION_START';
-export const WS_CONNECTION_SUCCESS = 'WS_CONNECTION_SUCCESS';
-export const WS_GET_ORDERS = 'WS_GET_ORDERS';
-export const WS_SEND_MESSAGE = 'WS_SEND_MESSAGE';
-export const WS_SEND_PONG = 'WS_SEND_PONG';
-export const WS_CONNECTION_ERROR = 'WS_CONNECTION_ERROR';
-export const WS_CONNECTION_CLOSED = 'WS_CONNECTION_CLOSED';
-export const WS_CONNECTION_END = 'WS_CONNECTION_END';
+export const WS_CONNECTION_START: 'WS_CONNECTION_START' = 'WS_CONNECTION_START';
+export const WS_CONNECTION_SUCCESS: 'WS_CONNECTION_SUCCESS' = 'WS_CONNECTION_SUCCESS';
+export const WS_GET_ORDERS: 'WS_GET_ORDERS' = 'WS_GET_ORDERS';
+export const WS_SEND_MESSAGE: 'WS_SEND_MESSAGE' = 'WS_SEND_MESSAGE';
+export const WS_SEND_PONG: 'WS_SEND_PONG' = 'WS_SEND_PONG';
+export const WS_CONNECTION_ERROR: 'WS_CONNECTION_ERROR' = 'WS_CONNECTION_ERROR';
+export const WS_CONNECTION_CLOSED: 'WS_CONNECTION_CLOSED' = 'WS_CONNECTION_CLOSED';
+export const WS_CONNECTION_END: 'WS_CONNECTION_END' = 'WS_CONNECTION_END';
 
 export function wsConnectionSuccess() {
   return {

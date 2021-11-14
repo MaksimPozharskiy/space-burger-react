@@ -1,5 +1,5 @@
-import { compose, createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
+import { compose, createStore, applyMiddleware, Action, ActionCreator } from "redux";
+import thunk, { ThunkAction } from "redux-thunk";
 import rootReducer from "./reducers";
 import {
   WS_CONNECTION_START,
@@ -11,7 +11,9 @@ import {
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_END,
 } from "./actions/index";
+
 import { socketMiddleware } from "./socketMiddleware";
+import { TApplicationActions } from "./actions/types";
 
 const wsUrl = "wss://norma.nomoreparties.space/orders/all";
 
@@ -28,9 +30,15 @@ export const wsActions = {
 
 const socketFeedOrdersMiddlware = socketMiddleware(wsUrl, wsActions);
 
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
     : compose;
 
 const enhancer = composeEnhancers(
@@ -38,3 +46,8 @@ const enhancer = composeEnhancers(
 );
 
 export const store = createStore(rootReducer, enhancer);
+export type RootState = ReturnType<typeof rootReducer>
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk<ReturnType = void> = ActionCreator<
+  ThunkAction<ReturnType, Action, RootState, TApplicationActions>
+>;

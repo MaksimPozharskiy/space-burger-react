@@ -98,7 +98,7 @@ class AuthApi {
       .catch(this.handleResponseError);
   }
 
-  refreshToken(refreshToken: string) {
+  refreshToken(refreshToken: string | null) {
     return fetch(`${this._url}/auth/token`, {
       method: "POST",
       headers: {

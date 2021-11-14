@@ -171,7 +171,7 @@ const getConstructorIngredientsReducer = (state = initialStateConstructor, actio
         ...state,
         constructorIngredients: [
           ...state.constructorIngredients.filter(
-            (item) => item.ingredientId !== action.payload
+            (item: any) => item.ingredientId !== action.payload
           ),
         ],
       };
