@@ -39,40 +39,83 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
 } from '../actions/index';
+import { TError, TGetOrderSuccess, TIngredient, TIngredients, TOrder, TUser } from "../actions/types";
 
-const initialStateIngredients = {
+type TInitialStateIngredients = {
+  ingredients: TIngredients;
+  ingredientsRequest: boolean;
+  ingredientsFailed: boolean;
+  isLoading: boolean;
+};
+
+const initialStateIngredients: TInitialStateIngredients = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
   isLoading: false,
 };
 
-const initialStateConstructor = {
+export type TInitialStateConstructor = {
+  constructorIngredients: any;
+  isBuns: TIngredient | null;
+};
+
+const initialStateConstructor: TInitialStateConstructor = {
   constructorIngredients: [],
   isBuns: null,
 };
 
-const initialStateIngredient = {
+export type TInitialStateIngredient = {
+  currentIngredient: TIngredient | null;
+};
+
+const initialStateIngredient: TInitialStateIngredient = {
   currentIngredient: null,
 };
 
-const initialStateOrder = {
+type TInitialStateOrder = {
+  order: TGetOrderSuccess | null;
+  orderRequest: boolean;
+  orderFailed: boolean;
+};
+
+const initialStateOrder: TInitialStateOrder = {
   order: null,
   orderRequest: false,
   orderFailed: false,
 };
 
-const initialStateModal = {
+type TInitialStateModal = {
+  isModalOpened: boolean;
+  isModalOpenedOrder: boolean;
+  isModalOpenedError: boolean;
+};
+
+const initialStateModal: TInitialStateModal = {
   isModalOpened: false,
   isModalOpenedOrder: false,
   isModalOpenedError: false
 };
 
-const initialStateError = {
+type TInitialStateError = {
+  error: TError;
+};
+
+const initialStateError: TInitialStateError = {
   error: {},
 };
 
-const initialUserInfo = {
+type TInitialUserInfo = {
+  user: TUser | {};
+  success: boolean;
+  accessToken: string | null;
+  refreshToken: string | null;
+  message: string | null;
+  userRequest: boolean;
+  userRequestFail: boolean;
+};
+
+const initialUserInfo: TInitialUserInfo = {
   user: {},
   success: false,
   accessToken: null,
@@ -82,7 +125,17 @@ const initialUserInfo = {
   userRequestFail: false,
 };
 
-const initialStateWS = {
+type TinitialStateWS = {
+  wsConnected: boolean;
+  wsError: boolean;
+  Data: {
+    orders: [TOrder] | [];
+    total: number;
+    totalToday: number;
+  };
+};
+
+const initialStateWS: TinitialStateWS = {
   wsConnected: false,
   wsError: false,
   Data: {
@@ -92,7 +145,7 @@ const initialStateWS = {
   },
 };
 
-export const errorsReducer = (state = initialStateError, action) => {
+export const errorsReducer = (state = initialStateError, action): TInitialStateError => {
   switch (action.type) {
     case SHOW_ERROR: {
       return {
@@ -114,7 +167,7 @@ export const errorsReducer = (state = initialStateError, action) => {
   }
 };
 
-const getIngredientsListReducer = (state = initialStateIngredients, action) => {
+const getIngredientsListReducer = (state = initialStateIngredients, action): TInitialStateIngredients => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {
@@ -149,7 +202,7 @@ const getIngredientsListReducer = (state = initialStateIngredients, action) => {
 };
 
 // Constructor of Burger Reducer
-const getConstructorIngredientsReducer = (state = initialStateConstructor, action) => {
+const getConstructorIngredientsReducer = (state = initialStateConstructor, action): TInitialStateConstructor => {
   switch (action.type) {
     case ADD_CONSTRUCTOR_INGREDIENT: {
       if (action.payload.type === "bun") {
@@ -193,7 +246,7 @@ const getConstructorIngredientsReducer = (state = initialStateConstructor, actio
   }
 };
 
-const getIngredientInfoReducer = (state = initialStateIngredient, action) => {
+const getIngredientInfoReducer = (state = initialStateIngredient, action): TInitialStateIngredient => {
   switch (action.type) {
     case GET_SELECTED_INGREDIENT_INFO: {
       return {
@@ -215,7 +268,7 @@ const getIngredientInfoReducer = (state = initialStateIngredient, action) => {
   }
 };
 
-const getOrderReducer = (state = initialStateOrder, action) => {
+const getOrderReducer = (state = initialStateOrder, action): TInitialStateOrder => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
       return {
@@ -255,7 +308,7 @@ const getOrderReducer = (state = initialStateOrder, action) => {
   }
 };
 
-const modalReducer = (state = initialStateModal, action) => {
+const modalReducer = (state = initialStateModal, action): TInitialStateModal => {
   switch (action.type) {
     case SHOW_MODAL: {
       return {
@@ -314,7 +367,7 @@ const modalReducer = (state = initialStateModal, action) => {
 };
 
 // Auth
-const userInfoReducer = (state = initialUserInfo, action) => {
+const userInfoReducer = (state = initialUserInfo, action): TInitialUserInfo => {
   switch (action.type) {
     case CREATE_USER_REQUEST: {
       return {
@@ -438,7 +491,7 @@ const userInfoReducer = (state = initialUserInfo, action) => {
   }
 }
 
-export const wsReducer = (state = initialStateWS, action) => {
+export const wsReducer = (state = initialStateWS, action): TinitialStateWS => {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS:
       return {
