@@ -125,6 +125,7 @@ class AuthApi {
       .then((res) => (res.json()))
       .catch(this.handleResponseError);
   }
+  
   updateUserInfo(name: string, email: string, password: string) {
     return fetch(`${this._url}/auth/user`, {
       method: "PATCH",
@@ -138,6 +139,18 @@ class AuthApi {
         email: `${email}`,
         password: `${password}`,
       }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
+
+  getCurrentOrder(orderNumber?: string) {
+    return fetch(`${this._url}/orders/${orderNumber}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     })
       .then(this.handleResponse)
       .catch(this.handleResponseError);

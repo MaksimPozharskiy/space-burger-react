@@ -1,7 +1,7 @@
 import { mainApiUrl } from '../../utils/constants';
 import AuthApi from '../../utils/AuthApi';
 import { setCookie } from '../../utils/cookie';
-const authApi = new AuthApi(mainApiUrl);
+export const authApi = new AuthApi(mainApiUrl);
 
 // Ingredients of Burger
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
