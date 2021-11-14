@@ -30,7 +30,7 @@ function AppHeader() {
             </Link>
           </li>
           <li className={`${styles['list-item']} pr-5 pl-5 pt-4 pb-4`}>
-            <Link to="/order-feed" className={styles.link}>
+            <Link to="/feed" className={styles.link}>
               <ListIcon type={
                 location.pathname.indexOf("/feed") >= 0
                   ? "primary"
