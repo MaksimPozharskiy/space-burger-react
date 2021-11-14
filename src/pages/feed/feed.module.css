@@ -30,6 +30,18 @@
   height: 80vh;
 }
 
+.feed_orders_list::-webkit-scrollbar-track {
+  background-color: #2F2F37;
+}
+
+.feed_orders_list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.feed_orders_list::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
 .feed_order {
   margin: 16px auto;
 }
