@@ -16,6 +16,7 @@ interface IItem {
   _id: string;
   count: number;
   number: number;
+  ingredients: [];
 };
 
 function ProfileOrders() {
@@ -48,18 +49,21 @@ function ProfileOrders() {
       <div className={styles.profile_orders}>
         <ul className={styles.profile_orders_list}>
           {data.map((item: IItem, index: number) => {
-            return (
-              <li className={styles.profile_order} key={index}>
-                <Link
-                  to={{
-                    pathname: `/profile/orders/${item.number}`,
-                    state: { backgroundOrder: location },
-                  }}
-                >
-                  <Order order={item} />
-                </Link>
-              </li>
-            );
+            if (item.ingredients.length > 0) {
+              return (
+                <li className={styles.profile_order} key={index}>
+                  <Link
+                    to={{
+                      pathname: `/profile/orders/${item.number}`,
+                      state: { backgroundOrder: location },
+                    }}
+                  >
+                    <Order order={item} />
+                  </Link>
+                </li>
+              );
+            }
+            return null;
           })}
         </ul>
       </div>
