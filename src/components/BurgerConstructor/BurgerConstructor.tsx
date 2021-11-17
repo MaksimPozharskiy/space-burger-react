@@ -6,6 +6,7 @@ import { useDrop} from "react-dnd";
 import { addConstructorIngredient, getOrder, showError, showModalError } from '../../services/actions';
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 import { useHistory } from "react-router-dom";
+import { RootState } from '../../services/store';
 
 interface IBurgerConstructor {
   openModalOrder: () => void;
@@ -16,7 +17,7 @@ function BurgerConstructor({
   }: IBurgerConstructor): JSX.Element {
   const dispatch = useDispatch();
   const {constructorIngredients, IsBun } = useSelector(
-    (store: any) => ({
+    (store: RootState) => ({
       constructorIngredients: store.constructorOfOrder.constructorIngredients,
       IsBun: store.constructorOfOrder.isBuns,
       error: store.errors.error

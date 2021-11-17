@@ -1,6 +1,7 @@
 import { mainApiUrl } from '../../utils/constants';
 import AuthApi from '../../utils/AuthApi';
 import { setCookie } from '../../utils/cookie';
+import { Dispatch } from '../store';
 export const authApi = new AuthApi(mainApiUrl);
 
 // Ingredients of Burger
@@ -9,7 +10,7 @@ export const GET_INGREDIENTS_SUCCESS: "GET_INGREDIENTS_SUCCESS" = "GET_INGREDIEN
 export const GET_INGREDIENTS_FAILED: "GET_INGREDIENTS_FAILED" = "GET_INGREDIENTS_FAILED";
 
 export function getIngredients() {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: GET_INGREDIENTS_REQUEST,
     });
@@ -90,7 +91,7 @@ export const GET_SELECTED_ORDER: "GET_SELECTED_ORDER" = "GET_SELECTED_ORDER";
 export const REMOVE_SELECTED_ORDER: "REMOVE_SELECTED_ORDER" = "REMOVE_SELECTED_ORDER";
 
 export function getOrder(ingredients) {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: GET_ORDER_REQUEST,
     });
@@ -138,7 +139,7 @@ export const SHOW_MODAL_ORDER: "SHOW_MODAL_ORDER" = "SHOW_MODAL_ORDER";
 export const HIDE_MODAL_ORDER: "HIDE_MODAL_ORDER" = "HIDE_MODAL_ORDER";
 
 export function closeModals() {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch(deleteSelectedIngredient());
     dispatch(closeOrder());
   };
@@ -213,7 +214,7 @@ export const CREATE_USER_SUCCESS: "CREATE_USER_SUCCESS" = "CREATE_USER_SUCCESS";
 export const CREATE_USER_FAILED: "CREATE_USER_FAILED" = "CREATE_USER_FAILED";
 
 export function createUser({ email, password, name }) {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: CREATE_USER_REQUEST,
     });
@@ -246,7 +247,7 @@ export const LOGIN_USER_SUCCESS: "LOGIN_USER_SUCCESS" = "LOGIN_USER_SUCCESS";
 export const LOGIN_USER_FAILED: "LOGIN_USER_FAILED" = "LOGIN_USER_FAILED";
 
 export function loginUser({ email, password }) {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: LOGIN_USER_REQUEST,
     });
@@ -278,7 +279,7 @@ export const FORGET_PASSWORD_CODE: "FORGET_PASSWORD_CODE" = "FORGET_PASSWORD_COD
 export const RESET_USER_PASSWORD: "RESET_USER_PASSWORD" = "RESET_USER_PASSWORD";
 
 export function forgetUserPassword(email) {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     authApi
       .forgetPassword(email)
       .then((res) => {
@@ -295,7 +296,7 @@ export function forgetUserPassword(email) {
 }
 
 export function resetUserPassword(password, code) {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     authApi
       .resetPassword(password, code)
       .then((res) => {
@@ -315,7 +316,7 @@ export function resetUserPassword(password, code) {
 export const LOGOUT_USER_INFO: "LOGOUT_USER_INFO" = "LOGOUT_USER_INFO";
 
 export function logout(refreshToken) {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     authApi
       .logout(refreshToken)
       .then((res) => {
@@ -339,7 +340,7 @@ export function logout(refreshToken) {
 export const REFRESH_USER_TOKEN: "REFRESH_USER_TOKEN" = "REFRESH_USER_TOKEN";
 
 export function refreshToken(afterRefresh) {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     authApi
       .refreshToken(localStorage.getItem("refreshToken"))
       .then((res) => {
@@ -366,7 +367,7 @@ export const GET_USER_INFO_SUCCESS: "GET_USER_INFO" = "GET_USER_INFO";
 export const GET_USER_INFO_FAILED: "GET_USER_INFO_FAILED" = "GET_USER_INFO_FAILED";
 
 export function getUserInfo() {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: GET_USER_INFO_REQUEST,
     });
@@ -403,7 +404,7 @@ export const UPDATE_USER_INFO_SUCCESS: "UPDATE_USER_INFO_SUCCESS" = "UPDATE_USER
 export const UPDATE_USER_INFO_FAILED: "UPDATE_USER_INFO_FAILED" = "UPDATE_USER_INFO_FAILED";
 
 export function updateUserInfo(name, email, password) {
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     dispatch({
       type: UPDATE_USER_INFO_REQUEST,
     });

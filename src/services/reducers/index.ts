@@ -106,7 +106,7 @@ const initialStateError: TInitialStateError = {
 };
 
 type TInitialUserInfo = {
-  user: TUser | {};
+  user: TUser;
   success: boolean;
   accessToken: string | null;
   refreshToken: string | null;
@@ -116,7 +116,7 @@ type TInitialUserInfo = {
 };
 
 const initialUserInfo: TInitialUserInfo = {
-  user: {},
+  user: { email: "", password: "", name: "" },
   success: false,
   accessToken: null,
   refreshToken: null,
@@ -439,7 +439,7 @@ const userInfoReducer = (state = initialUserInfo, action): TInitialUserInfo => {
       const { success, message } = action.payload;
       return {
         ...state,
-        user: {},
+        user: { email: "", password: "", name: "" },
         success: success,
         accessToken: null,
         refreshToken: null,

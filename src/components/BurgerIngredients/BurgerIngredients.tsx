@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../services/store';
 
 function BurgerIngredients(): JSX.Element | null {
   const [current, setCurrent] = React.useState<string>('buns')
@@ -11,7 +12,7 @@ function BurgerIngredients(): JSX.Element | null {
   const toppings: HTMLElement | null = document.getElementById("toppings");
   const headerOfIngredients: HTMLElement | null = document.getElementById("ingredients");
   const { ingredients, constructorIngredients, IsBun } = useSelector(
-    (store: any) => ({
+    (store: RootState) => ({
       ingredients: store.burgerIngredients.ingredients,
       constructorIngredients: store.constructorOfOrder.constructorIngredients,
       IsBun: store.constructorOfOrder.isBuns,
@@ -24,7 +25,7 @@ function BurgerIngredients(): JSX.Element | null {
   }
 
   const countOfIngredients = useMemo(() => {
-    return ingredients.map((ingredient) => {
+    return ingredients.map((ingredient: any) => {
       ingredient.count = constructorIngredients.filter(
         (item) => item._id === ingredient._id
       ).length;

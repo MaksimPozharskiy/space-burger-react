@@ -1,4 +1,4 @@
-import { compose, createStore, applyMiddleware, Action, ActionCreator } from "redux";
+import { compose, createStore, applyMiddleware } from "redux";
 import thunk, { ThunkAction } from "redux-thunk";
 import rootReducer from "./reducers";
 import {
@@ -47,7 +47,8 @@ const enhancer = composeEnhancers(
 
 export const store = createStore(rootReducer, enhancer);
 export type RootState = ReturnType<typeof rootReducer>
-export type AppDispatch = typeof store.dispatch;
-export type AppThunk<ReturnType = void> = ActionCreator<
-  ThunkAction<ReturnType, Action, RootState, TApplicationActions>
->;
+// export type AppDispatch = typeof store.dispatch;
+export type Dispatch = <TReturnType = void>(action: AppActions | AppThunk) => TReturnType;
+export type AppActions = TApplicationActions;
+export type AppThunk<ReturnType = void> =
+  ThunkAction<ReturnType, RootState, unknown, AppActions>;

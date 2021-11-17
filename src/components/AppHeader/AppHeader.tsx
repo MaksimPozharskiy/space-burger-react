@@ -3,13 +3,14 @@ import React from 'react';
 import styles from './AppHeader.module.css';
 import { Link, useLocation } from "react-router-dom";
 import { useSelector } from 'react-redux';
+import { RootState } from '../../services/store';
 
 function AppHeader() {
   const [userName, setUserName] = React.useState<string>("");
   const location = useLocation();
 
   const nameInfo = useSelector(
-    (store: any) => ({
+    (store: RootState) => ({
       nameInfo: store.authInfoUser.user.name,
     })
   );

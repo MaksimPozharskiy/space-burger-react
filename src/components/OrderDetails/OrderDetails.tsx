@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { RootState } from '../../services/store';
 import styles from './OrderDetails.module.css';
 
 function OrderDetails(): JSX.Element | null {
   const { order } = useSelector(
-    (store: any) => ({
+    (store: RootState) => ({
       order: store.order.order,
     })
   );

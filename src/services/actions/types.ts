@@ -255,15 +255,23 @@ export interface IPutIngredientsListFailed {
 }
 
 export interface IHideError {
-  readonly type: typeof HIDE_MODAL_ERROR;
+  readonly type: typeof HIDE_ERROR;
 }
 
 export interface IShowError {
-  readonly type: typeof SHOW_MODAL_ERROR;
+  readonly type: typeof SHOW_ERROR;
   payload: TError;
 }
 
+export interface IHideModalError {
+  readonly type: typeof HIDE_MODAL_ERROR;
+}
+
+export interface IShowModalError {
+  readonly type: typeof SHOW_MODAL_ERROR;
+}
 export interface IShowMenu {
+
   readonly type: typeof SHOW_MODAL;
 }
 export interface IHideMenu {
@@ -375,4 +383,6 @@ export type TApplicationActions =
   | ICreateUserRequest
   | ICreateUserFailed
   | ILoginUserRequest
-  | ILoginUserFailed;
+  | ILoginUserFailed
+  | IHideModalError
+  | IShowModalError;
