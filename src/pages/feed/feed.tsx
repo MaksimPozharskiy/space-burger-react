@@ -3,7 +3,6 @@ import styles from "./feed.module.css";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getIngredients } from "../../services/actions";
 import { wsActions } from "../../services/store";
 
 interface IItem {
@@ -34,7 +33,6 @@ function Feed() {
   const location = useLocation();
 
   React.useEffect(() => {
-    dispatch(getIngredients());
     dispatch({
       type: wsActions.wsStart,
       payload: "wss://norma.nomoreparties.space/orders/all",

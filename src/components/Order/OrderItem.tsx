@@ -6,7 +6,6 @@ import { updateDate } from "../../utils/helpers";
 import { optionsDate } from "../../utils/constants";
 import { authApi } from "../../services/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { getIngredients } from "../../services/actions";
 import { showError } from "../../services/actions";
 
 interface IItem {
@@ -51,7 +50,6 @@ function OrderItem() {
     }, 0);
 
   React.useEffect(() => {
-    dispatch(getIngredients());
     authApi
       .getCurrentOrder(id)
       .then((res) => {

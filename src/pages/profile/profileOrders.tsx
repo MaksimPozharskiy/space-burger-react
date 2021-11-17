@@ -4,7 +4,6 @@ import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getIngredients } from "../../services/actions";
 import { wsActions } from "../../services/store";
 import { getCookie } from "../../utils/helpers";
 
@@ -31,7 +30,6 @@ function ProfileOrders() {
   const data = dataOrders && dataOrders.data && dataOrders.data.orders;
 
   React.useEffect(() => {
-    dispatch(getIngredients());
     dispatch({
       type: wsActions.wsStart,
       payload: `wss://norma.nomoreparties.space/orders?token=${token}`,
