@@ -62,6 +62,7 @@ function BurgerConstructor({
 
     const handleCreateOrder = async () => {
       if (IsBun === null) return;
+      constructorIngredients.push(IsBun);
       dispatch(getOrder(constructorIngredients));
       if ((IsBun && !isToken) || (!IsBun && !isToken)) {
         history.push("/login");
