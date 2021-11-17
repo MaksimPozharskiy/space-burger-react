@@ -1,9 +1,21 @@
+import { Middleware } from "redux";
 import { getCookie } from "../utils/helpers";
+import { RootState } from "./store";
 
-export const socketMiddleware = (wsUrl, wsActions) => {
+export type WsActions = {
+  wsStart: string;
+  wsSendMessage: string;
+  onOpen: string;
+  onClose: string;
+  onError: string;
+  onGetOrders: string;
+  wsClose: string;
+  wsPingPong: string;
+};
+
+export const socketMiddleware = (wsUrl: string, wsActions: WsActions): Middleware<{}, RootState> => {
   return (store) => {
-    let socket;
-
+    let socket: WebSocket | null = null;
     return (next) => (action) => {
       const { dispatch } = store;
       const { type, payload } = action;
@@ -47,7 +59,7 @@ export const socketMiddleware = (wsUrl, wsActions) => {
       }
       if (wsClose && type === wsClose && socket) {
         socket.close();
-        socket = undefined;
+        socket = null;
       }
 
       if (wsSendMessage && type === wsSendMessage && socket) {
