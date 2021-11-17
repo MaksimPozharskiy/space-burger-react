@@ -1,22 +1,18 @@
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import styles from './BurgerConstructor.module.css';
-import { mainApiUrl } from '../../utils/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop} from "react-dnd";
-import { addConstructorIngredient, showError, showModalError } from '../../services/actions';
+import { addConstructorIngredient, getOrder, showError, showModalError } from '../../services/actions';
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 import { useHistory } from "react-router-dom";
-import { getCookie } from '../../utils/helpers';
 
 interface IBurgerConstructor {
   openModalOrder: () => void;
-  setOrderNumber: Dispatch<SetStateAction<number>>;
 }
 
 function BurgerConstructor({ 
     openModalOrder,
-    setOrderNumber,
   }: IBurgerConstructor): JSX.Element {
   const dispatch = useDispatch();
   const {constructorIngredients, IsBun } = useSelector(
@@ -66,27 +62,7 @@ function BurgerConstructor({
 
     const handleCreateOrder = async () => {
       if (IsBun === null) return;
-      try {
-        const res = await fetch(`${mainApiUrl}/orders`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + getCookie("token"),
-          },
-          body: JSON.stringify({ ingredients: constructorIngredients }),
-        })
-        const data = await res.json();
-        if (res.status === 200) {
-          setOrderNumber(data.order.number)
-          console.log(data)
-        } else {
-          throw new Error('Произошла ошибка ');
-        }
-      }
-      catch(err) {
-        console.log(err)
-      }
+      dispatch(getOrder(constructorIngredients));
       if ((IsBun && !isToken) || (!IsBun && !isToken)) {
         history.push("/login");
       }

@@ -29,7 +29,6 @@ import { Feed } from '../../pages/feed';
 import OrderItem from '../Order/OrderItem';
 
 function App() {
-  const [orderNumber, setOrderNumber] = React.useState<number>(0);
   const { isModalOpened, isModalOpenedOrder, currentIngredient, error, isModalOpenedError, isLoading } = useSelector(
     (store: any) => ({
       isModalOpened: store.modal.isModalOpened,
@@ -107,8 +106,7 @@ function App() {
                 <>
                   <BurgerIngredients /> 
                   <BurgerConstructor 
-                    openModalOrder={openModalOrder} 
-                    setOrderNumber={setOrderNumber} />
+                    openModalOrder={openModalOrder} />
                 </>
                 : <div>Loading...</div>
               }
@@ -123,7 +121,7 @@ function App() {
           <Modal
             closeModal={closeModalOrder}
             isModalOpened={isModalOpenedOrder}>
-            <OrderDetails orderNumber={orderNumber} />
+            <OrderDetails />
           </Modal>
           <Modal
             closeModal={closeModalError}

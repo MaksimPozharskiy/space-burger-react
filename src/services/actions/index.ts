@@ -95,20 +95,8 @@ export function getOrder(ingredients) {
       type: GET_ORDER_REQUEST,
     });
 
-    fetch(`${mainApiUrl}/orders`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ingredients: ingredients }),
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(res);
-      }
-    }).then((res) => {
+    authApi.getOrder(ingredients)
+      .then((res) => {
         dispatch({
           type: GET_ORDER_SUCCESS,
           payload: res,
