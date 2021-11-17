@@ -135,9 +135,6 @@ function App() {
           <p>Страница не существует</p>
         </Route>
       </Switch>
-      {backgroundIngredient && <Route exact path="/ingredients/:id">
-          <IngredientDetails />
-        </Route>}
     </Router> : <div>Loading...</div>
   );
 }
