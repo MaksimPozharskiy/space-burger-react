@@ -2,7 +2,7 @@ import React from "react";
 import styles from "../../pages/profile/profile.module.css";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../../services/actions";
+import { logout } from "../../services/actions/authActions";
 
 function ProfileMenu(): JSX.Element | null {
   const refreshToken = localStorage.getItem("refreshToken");

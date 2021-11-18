@@ -1,18 +1,31 @@
 import { combineReducers } from "redux";
 import { v4 as uuidv4 } from 'uuid';
 import {
+  WS_CONNECTION_SUCCESS,
+  WS_GET_ORDERS,
+  WS_CONNECTION_ERROR,
+  WS_CONNECTION_CLOSED,
+} from '../actions/wsActions';
+
+import {  
   ADD_CONSTRUCTOR_INGREDIENT,
   DELETE_CONSTRUCTOR_INGREDIENT,
   MOVE_CONSTRUCTOR_INGREDIENT,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
-  GET_SELECTED_INGREDIENT_INFO,
-  DELETE_SELECTED_INGREDIENT_INFO,
+} from '../actions/burgerActions';
+
+import {
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   GET_ORDER_FAILED,
   DELETE_ORDER,
+} from '../actions/orderActions';
+
+import {
+  GET_SELECTED_INGREDIENT_INFO,
+  DELETE_SELECTED_INGREDIENT_INFO,
   SHOW_MODAL,
   HIDE_MODAL,
   SHOW_MODAL_ORDER,
@@ -21,6 +34,9 @@ import {
   HIDE_ERROR,
   SHOW_MODAL_ERROR,
   HIDE_MODAL_ERROR,
+} from '../actions/modalActions';
+
+import {
   CREATE_USER_REQUEST,
   CREATE_USER_SUCCESS,
   CREATE_USER_FAILED,
@@ -30,15 +46,15 @@ import {
   FORGET_PASSWORD_CODE,
   RESET_USER_PASSWORD,
   LOGOUT_USER_INFO,
+  REFRESH_USER_TOKEN,
+} from '../actions/authActions';
+
+import {
   UPDATE_USER_INFO_REQUEST,
   UPDATE_USER_INFO_SUCCESS,
   UPDATE_USER_INFO_FAILED,
-  REFRESH_USER_TOKEN,
-  WS_CONNECTION_SUCCESS,
-  WS_GET_ORDERS,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_CLOSED,
-} from '../actions/index';
+} from '../actions/userActions';
+
 import { TError, TGetOrderSuccess, TIngredient, TIngredients, TOrder, TUser } from "../actions/types";
 
 type TInitialStateIngredients = {

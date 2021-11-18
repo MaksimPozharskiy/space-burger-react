@@ -1,9 +1,10 @@
 import React from "react";
 import styles from "../../components/IngredientDetails/IngredientDetails.module.css";
 import { useSelector, useDispatch } from "react-redux";
-import { addConstructorIngredient, closeModals } from "../../services/actions";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useParams, useHistory } from "react-router-dom";
+import { addConstructorIngredient } from "../../services/actions/burgerActions";
+import { closeModals } from "../../services/actions/modalActions";
 
 function IngredientDetailsPage():JSX.Element | null {
   const history = useHistory();

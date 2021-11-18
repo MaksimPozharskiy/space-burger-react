@@ -2,10 +2,10 @@ import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-c
 import React from 'react';
 import styles from './BurgerIngredient.module.css';
 import { useDispatch } from 'react-redux';
-import { getSelectedIngredient, showModal } from '../../services/actions';
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
 import { IIngredient } from '../../interfaces/interfaces';
+import { getSelectedIngredient, showModal } from '../../services/actions/modalActions';
 
 interface IBurgerIngredient {
   image: string;

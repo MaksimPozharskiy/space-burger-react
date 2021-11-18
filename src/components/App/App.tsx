@@ -7,7 +7,6 @@ import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
-import { getIngredients, hideModal, hideModalError, hideModalOrder, showModalOrder } from '../../services/actions';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import {
@@ -28,6 +27,8 @@ import { Feed } from '../../pages/feed';
 import OrderItem from '../Order/OrderItem';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 import { RootState } from '../../services/store';
+import { getIngredients } from '../../services/actions/burgerActions';
+import { hideModalOrder, showModalOrder, hideModal, hideModalError } from '../../services/actions/modalActions';
 
 function App() {
   const { isModalOpened, isModalOpenedOrder, currentIngredient, error, isModalOpenedError, isLoading } = useAppSelector(

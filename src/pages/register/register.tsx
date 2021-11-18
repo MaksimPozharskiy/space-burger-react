@@ -4,8 +4,8 @@ import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect } from "react-router-dom";
-import { createUser } from "../../services/actions";
 import { emailRegxep } from "../../utils/constants";
+import { createUser } from "../../services/actions/authActions";
 
 function RegisterPage(): JSX.Element | null {
   const dispatch = useDispatch();

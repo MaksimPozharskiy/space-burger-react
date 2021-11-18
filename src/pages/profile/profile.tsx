@@ -3,8 +3,8 @@ import styles from "./profile.module.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserInfo, updateUserInfo } from "../../services/actions";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import { updateUserInfo, getUserInfo } from "../../services/actions/userActions";
 
 function Profile(): JSX.Element | null {
   const { userName, userEmail } = useSelector((store: any) => ({

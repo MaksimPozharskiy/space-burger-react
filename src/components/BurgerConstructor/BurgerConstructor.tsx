@@ -3,10 +3,12 @@ import React from 'react';
 import styles from './BurgerConstructor.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDrop} from "react-dnd";
-import { addConstructorIngredient, getOrder, showError, showModalError } from '../../services/actions';
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 import { useHistory } from "react-router-dom";
 import { RootState } from '../../services/store';
+import { addConstructorIngredient } from '../../services/actions/burgerActions';
+import { getOrder } from '../../services/actions/orderActions';
+import { showError, showModalError } from '../../services/actions/modalActions';
 
 interface IBurgerConstructor {
   openModalOrder: () => void;

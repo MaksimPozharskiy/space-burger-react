@@ -6,7 +6,7 @@ import { updateDate } from "../../utils/helpers";
 import { optionsDate } from "../../utils/constants";
 import { authApi } from "../../services/actions";
 import { useSelector, useDispatch } from "react-redux";
-import { showError } from "../../services/actions";
+import { showError } from "../../services/actions/modalActions";
 
 interface IItem {
   image: string;

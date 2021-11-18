@@ -4,8 +4,8 @@ import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useLocation } from "react-router-dom";
-import { loginUser } from "../../services/actions";
 import { emailRegxep } from "../../utils/constants";
+import { loginUser } from "../../services/actions/authActions";
 
 function LoginPage(): JSX.Element | null {
   const location = useLocation();

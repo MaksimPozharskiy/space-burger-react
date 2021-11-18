@@ -10,7 +10,7 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_CONNECTION_END,
-} from "./actions/index";
+} from "./actions/wsActions";
 
 import { socketMiddleware } from "./socketMiddleware";
 import { TApplicationActions } from "./actions/types";

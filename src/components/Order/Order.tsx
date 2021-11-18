@@ -4,7 +4,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import { updateDate } from "../../utils/helpers";
 import { optionsDate } from "../../utils/constants";
 import { useSelector, useDispatch } from "react-redux";
-import { getSelectedOrder } from "../../services/actions";
+import { getSelectedOrder } from "../../services/actions/orderActions";
 
 interface IItem {
   image: string;

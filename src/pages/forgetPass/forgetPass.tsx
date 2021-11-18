@@ -5,7 +5,7 @@ import styles from "../common.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
-import { forgetUserPassword } from "../../services/actions";
+import { forgetUserPassword } from "../../services/actions/authActions";
 
 function ForgetPassPage(): JSX.Element | null {
   const location = useLocation();
