@@ -66,7 +66,7 @@ function App() {
   function closeModalError() {
     dispatch(hideModalError())
   };
-
+  console.log(error)
   return (
     isLoading ? <Router history={history}>
       <AppHeader />
@@ -128,7 +128,7 @@ function App() {
           <Modal
             closeModal={closeModalError}
             isModalOpened={isModalOpenedError}>
-            <p className={styles.error}>{error.statusText}</p>
+            <p className={styles.error}>{Object.values(error)}</p>
           </Modal>
         </Route>
         <Route>
