@@ -1,8 +1,8 @@
 import styles from './IngredientDetails.module.css';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../utils/hooks';
 
 function IngredientDetails(): JSX.Element | null {
-  const { currentIngredient } = useSelector((store: any) => ({
+  const { currentIngredient } = useAppSelector((store: any) => ({
     currentIngredient: store.burgerIngredient.currentIngredient,
   }));
 

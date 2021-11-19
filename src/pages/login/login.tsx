@@ -1,16 +1,15 @@
 import React, { FormEvent } from "react";
-import { useSelector } from "react-redux";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
 import { loginUser } from "../../services/actions/authActions";
-import { useAppDispatch } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 function LoginPage(): JSX.Element | null {
   const location = useLocation();
-  const { success, userName } = useSelector((store: any) => ({
+  const { success, userName } = useAppSelector((store: any) => ({
     success: store.authInfoUser.success,
     userName: store.authInfoUser.name,
   }));

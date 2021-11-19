@@ -2,8 +2,8 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo } from 'react';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
+import { useAppSelector } from '../../utils/hooks';
 
 function BurgerIngredients(): JSX.Element | null {
   const [current, setCurrent] = React.useState<string>('buns')
@@ -11,7 +11,7 @@ function BurgerIngredients(): JSX.Element | null {
   const sauces: HTMLElement | null = document.getElementById("sauces");
   const toppings: HTMLElement | null = document.getElementById("toppings");
   const headerOfIngredients: HTMLElement | null = document.getElementById("ingredients");
-  const { ingredients, constructorIngredients, IsBun } = useSelector(
+  const { ingredients, constructorIngredients, IsBun } = useAppSelector(
     (store: RootState) => ({
       ingredients: store.burgerIngredients.ingredients,
       constructorIngredients: store.constructorOfOrder.constructorIngredients,

@@ -5,9 +5,8 @@ import { useParams } from "react-router-dom";
 import { updateDate } from "../../utils/helpers";
 import { optionsDate } from "../../utils/constants";
 import { authApi } from "../../services/actions";
-import { useSelector } from "react-redux";
 import { showError } from "../../services/actions/modalActions";
-import { useAppDispatch } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 interface IItem {
   image: string;
@@ -33,7 +32,7 @@ function OrderItem() {
   const dispatch = useAppDispatch();
   const [order, setOrder] = React.useState<IOrderProps>();
   const { id } = useParams<{ id?: string }>();
-  const { ingredients } = useSelector((store: any) => ({
+  const { ingredients } = useAppSelector((store: any) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));
   const orderIngredients =

@@ -2,9 +2,9 @@ import React from "react";
 import styles from "./feed.module.css";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { wsActions } from "../../services/store";
-import { useAppDispatch } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 interface IItem {
   image: string;
@@ -27,7 +27,7 @@ interface IOrderProps {
 
 function Feed() {
   const dispatch = useDispatch();
-  const { dataOrders, wsConnected } = useSelector((store: any) => ({
+  const { dataOrders, wsConnected } = useAppSelector((store: any) => ({
     dataOrders: store.ws.Data,
     wsConnected: store.ws.wsConnected,
   }));

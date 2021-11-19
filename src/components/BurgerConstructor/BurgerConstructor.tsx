@@ -1,7 +1,6 @@
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import React from 'react';
 import styles from './BurgerConstructor.module.css';
-import { useSelector } from 'react-redux';
 import { useDrop} from "react-dnd";
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 import { useHistory } from "react-router-dom";
@@ -9,7 +8,7 @@ import { RootState } from '../../services/store';
 import { addConstructorIngredient } from '../../services/actions/burgerActions';
 import { getOrder } from '../../services/actions/orderActions';
 import { showError, showModalError } from '../../services/actions/modalActions';
-import { useAppDispatch } from '../../utils/hooks';
+import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 
 interface IBurgerConstructor {
   openModalOrder: () => void;
@@ -19,7 +18,7 @@ function BurgerConstructor({
     openModalOrder,
   }: IBurgerConstructor): JSX.Element {
   const dispatch = useAppDispatch();
-  const {constructorIngredients, IsBun } = useSelector(
+  const {constructorIngredients, IsBun } = useAppSelector(
     (store: RootState) => ({
       constructorIngredients: store.constructorOfOrder.constructorIngredients,
       IsBun: store.constructorOfOrder.isBuns,

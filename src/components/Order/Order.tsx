@@ -3,9 +3,8 @@ import styles from "./Order.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { updateDate } from "../../utils/helpers";
 import { optionsDate } from "../../utils/constants";
-import { useSelector } from "react-redux";
 import { getSelectedOrder } from "../../services/actions/orderActions";
-import { useAppDispatch } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 interface IItem {
   image: string;
@@ -27,7 +26,7 @@ interface IOrderProps {
 
 function Order(props: IOrderProps) {
   const dispatch = useAppDispatch();
-  const { ingredients } = useSelector((store: any) => ({
+  const { ingredients } = useAppSelector((store: any) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));
   const handleClick = () => {

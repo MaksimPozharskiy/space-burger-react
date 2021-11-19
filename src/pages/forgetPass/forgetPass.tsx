@@ -1,16 +1,15 @@
 import React, { FormEvent } from "react";
-import { useSelector } from "react-redux";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
 import { forgetUserPassword } from "../../services/actions/authActions";
-import { useAppDispatch } from "../../utils/hooks";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 function ForgetPassPage(): JSX.Element | null {
   const location = useLocation();
-  const { message, success } = useSelector((store: any) => ({
+  const { message, success } = useAppSelector((store: any) => ({
     message: store.authInfoUser.message,
     success: store.authInfoUser.success,
   }));

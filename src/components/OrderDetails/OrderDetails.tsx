@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
+import { useAppSelector } from '../../utils/hooks';
 import styles from './OrderDetails.module.css';
 
 function OrderDetails(): JSX.Element | null {
-  const { order } = useSelector(
+  const { order } = useAppSelector(
     (store: RootState) => ({
       order: store.order.order,
     })
