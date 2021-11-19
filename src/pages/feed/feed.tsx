@@ -3,33 +3,15 @@ import styles from "./feed.module.css";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { wsActions, wsUrl } from "../../services/store";
+import { RootState, wsActions, wsUrl } from "../../services/store";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { wsConnectionStart } from "../../services/actions/wsActions";
-
-interface IItem {
-  image: string;
-  image_mobile: string;
-  name: string;
-  price: number;
-  _id: string;
-  count: number;
-  number: number;
-};
-
-interface IOrderProps {
-  order?: any;
-  date?: number;
-  number?: number;
-  name?: string;
-  status?: string;
-  price?: number;
-};
+import { TOrder } from "../../services/actions/types";
 
 function Feed() {
   const dispatch = useDispatch();
-  const { dataOrders, wsConnected } = useAppSelector((store: any) => ({
-    dataOrders: store.ws.data,
+  const { wsDataOrders, wsConnected } = useAppSelector((store: RootState) => ({
+    wsDataOrders: store.ws.data,
     wsConnected: store.ws.wsConnected,
   }));
   const location = useLocation();
@@ -41,18 +23,19 @@ function Feed() {
     };
   }, [dispatch]);
 
-  const data = dataOrders && dataOrders.data && dataOrders.data.orders;
+  const dataOrders = wsDataOrders && wsDataOrders && wsDataOrders.data.orders;
   const ReadyOrders =
-    data && data.filter((item: IOrderProps) => item.status === "done");
+    dataOrders && dataOrders.filter((item: TOrder) => item.status === "done");
   const WorkOrders =
-    data && data.filter((item: IOrderProps) => item.status === "pending");
+    dataOrders &&
+    dataOrders.filter((item: TOrder) => item.status === "pending");
 
-  return wsConnected && data ? (
+  return wsConnected && dataOrders ? (
     <section className={styles.feed}>
       <h1 className={styles.feed_title}>Лента заказов</h1>
       <div className={styles.feed_orders}>
         <ul className={styles.feed_orders_list}>
-          {data.map((item: IItem) => {
+          {dataOrders.map((item: TOrder) => {
             return (
               <li className={styles.feed_order} key={item._id}>
                 <Link
@@ -72,7 +55,7 @@ function Feed() {
             <div className={styles.feed_orders_ready}>
               <p className={styles.feed_orders_title}>Готовы:</p>
               <ul className={styles.feed_list}>
-                {ReadyOrders.map((item: IItem, index: number) => {
+                {ReadyOrders.map((item: TOrder, index: number) => {
                   if (index < 10) {
                     return (
                       <li
@@ -90,7 +73,7 @@ function Feed() {
             <div className={styles.feed_orders_ready}>
               <p className={styles.feed_orders_title}>Готовы:</p>
               <ul className={styles.feed_list}>
-                {ReadyOrders.map((item: IItem, index: number) => {
+                {ReadyOrders.map((item: TOrder, index: number) => {
                   if (index > 9 && index < 20) {
                     return (
                       <li
@@ -108,7 +91,7 @@ function Feed() {
             <div className={styles.feed_orders_work}>
               <p className={styles.feed_orders_title}>В работе:</p>
               <ul className={styles.feed_list}>
-                {WorkOrders.map((item: IItem, index: number) => {
+                {WorkOrders.map((item: TOrder, index: number) => {
                   if (index > 10) {
                     return null;
                   }
@@ -124,13 +107,13 @@ function Feed() {
           <div className={styles.order_count}>
             <p className={styles.feed_orders_title}>Выполнено за все время:</p>
             <p className={styles.feed_orders_count}>
-              {dataOrders.data ? dataOrders.data.total - 1 : "none"}
+              {wsDataOrders.data ? wsDataOrders.data.total - 1 : "none"}
             </p>
           </div>
           <div className={styles.order_count}>
             <p className={styles.feed_orders_title}>Выполнено за сегодня:</p>
             <p className={styles.feed_orders_count}>
-              {dataOrders.data ? dataOrders.data.totalToday - 1 : "none"}
+              {wsDataOrders.data ? wsDataOrders.data.totalToday - 1 : "none"}
             </p>
           </div>
         </div>

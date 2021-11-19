@@ -46,8 +46,10 @@ export type TinitialStateWS = {
   wsConnected: boolean;
   wsError: boolean;
   data: {
-    orders: [TOrder] | [];
-    total: number;
-    totalToday: number;
-  };
+    data: {
+      orders: [TOrder] | [];
+      total: number;
+      totalToday: number;
+    };
+  }
 };

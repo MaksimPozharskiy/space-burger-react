@@ -4,11 +4,11 @@ import { TinitialStateWS } from "./types";
 const initialStateWS: TinitialStateWS = {
   wsConnected: false,
   wsError: false,
-  data: {
+  data: {data: {
     orders: [],
     total: 0,
     totalToday: 0,
-  },
+  },}
 };
 
 export const wsReducer = (state = initialStateWS, action): TinitialStateWS => {
