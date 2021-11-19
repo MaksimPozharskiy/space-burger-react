@@ -25,7 +25,7 @@ function ProfileOrders() {
   const token = getCookie("token");
 
   const { dataOrders, wsConnected } = useAppSelector((store: any) => ({
-    dataOrders: store.ws.Data,
+    dataOrders: store.ws.data,
     wsConnected: store.ws.wsConnected,
   }));
   const data = dataOrders && dataOrders.data && dataOrders.data.orders;

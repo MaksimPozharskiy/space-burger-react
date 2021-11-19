@@ -45,7 +45,7 @@ export type TInitialUserInfo = {
 export type TinitialStateWS = {
   wsConnected: boolean;
   wsError: boolean;
-  Data: {
+  data: {
     orders: [TOrder] | [];
     total: number;
     totalToday: number;

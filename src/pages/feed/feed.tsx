@@ -29,7 +29,7 @@ interface IOrderProps {
 function Feed() {
   const dispatch = useDispatch();
   const { dataOrders, wsConnected } = useAppSelector((store: any) => ({
-    dataOrders: store.ws.Data,
+    dataOrders: store.ws.data,
     wsConnected: store.ws.wsConnected,
   }));
   const location = useLocation();
