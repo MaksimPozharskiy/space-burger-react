@@ -3,7 +3,7 @@ import styles from "./feed.module.css";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { wsActions } from "../../services/store";
+import { wsActions, wsUrl } from "../../services/store";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { wsConnectionStart } from "../../services/actions/wsActions";
 
@@ -35,7 +35,7 @@ function Feed() {
   const location = useLocation();
 
   React.useEffect(() => {
-    dispatch(wsConnectionStart("wss://norma.nomoreparties.space/orders/all"));
+    dispatch(wsConnectionStart(wsUrl));
     return () => {
       dispatch({ type: wsActions.wsClose });
     };

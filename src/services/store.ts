@@ -15,7 +15,7 @@ import {
 import { socketMiddleware } from "./socketMiddleware";
 import { TApplicationActions } from "./actions/types";
 
-const wsUrl = "wss://norma.nomoreparties.space/orders/all";
+export const wsUrl = "wss://norma.nomoreparties.space/orders/all";
 
 export const wsActions = {
   wsStart: WS_CONNECTION_START,
