@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "../../components/IngredientDetails/IngredientDetails.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useParams, useHistory } from "react-router-dom";
 import { addConstructorIngredient } from "../../services/actions/burgerActions";
 import { closeModals } from "../../services/actions/modalActions";
+import { useAppDispatch } from "../../utils/hooks";
 
 function IngredientDetailsPage():JSX.Element | null {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { id } = useParams();
   const { ingredients } = useSelector((store: any) => ({
     ingredients: store.burgerIngredients.ingredients,

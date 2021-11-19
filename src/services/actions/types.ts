@@ -285,10 +285,11 @@ export interface IHideModalError {
 export interface IShowModalError {
   readonly type: typeof SHOW_MODAL_ERROR;
 }
-export interface IShowMenu {
 
+export interface IShowMenu {
   readonly type: typeof SHOW_MODAL;
 }
+
 export interface IHideMenu {
   readonly type: typeof HIDE_MODAL;
 }

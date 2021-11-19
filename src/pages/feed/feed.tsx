@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./feed.module.css";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { wsActions } from "../../services/store";
+import { useAppDispatch } from "../../utils/hooks";
 
 interface IItem {
   image: string;

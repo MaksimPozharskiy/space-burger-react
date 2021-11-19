@@ -14,6 +14,12 @@ export function wsConnectionSuccess() {
   };
 }
 
+export function wsConnectionStart() {
+  return {
+    type: WS_CONNECTION_START,
+  };
+}
+
 export function wsGetOrders(orders) {
   return {
     type: WS_GET_ORDERS,

@@ -3,9 +3,10 @@ import styles from "./profile.module.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { wsActions } from "../../services/store";
 import { getCookie } from "../../utils/helpers";
+import { useAppDispatch } from "../../utils/hooks";
 
 interface IItem {
   image: string;

@@ -3,14 +3,14 @@ import { getCookie } from "../utils/helpers";
 import { RootState } from "./store";
 
 export type WsActions = {
-  wsStart: string;
-  wsSendMessage: string;
-  onOpen: string;
-  onClose: string;
-  onError: string;
-  onGetOrders: string;
-  wsClose: string;
-  wsPingPong: string;
+  wsStart: 'WS_CONNECTION_START',
+  wsSendMessage: 'WS_SEND_MESSAGE',
+  onOpen: 'WS_CONNECTION_SUCCESS',
+  wsClose: 'WS_CONNECTION_END',
+  onClose: 'WS_CONNECTION_CLOSED',
+  onError: 'WS_CONNECTION_ERROR',
+  onGetOrders: 'WS_GET_ORDERS',
+  wsPingPong: 'WS_SEND_PONG',
 };
 
 export const socketMiddleware = (wsUrl: string, wsActions: WsActions): Middleware<{}, RootState> => {

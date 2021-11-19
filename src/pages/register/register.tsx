@@ -1,14 +1,15 @@
 import React, { FormEvent } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
 import { createUser } from "../../services/actions/authActions";
+import { useAppDispatch } from "../../utils/hooks";
 
 function RegisterPage(): JSX.Element | null {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { success } = useSelector((store: any) => ({
     success: store.authInfoUser.success,
   }));

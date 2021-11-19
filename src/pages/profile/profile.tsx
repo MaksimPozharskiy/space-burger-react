@@ -2,9 +2,10 @@ import React, { FormEvent } from "react";
 import styles from "./profile.module.css";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { updateUserInfo, getUserInfo } from "../../services/actions/userActions";
+import { useAppDispatch } from "../../utils/hooks";
 
 function Profile(): JSX.Element | null {
   const { userName, userEmail } = useSelector((store: any) => ({
@@ -14,7 +15,7 @@ function Profile(): JSX.Element | null {
   const [name, setName] = React.useState<string>("");
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const changeName = (evt: React.ChangeEvent<HTMLInputElement>): void => {
     setName(evt.target.value);

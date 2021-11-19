@@ -3,8 +3,9 @@ import styles from "./Order.module.css";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { updateDate } from "../../utils/helpers";
 import { optionsDate } from "../../utils/constants";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { getSelectedOrder } from "../../services/actions/orderActions";
+import { useAppDispatch } from "../../utils/hooks";
 
 interface IItem {
   image: string;
@@ -25,7 +26,7 @@ interface IOrderProps {
 };
 
 function Order(props: IOrderProps) {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { ingredients } = useSelector((store: any) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));

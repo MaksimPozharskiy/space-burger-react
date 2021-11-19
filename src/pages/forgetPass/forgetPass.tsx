@@ -1,11 +1,12 @@
 import React, { FormEvent } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
 import { forgetUserPassword } from "../../services/actions/authActions";
+import { useAppDispatch } from "../../utils/hooks";
 
 function ForgetPassPage(): JSX.Element | null {
   const location = useLocation();
@@ -13,7 +14,7 @@ function ForgetPassPage(): JSX.Element | null {
     message: store.authInfoUser.message,
     success: store.authInfoUser.success,
   }));
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [email, setEmail] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
   const isMailValid = email ? email.match(emailRegxep) : "null";
