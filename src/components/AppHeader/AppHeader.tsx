@@ -2,14 +2,14 @@ import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-dev
 import React from 'react';
 import styles from './AppHeader.module.css';
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from 'react-redux';
 import { RootState } from '../../services/store';
+import { useAppSelector } from '../../utils/hooks';
 
 function AppHeader() {
   const [userName, setUserName] = React.useState<string>("");
   const location = useLocation();
 
-  const nameInfo = useSelector(
+  const nameInfo = useAppSelector(
     (store: RootState) => ({
       nameInfo: store.authInfoUser.user.name,
     })

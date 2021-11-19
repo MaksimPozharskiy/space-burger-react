@@ -66,7 +66,7 @@ function App() {
   function closeModalError() {
     dispatch(hideModalError())
   };
-  console.log(error)
+
   return (
     isLoading ? <Router history={history}>
       <AppHeader />

@@ -3,7 +3,6 @@ import styles from "./profile.module.css";
 import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { RootState, wsActions } from "../../services/store";
 import { getCookie } from "../../utils/helpers";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
@@ -11,7 +10,7 @@ import { TOrder } from "../../services/actions/types";
 
 function ProfileOrders() {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const token = getCookie("token");
 
   const { dataOrders, wsConnected } = useAppSelector((store: RootState) => ({

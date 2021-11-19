@@ -5,6 +5,8 @@ import {
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_SEND_MESSAGE,
+  WS_CONNECTION_START,
+  WS_CONNECTION_END,
 } from '../actions/wsActions';
 
 import {  
@@ -339,6 +341,11 @@ export interface IRemoveSelectedOrder {
   readonly type: typeof REMOVE_SELECTED_ORDER;
 }
 
+export interface IWsConnectionStart{
+  readonly type: typeof WS_CONNECTION_START;
+  payload: string;
+}
+
 export interface IWsConnectionSuccess {
   readonly type: typeof WS_CONNECTION_SUCCESS;
 }
@@ -355,6 +362,10 @@ export interface IWsConnectionError {
 }
 export interface IWsConnectionClosed {
   readonly type: typeof WS_CONNECTION_CLOSED;
+}
+
+export interface IWsConnectionEnd {
+  readonly type: typeof WS_CONNECTION_END;
 }
 
 export type TApplicationActions =
@@ -378,8 +389,10 @@ export type TApplicationActions =
   | IWsSendMessage
   | IWsConnectionError
   | IWsConnectionClosed
+  | IWsConnectionEnd
   | IGetOrder
   | IGetUserInfo
+  | IWsConnectionStart
   | IUpdateUserInfo
   | ILoginUser
   | ICreateUser

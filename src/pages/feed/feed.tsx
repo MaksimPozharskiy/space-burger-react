@@ -2,14 +2,13 @@ import React from "react";
 import styles from "./feed.module.css";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { RootState, wsActions, wsUrl } from "../../services/store";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { wsConnectionStart } from "../../services/actions/wsActions";
 import { TOrder } from "../../services/actions/types";
 
 function Feed() {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { wsDataOrders, wsConnected } = useAppSelector((store: RootState) => ({
     wsDataOrders: store.ws.data,
     wsConnected: store.ws.wsConnected,
