@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { wsActions } from "../../services/store";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { wsConnectionStart } from "../../services/actions/wsActions";
 
 interface IItem {
   image: string;
@@ -34,10 +35,7 @@ function Feed() {
   const location = useLocation();
 
   React.useEffect(() => {
-    dispatch({
-      type: wsActions.wsStart,
-      payload: "wss://norma.nomoreparties.space/orders/all",
-    });
+    dispatch(wsConnectionStart("wss://norma.nomoreparties.space/orders/all"));
     return () => {
       dispatch({ type: wsActions.wsClose });
     };

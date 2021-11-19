@@ -14,9 +14,10 @@ export function wsConnectionSuccess() {
   };
 }
 
-export function wsConnectionStart() {
+export function wsConnectionStart(url) {
   return {
     type: WS_CONNECTION_START,
+    payload: url,
   };
 }
 
