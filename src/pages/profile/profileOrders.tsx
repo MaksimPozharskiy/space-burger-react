@@ -9,17 +9,6 @@ import { getCookie } from "../../utils/helpers";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 import { TOrder } from "../../services/actions/types";
 
-interface IItem {
-  image: string;
-  image_mobile: string;
-  name: string;
-  price: number;
-  _id: string;
-  count: number;
-  number: number;
-  ingredients: [];
-};
-
 function ProfileOrders() {
   const location = useLocation();
   const dispatch = useDispatch();
