@@ -1,12 +1,13 @@
 import styles from './IngredientDetails.module.css';
 import { useAppSelector } from '../../utils/hooks';
+import { RootState } from '../../services/store';
 
 function IngredientDetails(): JSX.Element | null {
-  const { currentIngredient } = useAppSelector((store: any) => ({
+  const { currentIngredient } = useAppSelector((store: RootState) => ({
     currentIngredient: store.burgerIngredient.currentIngredient,
   }));
 
-  return (
+  return currentIngredient &&(
     <div className={`${styles.container} mb-15`}>
       <img src={currentIngredient.image_large} alt={currentIngredient.name}/>
       <p className="text text_type_main-medium mt-6 mb-10">{currentIngredient.name}</p>

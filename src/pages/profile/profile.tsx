@@ -5,9 +5,10 @@ import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { updateUserInfo, getUserInfo } from "../../services/actions/userActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { RootState } from "../../services/store";
 
 function Profile(): JSX.Element | null {
-  const { userName, userEmail } = useAppSelector((store: any) => ({
+  const { userName, userEmail } = useAppSelector((store: RootState) => ({
     userName: store.authInfoUser.user.name,
     userEmail: store.authInfoUser.user.email,
   }));

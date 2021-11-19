@@ -5,16 +5,17 @@ import { useParams, useHistory } from "react-router-dom";
 import { addConstructorIngredient } from "../../services/actions/burgerActions";
 import { closeModals } from "../../services/actions/modalActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { RootState } from "../../services/store";
 
 function IngredientDetailsPage():JSX.Element | null {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const { ingredients } = useAppSelector((store: any) => ({
+  const { ingredients } = useAppSelector((store: RootState) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));
 
-  const currentIngredient = ingredients.filter(({ _id }: {_id: string}) => {
+  const currentIngredient: any = ingredients.filter(({ _id }: {_id: string}) => {
     return _id === id;
   })[0];
 

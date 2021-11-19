@@ -6,10 +6,11 @@ import { Link, Redirect, useLocation } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
 import { forgetUserPassword } from "../../services/actions/authActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { RootState } from "../../services/store";
 
 function ForgetPassPage(): JSX.Element | null {
   const location = useLocation();
-  const { message, success } = useAppSelector((store: any) => ({
+  const { message, success } = useAppSelector((store: RootState) => ({
     message: store.authInfoUser.message,
     success: store.authInfoUser.success,
   }));

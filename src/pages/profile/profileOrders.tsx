@@ -4,9 +4,10 @@ import ProfileMenu from "../../components/ProfileMenu/ProfileMenu";
 import Order from "../../components/Order/Order";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { wsActions } from "../../services/store";
+import { RootState, wsActions } from "../../services/store";
 import { getCookie } from "../../utils/helpers";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { TOrder } from "../../services/actions/types";
 
 interface IItem {
   image: string;
@@ -24,7 +25,7 @@ function ProfileOrders() {
   const dispatch = useDispatch();
   const token = getCookie("token");
 
-  const { dataOrders, wsConnected } = useAppSelector((store: any) => ({
+  const { dataOrders, wsConnected } = useAppSelector((store: RootState) => ({
     dataOrders: store.ws.data,
     wsConnected: store.ws.wsConnected,
   }));
@@ -47,7 +48,7 @@ function ProfileOrders() {
       </div>
       <div className={styles.profile_orders}>
         <ul className={styles.profile_orders_list}>
-          {data.map((item: IItem, index: number) => {
+          {data.map((item: TOrder, index: number) => {
             if (item.ingredients.length > 0) {
               return (
                 <li className={styles.profile_order} key={index}>

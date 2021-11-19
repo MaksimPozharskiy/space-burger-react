@@ -5,11 +5,12 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
 import { resetUserPassword } from "../../services/actions/authActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { RootState } from "../../services/store";
 
 function ResetPassPage(): JSX.Element | null {
   const location = useLocation();
   const history = useHistory();
-  const { message, success } = useAppSelector((store: any) => ({
+  const { message, success } = useAppSelector((store: RootState) => ({
     message: store.authInfoUser.message,
     success: store.authInfoUser.success,
   }));

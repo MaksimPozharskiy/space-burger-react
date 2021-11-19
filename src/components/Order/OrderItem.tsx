@@ -7,15 +7,8 @@ import { optionsDate } from "../../utils/constants";
 import { authApi } from "../../services/actions";
 import { showError } from "../../services/actions/modalActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-
-interface IItem {
-  image: string;
-  image_mobile: string;
-  name: string;
-  price: number;
-  _id: string;
-  count: number;
-};
+import { RootState } from "../../services/store";
+import { TIngredient } from "../../services/actions/types";
 
 interface IOrderProps {
   order: any;
@@ -32,20 +25,20 @@ function OrderItem() {
   const dispatch = useAppDispatch();
   const [order, setOrder] = React.useState<IOrderProps>();
   const { id } = useParams<{ id?: string }>();
-  const { ingredients } = useAppSelector((store: any) => ({
+  const { ingredients } = useAppSelector((store: RootState) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));
-  const orderIngredients =
+  const orderIngredients: any =
     ingredients &&
     order &&
     order.ingredients.map((id: string) =>
-      ingredients.find((item: IItem) => item._id === id)
+      ingredients.find((item: TIngredient) => item._id === id)
     );
   const orderDate = order && updateDate(order.createdAt, optionsDate);
   const orderPrice =
     orderIngredients &&
     ingredients &&
-    orderIngredients.reduce(function (prevValue: number, item: IItem) {
+    orderIngredients.reduce(function (prevValue: number, item: TIngredient) {
       return prevValue + item.price;
     }, 0);
 
@@ -76,7 +69,7 @@ function OrderItem() {
       <div className={styles.order_ingredients_container}>
         {order &&
           orderIngredients &&
-          orderIngredients.map((item: IItem, index: number) => {
+          orderIngredients.map((item: TIngredient, index: number) => {
             return (
               <div className={styles.order_ingredient_item} key={index}>
                 <div className={styles.order_ingredient_container}>

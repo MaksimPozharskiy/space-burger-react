@@ -1,7 +1,7 @@
 import { getCookie } from "./helpers";
 
 class AuthApi {
-  _url: any;
+  _url: string;
   
   constructor(url) {
     this._url = url;

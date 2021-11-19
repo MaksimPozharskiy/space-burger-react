@@ -6,12 +6,13 @@ import { Link, Redirect, useLocation } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
 import { loginUser } from "../../services/actions/authActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import { RootState } from "../../services/store";
 
 function LoginPage(): JSX.Element | null {
   const location = useLocation();
-  const { success, userName } = useAppSelector((store: any) => ({
+  const { success, userName } = useAppSelector((store: RootState) => ({
     success: store.authInfoUser.success,
-    userName: store.authInfoUser.name,
+    userName: store.authInfoUser.user.name,
   }));
   const dispatch = useAppDispatch();
   const [email, setEmail] = React.useState<string>("");
