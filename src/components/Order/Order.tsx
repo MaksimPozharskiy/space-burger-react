@@ -37,6 +37,7 @@ function Order(props: IOrderProps) {
   const orderIngredients = orderIngredientsId.map((id: string) =>
     ingredients.find((item: IItem) => item._id === id)
   );
+
   const orderPrice = orderIngredients.reduce(function (
     prevValue: number,
     item: any
@@ -46,7 +47,7 @@ function Order(props: IOrderProps) {
   0);
   const orderDate = updateDate(props.order.createdAt, optionsDate);
 
-  return (
+  return orderIngredients && (
     <section className={styles.order} onClick={handleClick}>
       <div className={styles.order_header}>
         <p className={styles.order_number}>#{props.order.number}</p>
