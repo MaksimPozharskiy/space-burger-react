@@ -68,6 +68,7 @@ function BurgerConstructor({
       if ((IsBun && !isToken) || (!IsBun && !isToken)) {
         history.push("/login");
       } else {
+        openModalOrder()
         dispatch(getOrder(constructorIngredients));
       }
     }
@@ -108,7 +109,6 @@ function BurgerConstructor({
         <Button type="primary" size="large"  onClick={() => {
           if (IsBun !== null && constructorIngredients.length > 0) {
             handleCreateOrder()
-            openModalOrder()
           } else {openModalError({error: 'Для создания бургера необходимы 2 булки и минимум 1 наполнитель'})}
         }}> 
           Оформить заказ
