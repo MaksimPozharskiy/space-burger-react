@@ -6,11 +6,11 @@ import { Link, Redirect } from "react-router-dom";
 import { emailRegxep } from "../../utils/constants";
 import { createUser } from "../../services/actions/authActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-import { RootState } from "../../services/store";
+
 
 function RegisterPage(): JSX.Element | null {
   const dispatch = useAppDispatch();
-  const { success } = useAppSelector((store: RootState) => ({
+  const { success } = useAppSelector((store) => ({
     success: store.authInfoUser.success,
   }));
   const [name, setName] = React.useState<string>("");

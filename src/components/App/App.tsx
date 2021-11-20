@@ -26,13 +26,12 @@ import { IngredientDetailsPage } from '../../pages/ingredientDetail';
 import { Feed } from '../../pages/feed';
 import OrderItem from '../Order/OrderItem';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
-import { RootState } from '../../services/store';
 import { getIngredients } from '../../services/actions/burgerActions';
 import { hideModalOrder, showModalOrder, hideModal, hideModalError } from '../../services/actions/modalActions';
 
 function App() {
   const { isModalOpened, isModalOpenedOrder, currentIngredient, error, isModalOpenedError, isLoading } = useAppSelector(
-    (store: RootState) => ({
+    (store) => ({
       isModalOpened: store.modal.isModalOpened,
       isModalOpenedOrder: store.modal.isModalOpenedOrder,
       isModalOpenedError: store.modal.isModalOpenedError,

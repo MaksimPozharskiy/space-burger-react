@@ -1,11 +1,10 @@
 import React from 'react';
-import { RootState } from '../../services/store';
 import { useAppSelector } from '../../utils/hooks';
 import styles from './OrderDetails.module.css';
 
 function OrderDetails(): JSX.Element | null {
   const { order } = useAppSelector(
-    (store: RootState) => ({
+    (store) => ({
       order: store.order.order,
     })
   );

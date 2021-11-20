@@ -5,13 +5,13 @@ import { useParams, useHistory } from "react-router-dom";
 import { addConstructorIngredient } from "../../services/actions/burgerActions";
 import { closeModals } from "../../services/actions/modalActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-import { RootState } from "../../services/store";
+
 
 function IngredientDetailsPage():JSX.Element | null {
   const history = useHistory();
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const { ingredients } = useAppSelector((store: RootState) => ({
+  const { ingredients } = useAppSelector((store) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));
 

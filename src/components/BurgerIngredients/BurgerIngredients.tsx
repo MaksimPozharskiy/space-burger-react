@@ -2,7 +2,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import React, { useMemo } from 'react';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 import styles from './BurgerIngredients.module.css';
-import { RootState } from '../../services/store';
+
 import { useAppSelector } from '../../utils/hooks';
 
 function BurgerIngredients(): JSX.Element | null {
@@ -12,7 +12,7 @@ function BurgerIngredients(): JSX.Element | null {
   const toppings: HTMLElement | null = document.getElementById("toppings");
   const headerOfIngredients: HTMLElement | null = document.getElementById("ingredients");
   const { ingredients, constructorIngredients, IsBun } = useAppSelector(
-    (store: RootState) => ({
+    (store) => ({
       ingredients: store.burgerIngredients.ingredients,
       constructorIngredients: store.constructorOfOrder.constructorIngredients,
       IsBun: store.constructorOfOrder.isBuns,

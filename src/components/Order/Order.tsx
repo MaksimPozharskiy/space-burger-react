@@ -5,7 +5,6 @@ import { updateDate } from "../../utils/helpers";
 import { optionsDate } from "../../utils/constants";
 import { getSelectedOrder } from "../../services/actions/orderActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-import { RootState } from "../../services/store";
 
 interface IItem {
   image: string;
@@ -27,7 +26,7 @@ interface IOrderProps {
 
 function Order(props: IOrderProps) {
   const dispatch = useAppDispatch();
-  const { ingredients } = useAppSelector((store: RootState) => ({
+  const { ingredients } = useAppSelector((store) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));
   const handleClick = () => {

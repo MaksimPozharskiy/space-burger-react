@@ -1,9 +1,9 @@
 import styles from './IngredientDetails.module.css';
 import { useAppSelector } from '../../utils/hooks';
-import { RootState } from '../../services/store';
+
 
 function IngredientDetails(): JSX.Element | null {
-  const { currentIngredient } = useAppSelector((store: RootState) => ({
+  const { currentIngredient } = useAppSelector((store) => ({
     currentIngredient: store.burgerIngredient.currentIngredient,
   }));
 

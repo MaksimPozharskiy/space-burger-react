@@ -7,7 +7,7 @@ import { optionsDate } from "../../utils/constants";
 import { authApi } from "../../services/actions";
 import { showError } from "../../services/actions/modalActions";
 import { useAppDispatch, useAppSelector } from "../../utils/hooks";
-import { RootState } from "../../services/store";
+
 import { TIngredient } from "../../services/actions/types";
 
 interface IOrderProps {
@@ -25,7 +25,7 @@ function OrderItem() {
   const dispatch = useAppDispatch();
   const [order, setOrder] = React.useState<IOrderProps>();
   const { id } = useParams<{ id?: string }>();
-  const { ingredients } = useAppSelector((store: RootState) => ({
+  const { ingredients } = useAppSelector((store) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));
   const orderIngredients: any =
