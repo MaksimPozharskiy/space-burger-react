@@ -1,23 +1,21 @@
 import React from "react";
 import styles from "../../components/IngredientDetails/IngredientDetails.module.css";
-import ReactDOM from "react-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { addConstructorIngredient, closeModals } from "../../services/actions";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { getIngredients } from "../../services/actions";
 import { useParams, useHistory } from "react-router-dom";
+import { addConstructorIngredient } from "../../services/actions/burgerActions";
+import { closeModals } from "../../services/actions/modalActions";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
-const element: any = document.getElementById("modal");
 
 function IngredientDetailsPage():JSX.Element | null {
   const history = useHistory();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { id } = useParams();
-  const { ingredients } = useSelector((store: any) => ({
+  const { ingredients } = useAppSelector((store) => ({
     ingredients: store.burgerIngredients.ingredients,
   }));
 
-  const currentIngredient = ingredients.filter(({ _id }: {_id: string}) => {
+  const currentIngredient: any = ingredients.filter(({ _id }: {_id: string}) => {
     return _id === id;
   })[0];
 
@@ -27,12 +25,8 @@ function IngredientDetailsPage():JSX.Element | null {
     history.push("/");
   }
 
-  React.useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch]);
 
-  return ReactDOM.createPortal(
-    currentIngredient && <div className={`${styles.container} mb-15`}>
+  return (currentIngredient && <div className={`${styles.container} mb-15`}>
       <img src={currentIngredient.image_large} alt={currentIngredient.name}/>
       <p className="text text_type_main-medium mt-6 mb-10">{currentIngredient.name}</p>
         <ul className={styles.details}>
@@ -58,9 +52,7 @@ function IngredientDetailsPage():JSX.Element | null {
             Добавить в заказ
           </Button>
         </div>
-    </div>,
-    element
-  );
+    </div>)
 }
 
 export default IngredientDetailsPage;

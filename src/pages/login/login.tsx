@@ -1,19 +1,20 @@
 import React, { FormEvent } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, Redirect, useLocation } from "react-router-dom";
-import { loginUser } from "../../services/actions";
 import { emailRegxep } from "../../utils/constants";
+import { loginUser } from "../../services/actions/authActions";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+
 
 function LoginPage(): JSX.Element | null {
   const location = useLocation();
-  const { success, userName } = useSelector((store: any) => ({
+  const { success, userName } = useAppSelector((store) => ({
     success: store.authInfoUser.success,
-    userName: store.authInfoUser.name,
+    userName: store.authInfoUser.user.name,
   }));
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [email, setEmail] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");

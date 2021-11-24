@@ -3,17 +3,17 @@ import CustomInput from "../../components/CustomInput/CustomInput";
 import styles from "../common.module.css"
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useHistory, Redirect, useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { resetUserPassword } from "../../services/actions";
+import { resetUserPassword } from "../../services/actions/authActions";
+import { useAppDispatch, useAppSelector } from "../../utils/hooks";
 
 function ResetPassPage(): JSX.Element | null {
   const location = useLocation();
   const history = useHistory();
-  const { message, success } = useSelector((store: any) => ({
+  const { message, success } = useAppSelector((store) => ({
     message: store.authInfoUser.message,
     success: store.authInfoUser.success,
   }));
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [code, setCode] = React.useState<string>("");
   const [password, setPassword] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");

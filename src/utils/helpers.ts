@@ -4,3 +4,7 @@ export function getCookie(name: string): string | undefined {
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+
+export const updateDate = (date: number, options: Intl.DateTimeFormatOptions) => {
+  return new Date(date).toLocaleDateString("ru-RU", options);
+};

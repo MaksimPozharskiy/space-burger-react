@@ -1,7 +1,7 @@
 import { getCookie } from "./helpers";
 
 class AuthApi {
-  _url: any;
+  _url: string;
   
   constructor(url) {
     this._url = url;
@@ -98,7 +98,7 @@ class AuthApi {
       .catch(this.handleResponseError);
   }
 
-  refreshToken(refreshToken: string) {
+  refreshToken(refreshToken: string | null) {
     return fetch(`${this._url}/auth/token`, {
       method: "POST",
       headers: {
@@ -125,6 +125,7 @@ class AuthApi {
       .then((res) => (res.json()))
       .catch(this.handleResponseError);
   }
+
   updateUserInfo(name: string, email: string, password: string) {
     return fetch(`${this._url}/auth/user`, {
       method: "PATCH",
@@ -138,6 +139,32 @@ class AuthApi {
         email: `${email}`,
         password: `${password}`,
       }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
+
+  getOrder(ingredients: []) {
+    return fetch(`${this._url}/orders`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + getCookie("token"),
+      },
+      body: JSON.stringify({ ingredients: ingredients }),
+    })
+      .then(this.handleResponse)
+      .catch(this.handleResponseError);
+  }
+
+  getCurrentOrder(orderNumber?: string) {
+    return fetch(`${this._url}/orders/${orderNumber}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
     })
       .then(this.handleResponse)
       .catch(this.handleResponseError);

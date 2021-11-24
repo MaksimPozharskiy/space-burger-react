@@ -1,0 +1,135 @@
+.feed {
+  width: 99%;
+  margin: 0 auto;
+  max-width: 1280px;
+  overflow: hidden;
+}
+.feed a {
+  text-decoration: none;
+}
+.feed_title {
+  color: #f2f2f3;
+  font-family: JetBrains Mono;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 40px;
+  margin: 40px auto 20px 16px;
+}
+
+.feed_orders {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.feed_orders_list {
+  list-style: none;
+  margin: 0 60px 0 0;
+  padding: 0;
+  overflow-y: scroll;
+  width: 48%;
+  height: 80vh;
+}
+
+.feed_orders_list::-webkit-scrollbar-track {
+  background-color: #2F2F37;
+}
+
+.feed_orders_list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.feed_orders_list::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
+
+.feed_order {
+  margin: 16px auto;
+}
+.feed_order:last-child {
+  margin: 16px auto 0 auto;
+}
+.feed_order:first-child {
+  margin: 0 auto 16px auto;
+}
+
+.feed_orders_summury {
+  width: 48%; 
+  height: 80vh;
+}
+
+.feed_orders_status {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 0 60px 0;
+}
+
+.feed_orders_title {
+  color: #f2f2f3;
+  font-family: JetBrains Mono;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.feed_orders_ready {
+  width: 272px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0 60px 0 0;
+}
+
+.feed_orders_work {
+  width: 272px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.feed_list {
+  list-style: none;
+  margin: 24px 0 0 0;
+  padding: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.feed_orders_work_item {
+  font-family: Iceland;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 24px;
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+.feed_orders_ready_item {
+  font-family: Iceland;
+  font-weight: normal;
+  font-size: 28px;
+  line-height: 24px;
+  color: #00cccc;
+  margin: 0 0 8px 0;
+  padding: 0;
+}
+
+.feed_orders_count {
+  font-family: Iceland;
+  font-weight: normal;
+  font-size: 44px;
+  line-height: 46px;
+  margin: 0;
+}
+
+.order_count {
+  margin: 60px 0 0 0;
+  text-shadow: 0px 0px 16px rgba(51, 51, 255, 0.25),
+    0px 0px 8px rgba(51, 51, 255, 0.25), 0px 4px 32px rgba(51, 51, 255, 0.5);
+}

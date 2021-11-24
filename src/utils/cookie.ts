@@ -1,4 +1,4 @@
-export function setCookie(name: string, value: string | number | boolean, props: {expires?: Date | string | number, path?: string}): void {
+export function setCookie(name: string, value: string | number | boolean, props?: {expires?: Date | string | number, path?: string}): void {
   props = props || {};
   let exp = props.expires;
   if (typeof exp == "number" && exp) {

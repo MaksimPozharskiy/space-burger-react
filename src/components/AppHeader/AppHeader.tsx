@@ -2,14 +2,14 @@ import { BurgerIcon, ListIcon, Logo, ProfileIcon } from '@ya.praktikum/react-dev
 import React from 'react';
 import styles from './AppHeader.module.css';
 import { Link, useLocation } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../utils/hooks';
 
 function AppHeader() {
   const [userName, setUserName] = React.useState<string>("");
   const location = useLocation();
 
-  const nameInfo = useSelector(
-    (store: any) => ({
+  const nameInfo = useAppSelector(
+    (store) => ({
       nameInfo: store.authInfoUser.user.name,
     })
   );
@@ -30,7 +30,7 @@ function AppHeader() {
             </Link>
           </li>
           <li className={`${styles['list-item']} pr-5 pl-5 pt-4 pb-4`}>
-            <Link to="/order-feed" className={styles.link}>
+            <Link to="/feed" className={styles.link}>
               <ListIcon type={
                 location.pathname.indexOf("/feed") >= 0
                   ? "primary"

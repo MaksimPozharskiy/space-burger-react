@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { DropTargetMonitor, useDrag, useDrop } from 'react-dnd';
 import styles from './constructor-item.module.css';
-import { useDispatch } from 'react-redux';
 import {DragIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
-import { deleteConstructorIngredient, moveConstructorIngredient } from '../../services/actions';
 import { IIngredient } from '../../interfaces/interfaces';
+import { deleteConstructorIngredient, moveConstructorIngredient } from '../../services/actions/burgerActions';
+import { useAppDispatch } from '../../utils/hooks';
 
 type TIngredientId = {
   ingredientId: string;
@@ -19,7 +19,7 @@ interface IConstructorItem {
 const ConstructorItem = ({ingredient, index }: IConstructorItem) => {
     const id: string = ingredient._id;
     const ref = useRef<HTMLLIElement>(null);
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     
     const [, drop] = useDrop({
       accept: "constructor",
