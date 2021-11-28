@@ -2,7 +2,7 @@ import { ADD_CONSTRUCTOR_INGREDIENT, DELETE_CONSTRUCTOR_INGREDIENT, MOVE_CONSTRU
 import { TInitialStateConstructor } from "./types";
 import { v4 as uuidv4 } from 'uuid';
 
-const initialStateConstructor: TInitialStateConstructor = {
+export const initialStateConstructor: TInitialStateConstructor = {
   constructorIngredients: [],
   isBuns: null,
 };

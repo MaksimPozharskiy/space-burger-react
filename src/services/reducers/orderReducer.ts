@@ -1,7 +1,7 @@
 import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_FAILED, DELETE_ORDER } from "../actions/orderActions";
 import { TInitialStateOrder } from "./types";
 
-const initialStateOrder: TInitialStateOrder = {
+export const initialStateOrder: TInitialStateOrder = {
   order: null,
   orderRequest: false,
   orderFailed: false,

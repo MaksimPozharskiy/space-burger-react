@@ -1,7 +1,7 @@
 import { SHOW_MODAL, HIDE_MODAL, SHOW_MODAL_ORDER, HIDE_MODAL_ORDER, SHOW_MODAL_ERROR, HIDE_MODAL_ERROR } from "../actions/modalActions";
 import { TInitialStateModal } from "./types";
 
-const initialStateModal: TInitialStateModal = {
+export const initialStateModal: TInitialStateModal = {
   isModalOpened: false,
   isModalOpenedOrder: false,
   isModalOpenedError: false

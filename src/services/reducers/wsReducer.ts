@@ -1,7 +1,7 @@
 import { WS_CONNECTION_SUCCESS, WS_CONNECTION_ERROR, WS_CONNECTION_CLOSED, WS_GET_ORDERS } from "../actions/wsActions";
 import { TinitialStateWS } from "./types";
 
-const initialStateWS: TinitialStateWS = {
+export const initialStateWS: TinitialStateWS = {
   wsConnected: false,
   wsError: false,
   data: {data: {

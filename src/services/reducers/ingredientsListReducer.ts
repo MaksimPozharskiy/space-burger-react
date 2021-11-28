@@ -1,7 +1,7 @@
 import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_FAILED } from "../actions/burgerActions";
 import { TInitialStateIngredients } from "./types";
 
-const initialStateIngredients: TInitialStateIngredients = {
+export const initialStateIngredients: TInitialStateIngredients = {
   ingredients: [],
   ingredientsRequest: false,
   ingredientsFailed: false,
