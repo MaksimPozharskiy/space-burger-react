@@ -2,7 +2,7 @@
   "name": "space-burger-react",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://maksimpozharskiy.github.io/", 
+  "homepage": "./", 
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.11.4",
