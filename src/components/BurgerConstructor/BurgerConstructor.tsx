@@ -4,8 +4,8 @@ import styles from './BurgerConstructor.module.css';
 import { useDrop} from "react-dnd";
 import ConstructorItem from '../ConstructorItem/ConstructorItem';
 import { useHistory } from "react-router-dom";
-import { addConstructorIngredient } from '../../services/actions/burgerActions';
-import { getOrder } from '../../services/actions/orderActions';
+import { addConstructorIngredient, resetConstructorIngredient } from '../../services/actions/burgerActions';
+import { getOrder, hideOrder } from '../../services/actions/orderActions';
 import { showError, showModalError } from '../../services/actions/modalActions';
 import { useAppDispatch, useAppSelector } from '../../utils/hooks';
 
@@ -62,16 +62,19 @@ function BurgerConstructor({
     dispatchPrice({type: 'сount'})
   }, [constructorIngredients])
 
-    const handleCreateOrder = async () => {
-      if (IsBun === null) return;
-      constructorIngredients.push(IsBun);
-      if ((IsBun && !isToken) || (!IsBun && !isToken)) {
-        history.push("/login");
-      } else {
-        openModalOrder()
-        dispatch(getOrder(constructorIngredients));
-      }
+  const handleCreateOrder = async () => {
+    if (IsBun === null) return;
+    constructorIngredients.push(IsBun);
+    if ((IsBun && !isToken) || (!IsBun && !isToken)) {
+      history.push("/login");
+    } else {
+      openModalOrder()
+      dispatch(getOrder(constructorIngredients));
+      dispatch(hideOrder());
+      dispatch(resetConstructorIngredient());
     }
+  }
+
 
   return (
     <section className={`${styles.construct} mt-10`}  id="dropTarget" ref={dropTarget}>

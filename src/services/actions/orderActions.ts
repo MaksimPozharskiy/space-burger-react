@@ -8,6 +8,7 @@ export const DELETE_ORDER: "DELETE_ORDER" = "DELETE_ORDER";
 export const REMOVE_ORDER: "REMOVE_ORDER" = "REMOVE_ORDER";
 export const GET_SELECTED_ORDER: "GET_SELECTED_ORDER" = "GET_SELECTED_ORDER";
 export const REMOVE_SELECTED_ORDER: "REMOVE_SELECTED_ORDER" = "REMOVE_SELECTED_ORDER";
+export const RESET_ORDER: "RESET_ORDER" = "RESET_ORDER";
 
 export function getOrder(ingredients) {
   return (dispatch: Dispatch) => {
@@ -47,6 +48,12 @@ export function getSelectedOrder(currentOrder) {
 export function removeSelectedOrder() {
   return {
     type: REMOVE_SELECTED_ORDER,
+  };
+}
+
+export function resetOrder() {
+  return {
+    type: RESET_ORDER,
   };
 }
 

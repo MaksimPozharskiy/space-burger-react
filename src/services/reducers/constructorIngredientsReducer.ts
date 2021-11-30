@@ -1,4 +1,4 @@
-import { ADD_CONSTRUCTOR_INGREDIENT, DELETE_CONSTRUCTOR_INGREDIENT, MOVE_CONSTRUCTOR_INGREDIENT } from "../actions/burgerActions";
+import { ADD_CONSTRUCTOR_INGREDIENT, DELETE_CONSTRUCTOR_INGREDIENT, MOVE_CONSTRUCTOR_INGREDIENT, RESET_CONSTRUCTOR_INGREDIENT } from "../actions/burgerActions";
 import { TInitialStateConstructor } from "./types";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -41,6 +41,13 @@ export const getConstructorIngredientsReducer = (state = initialStateConstructor
       return {
         ...state,
         constructorIngredients: ingredients,
+      };
+    }
+
+    case RESET_CONSTRUCTOR_INGREDIENT: {
+      return {
+        constructorIngredients: [],
+        isBuns: null,
       };
     }
     default: {

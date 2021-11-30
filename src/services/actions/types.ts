@@ -16,6 +16,7 @@ import {
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
+  RESET_CONSTRUCTOR_INGREDIENT,
 } from './burgerActions';
 
 import {
@@ -26,6 +27,7 @@ import {
   GET_SELECTED_ORDER,
   REMOVE_SELECTED_ORDER,
   REMOVE_ORDER,
+  RESET_ORDER,
 } from './orderActions';
 
 import {
@@ -271,6 +273,11 @@ export interface IPutIngredientsListFailed {
   readonly type: typeof GET_INGREDIENTS_FAILED;
 }
 
+
+export interface IResetConstructorIngredient {
+  readonly type: typeof RESET_CONSTRUCTOR_INGREDIENT;
+}
+
 export interface IHideError {
   readonly type: typeof HIDE_ERROR;
 }
@@ -339,6 +346,10 @@ export interface IGetSelectedOrder {
 
 export interface IRemoveSelectedOrder {
   readonly type: typeof REMOVE_SELECTED_ORDER;
+}
+
+export interface IResetOrder {
+  readonly type: typeof RESET_ORDER;
 }
 
 export interface IWsConnectionStart{
@@ -414,4 +425,5 @@ export type TApplicationActions =
   | ILoginUserRequest
   | ILoginUserFailed
   | IHideModalError
+  | IResetConstructorIngredient
   | IShowModalError;

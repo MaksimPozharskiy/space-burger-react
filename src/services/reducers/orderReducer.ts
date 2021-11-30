@@ -1,4 +1,4 @@
-import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_FAILED, DELETE_ORDER } from "../actions/orderActions";
+import { GET_ORDER_REQUEST, GET_ORDER_SUCCESS, GET_ORDER_FAILED, REMOVE_ORDER } from "../actions/orderActions";
 import { TInitialStateOrder } from "./types";
 
 export const initialStateOrder: TInitialStateOrder = {
@@ -30,7 +30,8 @@ export const getOrderReducer = (state = initialStateOrder, action): TInitialStat
         orderRequest: false,
       };
     }
-    case DELETE_ORDER: {
+
+    case REMOVE_ORDER: {
       return {
         ...state,
         orderFailed: false,
