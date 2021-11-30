@@ -1,6 +1,8 @@
 describe("app correctly works with dnd", function () {
   before(function () {
     cy.visit("http://localhost:3001");
+    // eslint-disable-next-line cypress/no-unnecessary-waiting
+    cy.wait(1500)
   });
 
   it("should drag and drop and delete ingredient", function () {
