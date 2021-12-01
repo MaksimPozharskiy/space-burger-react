@@ -2,7 +2,7 @@ import { CREATE_USER_REQUEST, CREATE_USER_SUCCESS, CREATE_USER_FAILED, LOGIN_USE
 import { UPDATE_USER_INFO_REQUEST, UPDATE_USER_INFO_SUCCESS, UPDATE_USER_INFO_FAILED } from "../actions/userActions";
 import { TInitialUserInfo } from "./types";
 
-const initialUserInfo: TInitialUserInfo = {
+export const initialUserInfo: TInitialUserInfo = {
   user: { email: "", password: "", name: "" },
   success: false,
   accessToken: null,

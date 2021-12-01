@@ -1,7 +1,7 @@
 import { GET_SELECTED_INGREDIENT_INFO, DELETE_SELECTED_INGREDIENT_INFO } from "../actions/modalActions";
 import { TInitialStateIngredient } from "./types";
 
-const initialStateIngredient: TInitialStateIngredient = {
+export const initialStateIngredient: TInitialStateIngredient = {
   currentIngredient: null,
 };
 

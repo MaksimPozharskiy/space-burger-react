@@ -1,46 +1,37 @@
-# Getting Started with Create React App
+<h1 align="center">Space Burger</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div align="center">Web application for ordering in a burger shop using the burger constructor</div>
 
-## Available Scripts
+![Tech logos](https://i.ibb.co/DVFj8PL/tech-icons.jpg)
 
-In the project directory, you can run:
+![App screenshot](./readme_src/screenshot-app.PNG)
 
-### `yarn start`
+## What is this web application for? 🤷‍♀️
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+It is an interactive application that allows the user to conveniently assemble their own special burger using the constructor.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Also for registered users, you can view the order history. The user can see the order feed - a list of burgers that are being prepared right now or are already ready. This functionality is available live thanks to the web socket connection.
 
-### `yarn test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Registration and authorization of users
+- The ability to collect your own special burger with the help of drag and drop
+- View user's order history
+- Overview of already collected and preparing burgers
+- Ability to edit user data in your personal account
 
-### `yarn build`
+## Setting up development environment 🛠
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `git clone https://github.com/MaksimPozharskiy/space-burger-react.git`
+- `npm install`
+- `npm run start`
+- App should now be running on `http://localhost:3001/`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Running cypress end-to-end tests 🚥
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Set up development environment
+- `npm run start`
+- `npm run cypress` in another terminal
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Link to the project
+- `https://maksimpozharskiy.github.io/space-burger-react/`

@@ -1,7 +1,7 @@
 import { SHOW_ERROR, HIDE_ERROR } from "../actions/modalActions";
 import { TInitialStateError } from "./types";
 
-const initialStateError: TInitialStateError = {
+export const initialStateError: TInitialStateError = {
   error: {},
 };
 
